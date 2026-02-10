@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do What You Love: Side Projects as Organic Marketing</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <style>
+        :root {
+            --accent: #00a66b;
+            --accent-light: rgba(0, 166, 107, 0.1);
+            --accent-border: rgba(0, 166, 107, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slide.with-image {
+            flex-direction: row;
+            gap: 60px;
+        }
+
+        .slide-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .slide-image {
+            flex: 1;
+            max-width: 50%;
+            height: 70vh;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .quote {
+            font-size: 2rem;
+            font-style: italic;
+            color: #fff;
+            border-left: 4px solid var(--accent);
+            padding-left: 30px;
+            margin: 40px 0;
+        }
+
+        .big-question {
+            font-size: 3rem;
+            font-weight: 300;
+            text-align: center;
+            max-width: 900px;
+            line-height: 1.4;
+        }
+
+        .big-question .highlight {
+            display: block;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.3rem;
+            line-height: 2;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 30px;
+            color: #b0b0b0;
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+        }
+
+        .framework-item {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .framework-item h4 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .framework-item p {
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        .framework-item .anti {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .story-slide {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start !important;
+            justify-content: center;
+            padding-left: 80px;
+        }
+
+        .story-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+
+        .story-slide .slide-content {
+            position: relative;
+            z-index: 2;
+            max-width: 550px;
+            text-align: left;
+        }
+
+        .story-slide .slide-content h2,
+        .story-slide .slide-content h3 {
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .story-slide .slide-content p {
+            color: #e0e0e0;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .story-slide .slide-content ul {
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .story-slide .slide-content ul li {
+            color: #e0e0e0;
+        }
+
+        .story-slide .slide-content .quote {
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+        }
+
+        .title-slide h1 {
+            font-size: 4rem;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-top: 30px;
+        }
+
+        .title-slide .author {
+            margin-top: 60px;
+            font-size: 1.2rem;
+            color: #888;
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 40px;
+            font-size: 0.85rem;
+            color: #333;
+        }
+
+        .challenge-list {
+            background: var(--accent-light);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--accent-border);
+        }
+
+        .challenge-list ol {
+            list-style: none;
+            counter-reset: challenge;
+        }
+
+        .challenge-list li {
+            counter-increment: challenge;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            padding-left: 50px;
+            position: relative;
+            color: #fff;
+        }
+
+        .challenge-list li::before {
+            content: counter(challenge);
+            position: absolute;
+            left: 0;
+            width: 35px;
+            height: 35px;
+            background: var(--accent);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .closing-quote {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .closing-quote p {
+            font-size: 2rem;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .contact-slide {
+            text-align: center;
+        }
+
+        .contact-slide .links {
+            margin-top: 40px;
+            font-size: 1.3rem;
+        }
+
+        .contact-slide .links a {
+            color: var(--accent);
+            text-decoration: none;
+            display: block;
+            margin: 15px 0;
+        }
+
+        .echn-badge {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 0.85rem;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo-small {
+            position: fixed;
+            bottom: 25px;
+            left: 240px;
+            height: 35px;
+            opacity: 0.7;
+            z-index: 100;
+        }
+
+        .title-slide .logo-big {
+            height: 80px;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+
+    <div class="presentation" id="presentation">
+
+        <!-- SLIDE 1: Title -->
+        <section class="slide title-slide active">
+            <img src="images/anceu-logo.png" alt="Anceu Coliving" class="logo-big">
+            <h1>Side Projects<br>as Organic Marketing</h1>
+            <p class="subtitle">Do What You Love</p>
+            <p class="author">Agustín Jamardo · Anceu Coliving</p>
+            <span class="echn-badge">ECHN Workshop @ Sende</span>
+        </section>
+
+        <!-- SLIDE 2: The Wrong Question -->
+        <section class="slide">
+            <div class="big-question">
+                When people ask<br>"How do you market your creative hub?"<br>
+                <span class="highlight">I think it's the wrong question.</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: The Right Question -->
+        <section class="slide">
+            <div class="big-question">
+                The better question is:
+                <span class="highlight">"What would you build even if nobody came?"</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: The Answer -->
+        <section class="slide">
+            <h2>Our answer to that question</h2>
+            <p>...accidentally became our best marketing.</p>
+            <p style="margin-top: 30px;">Yes, you need to bring people in. That's not optional.</p>
+            <ul style="margin-top: 20px;">
+                <li>Word of mouth works</li>
+                <li>SEO works</li>
+                <li>But side projects do something different</li>
+            </ul>
+            <p style="margin-top: 30px;">Instead of marketing you hate, you do activities you love—<br><span class="highlight">and they attract people who already share your values.</span></p>
+        </section>
+
+        <!-- SLIDE 5: Context -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Anceu Coliving</h3>
+                <h2>Rural Galicia, Spain</h2>
+                <ul>
+                    <li>98-person village</li>
+                    <li>30 min from Pontevedra</li>
+                    <li>1h from the nearest (very small) airport</li>
+                    <li>Remote workers seeking rural life</li>
+                    <li>15-60 day stays</li>
+                </ul>
+                <p style="margin-top: 30px;">The challenge: attracting people to a tiny village they've never heard of—and most don't even know what coliving is.</p>
+            </div>
+            <img src="images/anceu-hero.jpg" alt="Anceu Coliving" class="slide-image">
+        </section>
+
+        <!-- SLIDE 6: Four Stories Intro -->
+        <section class="slide">
+            <h2>Four things we built</h2>
+            <p class="quote">Not because we wanted customers.<br>Because we wanted them to exist.</p>
+        </section>
+
+        <!-- SLIDE 7: Story 1 - Hacker Days -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Story 1</h3>
+                <h2>Hacker Days</h2>
+                <p><strong>What:</strong> Week-long hackathon. Technologists solve real rural problems.</p>
+            </div>
+            <img src="images/equipo-hackerdays.jpg" alt="Hacker Days" class="slide-image">
+        </section>
+
+        <!-- SLIDE 8: Hacker Days - Why -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Hacker Days</h3>
+                <h2>Why we did it</h2>
+                <p class="quote">"We're tech people. We saw villagers manually reading 100+ counters at least 3 times a year. That's a problem we wanted to solve—hackathon was the format we knew."</p>
+                <p style="margin-top: 20px;"><strong>2025 edition → Punto de Agua:</strong> A CRM for 1,500+ rural water communities—replacing paper and pen with a webapp.</p>
+            </div>
+            <img src="images/hackerdays-rosa-olga.jpeg" alt="Hacker Days team" class="slide-image">
+        </section>
+
+        <!-- SLIDE 9: Hacker Days - Effect -->
+        <section class="slide">
+            <h3>Hacker Days</h3>
+            <h2>The marketing effect</h2>
+            <ul>
+                <li>National press coverage</li>
+                <li>Participants who return as guests</li>
+                <li>Open-source project (puntodeagua.com)</li>
+                <li>Anceu's name in water management conversations</li>
+            </ul>
+            <p style="margin-top: 30px; color: #666;">We didn't plan any of this. We just wanted to fix the water problem.</p>
+        </section>
+
+        <!-- SLIDE 10: Story 2 - Fuchiqueiras -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Story 2</h3>
+                <h2>Fuchiqueiras</h2>
+                <p><strong>What:</strong> Monthly maker meetups in the village communal house.</p>
+                <p>3D printing, sewing, biomaterials, AI basics, traditional cooking. Locals + colivers together.</p>
+            </div>
+            <img src="images/fuchiqueira-1.jpg" alt="Fuchiqueiras" class="slide-image">
+        </section>
+
+        <!-- SLIDE 11: Fuchiqueiras - Why -->
+        <section class="slide">
+            <h3>Fuchiqueiras</h3>
+            <h2>Why we did it</h2>
+            <p class="quote">"We're always doing too many things. I never had time to explore the maker space tools we had. With Fuchiqueiras, I know we'll spend time on it every month."</p>
+            <p style="margin-top: 20px;">"We wanted a maker space. We didn't have money for one. So we started meeting monthly with whatever skills people had."</p>
+            <p style="margin-top: 30px;">The name means "the art of curiosity" in Galician.</p>
+        </section>
+
+        <!-- SLIDE 12: Fuchiqueiras - Effect -->
+        <section class="slide">
+            <h3>Fuchiqueiras</h3>
+            <h2>The marketing effect</h2>
+            <ul>
+                <li>Blog post ranks for "rural maker community"</li>
+                <li>Creates ongoing content</li>
+                <li>Shows real integration with locals</li>
+                <li>Key trust signal for potential guests</li>
+            </ul>
+        </section>
+
+        <!-- SLIDE 13: Story 3 - Entre Culturas -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Story 3</h3>
+                <h2>Entre Culturas</h2>
+                <p><strong>What:</strong> Cultural exchange events. International guests cook dishes from their countries, local musicians play, village and coliving mix.</p>
+            </div>
+            <img src="images/entre-culturas-1.jpg" alt="Entre Culturas" class="slide-image">
+        </section>
+
+        <!-- SLIDE 14: Entre Culturas - Why -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Entre Culturas</h3>
+                <h2>Why we did it</h2>
+                <p class="quote">"We love to eat, dance, and listen to music. And we love putting people together. Entre Culturas is the perfect way to do all of that."</p>
+            </div>
+            <img src="images/entre-culturas-hero.jpg" alt="Entre Culturas" class="slide-image">
+        </section>
+
+        <!-- SLIDE 15: Entre Culturas - Effect -->
+        <section class="slide">
+            <h3>Entre Culturas</h3>
+            <h2>The marketing effect</h2>
+            <ul>
+                <li>Photos and stories that show the vibe</li>
+                <li>Better than any copywriting could</li>
+                <li>Colivers share these moments</li>
+            </ul>
+        </section>
+
+        <!-- SLIDE 16: Story 4 - Pegadas -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Story 4</h3>
+                <h2>Pegadas do Recordo</h2>
+                <p><strong>What:</strong> 5km of forgotten paths reopened. Villagers' stories recorded with NFC markers along the route.</p>
+                <p>24 people from 11 nationalities worked with locals.</p>
+            </div>
+            <img src="images/pegadas-casiano.jpg" alt="Pegadas do Recordo" class="slide-image">
+        </section>
+
+        <!-- SLIDE 17: Pegadas - Rogelio Story -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Pegadas do Recordo</h3>
+                <h2>Started with Rogelio</h2>
+                <p>I go for walks with Rogelio, an 80-year-old man from Anceu.</p>
+                <p>He teaches me about the paths, the history, what used to be where.</p>
+                <p>One day he showed me a path that's now forest—it used to be farmland, but nobody remembers.</p>
+                <p class="highlight" style="margin-top: 20px;">That conversation became this project.</p>
+            </div>
+            <img src="images/pegadas-rogelio.jpg" alt="Rogelio" class="slide-image">
+        </section>
+
+        <!-- SLIDE 18: Pegadas - Effect -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Pegadas do Recordo</h3>
+                <h2>The marketing effect</h2>
+                <ul>
+                    <li>YouTube videos that live forever</li>
+                    <li>The paths are open</li>
+                    <li>Ongoing project that keeps evolving</li>
+                    <li style="color: var(--accent);">Born at an ECHN workshop we hosted</li>
+                </ul>
+                <p style="margin-top: 20px;">Some of you were there when this started.</p>
+            </div>
+            <img src="images/pegadas-sign.jpg" alt="Pegadas signpost" class="slide-image">
+        </section>
+
+        <!-- SLIDE 19: Transition to Framework -->
+        <section class="slide">
+            <h2>Four different projects</h2>
+            <p>Different formats. Different scales.</p>
+            <p class="highlight" style="font-size: 1.8rem; margin-top: 30px;">But they share a pattern—<br>and that pattern is something you can steal.</p>
+        </section>
+
+        <!-- SLIDE 20: Framework -->
+        <section class="slide">
+            <h2 style="margin-bottom: 40px;">The Pattern</h2>
+            <div class="framework-grid">
+                <div class="framework-item">
+                    <h4>1. Start from passion, not strategy</h4>
+                    <p>Do what you'd do even if nobody came. Your energy is the signal.</p>
+                    <p class="anti">Anti-pattern: "Ceramics is trending, let's offer ceramics workshops"</p>
+                </div>
+                <div class="framework-item">
+                    <h4>2. Solve real problems</h4>
+                    <p>Hacker Days solves water management. Fuchiqueiras fills the maker space gap.</p>
+                    <p class="anti">Anti-pattern: Creating content for content's sake</p>
+                </div>
+                <div class="framework-item">
+                    <h4>3. Mix your people with locals</h4>
+                    <p>Entre Culturas and Fuchiqueiras blend colivers + village. Stories worth telling.</p>
+                    <p class="anti">Anti-pattern: Events only for your community</p>
+                </div>
+                <div class="framework-item">
+                    <h4>4. Make it open</h4>
+                    <p>Open-source code, open events, open documentation. Generosity travels.</p>
+                    <p class="anti">Anti-pattern: Gatekeeping your "secret sauce"</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 21: The Authenticity Filter -->
+        <section class="slide">
+            <h2>The authenticity filter</h2>
+            <p class="quote" style="font-size: 2.2rem;">"If you wouldn't do it for free, with no audience, don't do it for marketing.<br><br>People can smell the difference."</p>
+        </section>
+
+        <!-- SLIDE 22: Why Passion Matters -->
+        <section class="slide">
+            <h2>Why passion matters more than strategy</h2>
+            <ul style="max-width: 700px;">
+                <li><strong>Energy is visible</strong> — When you're genuinely excited, it shows. Guests feel the difference.</li>
+                <li style="margin-top: 20px;"><strong>Sustainability</strong> — Marketing tactics burn you out. Projects you love energize you.</li>
+                <li style="margin-top: 20px;"><strong>Attraction vs. promotion</strong> — Promotion says "look at us." Attraction says "look at this interesting thing."</li>
+            </ul>
+        </section>
+
+        <!-- SLIDE 23: Rogelio Lesson -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h2>Back to Rogelio</h2>
+                <p>He always gives value to the local initiatives we do.</p>
+                <p>He sees his village coming alive again.</p>
+                <p style="margin-top: 30px;" class="highlight">That feeling—that's why we do this.</p>
+                <p>The marketing is just what happens along the way.</p>
+            </div>
+            <img src="images/rogelio.jpeg" alt="Rogelio" class="slide-image">
+        </section>
+
+        <!-- SLIDE 24: Challenge -->
+        <section class="slide">
+            <h2>Your turn</h2>
+            <div class="challenge-list" style="max-width: 700px;">
+                <ol>
+                    <li><strong>Write down 3 things you'd love to do</strong>—not because they'd attract people, but because you want them to exist.</li>
+                    <li><strong>Pick the one that excites you most</strong>—not the one that sounds best as marketing.</li>
+                    <li><strong>Do it small, do it soon.</strong> Fuchiqueiras started with 10 people. Pegadas started with one walk.</li>
+                    <li><strong>Document it honestly.</strong> Not polished promo—just what happened.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- SLIDE 25: Closing Quote -->
+        <section class="slide">
+            <div class="closing-quote">
+                <p>"The projects that work aren't the ones designed to attract people.</p>
+                <p style="margin-top: 30px;" class="highlight">They're the ones that are worth doing anyway—</p>
+                <p>and the right people find their way to them."</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 26: Final Question -->
+        <section class="slide">
+            <div class="big-question">
+                <span class="highlight" style="font-size: 3rem;">What would you build<br>even if nobody came?</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 27: Contact -->
+        <section class="slide contact-slide">
+            <h2>Thank you</h2>
+            <p style="margin-top: 20px;">Let's talk about what you'd build.</p>
+            <div class="links">
+                <a href="https://anceu.com">anceu.com</a>
+                <a href="https://ruralhackers.com">ruralhackers.com</a>
+                <a href="https://hackerdays.org">hackerdays.org</a>
+            </div>
+            <p style="margin-top: 60px; color: #666;">Agustín Jamardo</p>
+        </section>
+
+    </div>
+
+    <img src="images/anceu-logo.png" alt="Anceu Coliving" class="logo-small">
+    <div class="slide-number" id="slideNumber">1 / 27</div>
+    <div class="nav-hint">← → or Space to navigate</div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+        const slideNumber = document.getElementById('slideNumber');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+
+            currentSlide = index;
+            progress.style.width = ((index + 1) / slides.length * 100) + '%';
+            slideNumber.textContent = (index + 1) + ' / ' + slides.length;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                showSlide(0);
+            } else if (e.key === 'End') {
+                showSlide(slides.length - 1);
+            }
+        });
+
+        // Touch navigation
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        });
+
+        // Click navigation (left/right halves of screen)
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') return;
+
+            const x = e.clientX;
+            const width = window.innerWidth;
+
+            if (x > width * 0.7) {
+                nextSlide();
+            } else if (x < width * 0.3) {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
