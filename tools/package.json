@@ -1,0 +1,13 @@
+{
+  "name": "presentations",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "export": "node export.mjs"
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "pptxgenjs": "^3.12.0",
+    "puppeteer": "^24.0.0"
+  }
+}
