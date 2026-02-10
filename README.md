@@ -21,6 +21,18 @@ open side-projects/index.html
 
 Navigate slides with arrow keys, spacebar, or by clicking/tapping.
 
+## Exporting to PDF / PPTX
+
+```bash
+cd tools && npm install && cd ..
+
+node tools/export.mjs eslibre-2026          # PDF + PPTX
+node tools/export.mjs side-projects --pdf   # PDF only
+node tools/export.mjs eslibre-2026 --ppt    # PPTX only
+```
+
+Output files (`export.pdf`, `export.pptx`) are saved inside the presentation folder.
+
 ## Adding a new presentation
 
 1. Create a new folder at the root (e.g. `my-talk/`).
