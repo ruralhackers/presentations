@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código abierto contra la despoblación: de Hacker Days a Punto de Agua</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <style>
+        :root {
+            --accent: #00a66b;
+            --accent-light: rgba(0, 166, 107, 0.1);
+            --accent-border: rgba(0, 166, 107, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slide.with-image {
+            flex-direction: row;
+            gap: 60px;
+        }
+
+        .slide-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .slide-image {
+            flex: 1;
+            max-width: 50%;
+            height: 70vh;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .quote {
+            font-size: 2rem;
+            font-style: italic;
+            color: #fff;
+            border-left: 4px solid var(--accent);
+            padding-left: 30px;
+            margin: 40px 0;
+        }
+
+        .big-question {
+            font-size: 3rem;
+            font-weight: 300;
+            text-align: center;
+            max-width: 900px;
+            line-height: 1.4;
+        }
+
+        .big-question .highlight {
+            display: block;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.3rem;
+            line-height: 2;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 30px;
+            color: #b0b0b0;
+        }
+
+        ul li::before {
+            content: "\2192";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+        }
+
+        .framework-item {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .framework-item h4 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .framework-item p {
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+        }
+
+        .title-slide h1 {
+            font-size: 3.5rem;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-top: 30px;
+        }
+
+        .title-slide .author {
+            margin-top: 60px;
+            font-size: 1.2rem;
+            color: #888;
+        }
+
+        .section-divider {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+        }
+
+        .section-divider h2 {
+            color: var(--accent);
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .section-divider p {
+            color: #888;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 110px;
+            font-size: 0.85rem;
+            color: #333;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .two-columns .column {
+            text-align: left;
+        }
+
+        .two-columns .column h4 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .big-number {
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 40px;
+            align-items: center;
+            max-width: 800px;
+        }
+
+        .phases-table {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .phase-row {
+            display: grid;
+            grid-template-columns: 100px 140px 1fr;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            align-items: center;
+        }
+
+        .phase-row .day {
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .phase-row .phase-name {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .phase-row .phase-desc {
+            color: #b0b0b0;
+            font-size: 1rem;
+        }
+
+        .challenge-list {
+            background: var(--accent-light);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--accent-border);
+        }
+
+        .challenge-list ol {
+            list-style: none;
+            counter-reset: challenge;
+        }
+
+        .challenge-list li {
+            counter-increment: challenge;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            padding-left: 50px;
+            position: relative;
+            color: #fff;
+        }
+
+        .challenge-list li::before {
+            content: counter(challenge);
+            position: absolute;
+            left: 0;
+            width: 35px;
+            height: 35px;
+            background: var(--accent);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .closing-quote {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .closing-quote p {
+            font-size: 2rem;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .contact-slide {
+            text-align: center;
+        }
+
+        .contact-slide .links {
+            margin-top: 40px;
+            font-size: 1.3rem;
+        }
+
+        .contact-slide .links a {
+            color: var(--accent);
+            text-decoration: none;
+            display: block;
+            margin: 15px 0;
+        }
+
+        .eslibre-badge {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 0.85rem;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo-small {
+            position: fixed;
+            bottom: 18px;
+            left: 40px;
+            height: 50px;
+            opacity: 0.5;
+            z-index: 100;
+            filter: invert(1);
+        }
+
+        .title-slide .logo-big {
+            height: 80px;
+            margin-bottom: 40px;
+            filter: invert(1);
+        }
+
+        .sponsors-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            max-width: 900px;
+            margin-top: 40px;
+        }
+
+        .sponsors-grid img {
+            height: 45px;
+            opacity: 0.6;
+            filter: brightness(0) invert(1);
+            transition: opacity 0.3s ease;
+        }
+
+        .sponsors-grid img:hover {
+            opacity: 1;
+        }
+
+        .sponsors-section {
+            margin-top: 40px;
+        }
+
+        .sponsors-section h4 {
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 800px;
+        }
+
+        .tech-item {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .tech-item .tech-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .tech-item .tech-desc {
+            font-size: 0.95rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+
+    <div class="presentation" id="presentation">
+
+        <!-- SLIDE 1: Portada -->
+        <section class="slide title-slide active">
+            <img src="logos/rural-hackers.png" alt="Rural Hackers" class="logo-big">
+            <h1>Codigo abierto contra la despoblacion</h1>
+            <p class="subtitle">De Hacker Days a Punto de Agua</p>
+            <p class="author">Agustin Jamardo · Rural Hackers</p>
+            <span class="eslibre-badge">esLibre 2026</span>
+        </section>
+
+        <!-- SLIDE 2: La cita de Rosabel -->
+        <section class="slide">
+            <div class="quote" style="max-width: 800px; font-size: 2.2rem;">
+                "Leemos casi 100 contadores, tres veces al año, casa por casa.
+                Si nos pasa algo, nadie sabe como funciona esto."
+            </div>
+            <p style="color: #666; font-size: 1.2rem; margin-top: 30px;">— Rosabel y Olga, vecinas de Anceu que gestionan el agua de su aldea</p>
+        </section>
+
+        <!-- SLIDE 3: El problema invisible -->
+        <section class="slide">
+            <h2>El problema invisible</h2>
+            <div class="stat-grid">
+                <div>
+                    <div class="big-number">1.500+</div>
+                    <p style="font-size: 1.1rem;">aldeas en Galicia con<br>gestion comunitaria del agua</p>
+                </div>
+                <div>
+                    <ul>
+                        <li>~100 contadores leidos a mano, 3 veces al año</li>
+                        <li>Deteccion de fugas, facturacion, cobros</li>
+                        <li>Conocimiento no documentado</li>
+                        <li>Gestionado por mayores de 60 años</li>
+                        <li>80 euros/año por hogar gracias a trabajo no remunerado</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: Pregunta al publico -->
+        <section class="slide">
+            <div class="big-question">
+                Conoceis aldeas o comunidades que gestionen recursos<br>
+                <span class="highlight">de forma colectiva?</span>
+            </div>
+            <p style="color: #666; margin-top: 30px; font-size: 1.1rem;">Agua, luz, pastos, montes comunales...</p>
+        </section>
+
+        <!-- SLIDE 5: Seccion Rural Hackers -->
+        <section class="slide section-divider">
+            <h2>Rural Hackers</h2>
+            <p>Tecnologia y comunidad contra la despoblacion</p>
+        </section>
+
+        <!-- SLIDE 6: Quienes somos -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Rural Hackers</h3>
+                <h2>Quienes somos</h2>
+                <p><span class="highlight">Asociacion gallega sin animo de lucro</span> que usa tecnologia y comunidad como herramientas contra la despoblacion.</p>
+                <ul>
+                    <li>Residencias, hackathons, encuentros</li>
+                    <li>Base en Anceu Coliving, Pontevedra</li>
+                    <li>Interseccion de tech y rural</li>
+                </ul>
+            </div>
+            <img src="images/rural-hackers-hero.jpg" alt="Rural Hackers en Anceu" class="slide-image">
+        </section>
+
+        <!-- SLIDE 7: Por que software libre -->
+        <section class="slide">
+            <h2>Por que software libre?</h2>
+            <div class="framework-grid">
+                <div class="framework-item">
+                    <h4>Soberania</h4>
+                    <p>El codigo pertenece a la comunidad, no a una empresa</p>
+                </div>
+                <div class="framework-item">
+                    <h4>Adaptabilidad</h4>
+                    <p>Cada territorio puede modificarlo a sus necesidades</p>
+                </div>
+                <div class="framework-item">
+                    <h4>Coste</h4>
+                    <p>Sin licencias, sin dependencia de proveedores</p>
+                </div>
+                <div class="framework-item">
+                    <h4>Transparencia</h4>
+                    <p>Las comunidades pueden auditar que hace el software</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: La trampa -->
+        <section class="slide">
+            <h2>La trampa de las "soluciones tecnologicas"</h2>
+            <p style="font-size: 1.8rem; color: #fff; margin-bottom: 40px;">El cementerio de apps rurales esta lleno de proyectos que <span class="highlight">nadie usa</span></p>
+            <ul>
+                <li>Diseñadas desde un despacho urbano</li>
+                <li>Sin entender el contexto real</li>
+                <li>Tecnologia que complica en vez de simplificar</li>
+                <li>Abandonadas tras la subvencion</li>
+            </ul>
+        </section>
+
+        <!-- SLIDE 9: Seccion HackerDays -->
+        <section class="slide section-divider">
+            <h2>Hacker Days</h2>
+            <p>Una semana, un reto real, una solucion util</p>
+        </section>
+
+        <!-- SLIDE 10: Que es HackerDays -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Hacker Days</h3>
+                <h2>Que es</h2>
+                <p>Una semana intensiva donde <span class="highlight">profesionales diversos</span> colaboran para resolver un <span class="highlight">reto rural real</span>.</p>
+                <ul>
+                    <li>Ingenieria, diseño, UX, comunicacion</li>
+                    <li>Vecinas del territorio</li>
+                    <li>14 participantes en Anceu Coliving</li>
+                    <li>Alojamiento y comidas incluidos</li>
+                </ul>
+            </div>
+            <img src="../side-projects/images/equipo-hackerdays.jpg" alt="Equipo Hacker Days" class="slide-image">
+        </section>
+
+        <!-- SLIDE 11: Como elegimos el reto -->
+        <section class="slide">
+            <h2>Como elegimos el reto</h2>
+            <ul style="max-width: 700px;">
+                <li><strong>Escuchamos primero:</strong> conversaciones con vecinas, asociaciones, ayuntamientos</li>
+                <li><strong>Problema real:</strong> algo que afecta a la comunidad hoy</li>
+                <li><strong>Alcance abordable:</strong> resoluble en una semana</li>
+                <li><strong>Replicable:</strong> que pueda servir a otras comunidades</li>
+            </ul>
+            <p style="margin-top: 40px; color: #fff; font-size: 1.6rem;">El reto lo define la comunidad, <span class="highlight">no nosotros</span>.</p>
+        </section>
+
+        <!-- SLIDE 12: Fases de la semana -->
+        <section class="slide">
+            <h2>Las fases de la semana</h2>
+            <div class="phases-table">
+                <div class="phase-row">
+                    <span class="day">Dia 1-2</span>
+                    <span class="phase-name">Inmersion</span>
+                    <span class="phase-desc">Conocer el territorio, hablar con vecinas, entender el problema de verdad</span>
+                </div>
+                <div class="phase-row">
+                    <span class="day">Dia 3-4</span>
+                    <span class="phase-name">Diseño y desarrollo</span>
+                    <span class="phase-desc">Definir la solucion, arquitectura y empezar a prototipar</span>
+                </div>
+                <div class="phase-row">
+                    <span class="day">Dia 5-6</span>
+                    <span class="phase-name">Testing y feedback</span>
+                    <span class="phase-desc">Probar con vecinas, iterar, refinar</span>
+                </div>
+                <div class="phase-row">
+                    <span class="day">Dia 7</span>
+                    <span class="phase-name">Celebracion</span>
+                    <span class="phase-desc">Presentacion publica y fiesta</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: Que lo hace diferente -->
+        <section class="slide">
+            <h2>Que lo hace diferente</h2>
+            <div class="two-columns">
+                <div class="column">
+                    <h4>Hackathon clasico</h4>
+                    <ul>
+                        <li>48 horas</li>
+                        <li>Reto abstracto o corporativo</li>
+                        <li>Prototipo que se abandona</li>
+                        <li>Competicion individual</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Hacker Days</h4>
+                    <ul>
+                        <li>7 dias</li>
+                        <li>Reto de una comunidad real</li>
+                        <li>Compromiso de continuidad</li>
+                        <li>Colaboracion con vecinas</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: Seccion Punto de Agua -->
+        <section class="slide section-divider">
+            <h2>Punto de Agua</h2>
+            <p>La solucion que construimos</p>
+        </section>
+
+        <!-- SLIDE 15: El reto de 2025 -->
+        <section class="slide with-image">
+            <div class="slide-content">
+                <h3>Hacker Days 2025</h3>
+                <h2>El reto</h2>
+                <p>Crear una <span class="highlight">web open source</span> para que las comunidades rurales gestionen su agua de forma sencilla.</p>
+                <ul>
+                    <li>Autenticacion y gestion de recursos</li>
+                    <li>Registro de contadores y consumos</li>
+                    <li>Facturacion y cobros</li>
+                    <li>Notificaciones y alertas</li>
+                </ul>
+            </div>
+            <img src="../side-projects/images/hackerdays-rosa-olga.jpeg" alt="Rosabel y Olga en Hacker Days" class="slide-image">
+        </section>
+
+        <!-- SLIDE 16: Demo -->
+        <section class="slide">
+            <div class="big-question">
+                <span class="highlight" style="font-size: 2.5rem;">Demo</span>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.5rem; color: #fff;">puntodeagua.com</p>
+        </section>
+
+        <!-- SLIDE 17: Decisiones de diseño -->
+        <section class="slide">
+            <h2>Diseñamos con, no para</h2>
+            <ul style="max-width: 700px;">
+                <li><strong>Inmersion primero:</strong> dos dias entendiendo el problema antes de escribir codigo</li>
+                <li><strong>Vecinas presentes toda la semana</strong>, no solo al final</li>
+                <li><strong>Textos claros:</strong> nada de jerga tecnica</li>
+                <li><strong>Sencillez:</strong> que reemplace al papel, no que lo complique</li>
+                <li><strong>Replicable:</strong> que otra aldea pueda usarlo sin nosotros</li>
+            </ul>
+            <p style="margin-top: 30px;">La tecnologia no es la solucion. Es una <span class="highlight">herramienta</span>.</p>
+        </section>
+
+        <!-- SLIDE 18: Lo que aprendimos -->
+        <section class="slide">
+            <h2>Lo que aprendimos</h2>
+            <div class="quote" style="max-width: 700px; margin-bottom: 40px;">
+                "El mejor codigo es el que no hace falta explicar"
+            </div>
+            <ul style="max-width: 700px;">
+                <li>Las usuarias saben lo que necesitan — solo hay que escuchar</li>
+                <li>Menos funcionalidades, mejor implementadas</li>
+                <li>El prototipo queda operativo en Anceu para validacion real</li>
+                <li>La documentacion es parte del producto</li>
+            </ul>
+        </section>
+
+        <!-- SLIDE 19: Seccion Replicarlo -->
+        <section class="slide section-divider">
+            <h2>Como replicarlo</h2>
+            <p>Recursos para tu territorio</p>
+        </section>
+
+        <!-- SLIDE 20: Organiza tu propio Hacker Days -->
+        <section class="slide">
+            <h2>Organiza tu propio Hacker Days</h2>
+            <p style="max-width: 700px; margin-bottom: 30px;">Esto ha funcionado asi porque nace de nuestro contexto: una aldea concreta, unas vecinas concretas, unos problemas concretos. <span class="highlight">No copies el formato — aprende del tuyo.</span></p>
+            <div class="challenge-list" style="max-width: 700px;">
+                <ol>
+                    <li><strong>Entiende tu territorio:</strong> lo que funciona en Anceu no tiene por que funcionar en tu pueblo</li>
+                    <li><strong>Escucha antes de proponer:</strong> el reto lo define la comunidad, no tu</li>
+                    <li><strong>Mezcla perfiles:</strong> lo tecnico sin lo humano no sirve</li>
+                    <li><strong>Compromiso despues:</strong> un hackathon sin continuidad es turismo tecnologico</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- SLIDE 22: Colabora -->
+        <section class="slide">
+            <h2>Colabora</h2>
+            <div class="two-columns">
+                <div class="column">
+                    <h4>Como persona</h4>
+                    <ul>
+                        <li>Participa en Hacker Days 2026</li>
+                        <li>Contribuye codigo a Punto de Agua</li>
+                        <li>Traduce documentacion</li>
+                        <li>Cuenta tu experiencia rural</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Como organizacion</h4>
+                    <ul>
+                        <li>Propon un reto de tu territorio</li>
+                        <li>Cede espacio para un evento</li>
+                        <li>Patrocina Hacker Days</li>
+                        <li>Replica el modelo</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 23: Mensaje central -->
+        <section class="slide">
+            <div class="closing-quote">
+                <p>El codigo abierto no es solo una licencia.</p>
+                <p style="margin-top: 30px;">Es una forma de construir tecnologia que <span class="highlight">pertenece a las comunidades</span> que la usan.</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 24: Cita de cierre de Rosabel -->
+        <section class="slide">
+            <div class="quote" style="max-width: 700px; font-size: 2.2rem; text-align: center; border-left: none; padding-left: 0; border-top: 4px solid var(--accent); padding-top: 30px;">
+                "Ahora, cuando yo no este, el pueblo seguira teniendo agua."
+            </div>
+            <p style="color: #666; font-size: 1.2rem; margin-top: 30px;">— Rosabel</p>
+        </section>
+
+        <!-- SLIDE 25: Llamada a la accion -->
+        <section class="slide">
+            <div class="big-question">
+                El rural necesita<br>
+                <span class="highlight">tu codigo</span>
+            </div>
+        </section>
+
+        <!-- SLIDE: Agradecimientos -->
+        <section class="slide">
+            <h2>Gracias a quienes lo hacen posible</h2>
+            <div class="sponsors-section">
+                <h4>Impulsan Hacker Days 2025</h4>
+                <div class="sponsors-grid">
+                    <img src="logos/anceu-coliving.png" alt="Anceu Coliving">
+                    <img src="logos/eleven-yellow.png" alt="Eleven Yellow">
+                    <img src="logos/siteground.png" alt="SiteGround">
+                    <img src="logos/viko.jpeg" alt="Viko">
+                    <img src="logos/teimas.svg" alt="Teimas">
+                    <img src="logos/next-digital.svg" alt="Next Digital">
+                </div>
+            </div>
+            <div class="sponsors-section">
+                <h4>Han confiado en Rural Hackers</h4>
+                <div class="sponsors-grid">
+                    <img src="logos/automattic.png" alt="Automattic">
+                    <img src="logos/aurea.svg" alt="Aurea Telecom">
+                    <img src="logos/revertia.png" alt="Revertia">
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE: Contacto -->
+        <section class="slide contact-slide">
+            <h2>Gracias!</h2>
+            <div class="links">
+                <a href="https://puntodeagua.com">puntodeagua.com</a>
+                <a href="https://hackerdays.org">hackerdays.org</a>
+                <a href="https://ruralhackers.org">ruralhackers.org</a>
+            </div>
+            <p style="margin-top: 60px; color: #666;">Agustin Jamardo · Rural Hackers</p>
+        </section>
+
+    </div>
+
+    <img src="logos/rural-hackers.png" alt="Rural Hackers" class="logo-small">
+    <div class="slide-number" id="slideNumber">1 / 26</div>
+    <div class="nav-hint">&larr; &rarr; o Espacio para navegar</div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+        const slideNumber = document.getElementById('slideNumber');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+
+            currentSlide = index;
+            progress.style.width = ((index + 1) / slides.length * 100) + '%';
+            slideNumber.textContent = (index + 1) + ' / ' + slides.length;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                showSlide(0);
+            } else if (e.key === 'End') {
+                showSlide(slides.length - 1);
+            }
+        });
+
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') return;
+
+            const x = e.clientX;
+            const width = window.innerWidth;
+
+            if (x > width * 0.7) {
+                nextSlide();
+            } else if (x < width * 0.3) {
+                prevSlide();
+            }
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>

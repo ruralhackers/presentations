@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código abierto contra la despoblación: de HackerDays a Punto de Agua</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css">
+    <style>
+        :root {
+            --r-main-font: 'Source Sans Pro', sans-serif;
+            --r-heading-font: 'Source Sans Pro', sans-serif;
+            --r-main-color: #2d3436;
+            --r-heading-color: #1e3a5f;
+            --r-link-color: #0984e3;
+            --r-background-color: #fefefe;
+        }
+        .reveal h1, .reveal h2, .reveal h3 {
+            text-transform: none;
+            font-weight: 700;
+        }
+        .reveal h1 {
+            font-size: 2.2em;
+        }
+        .reveal h2 {
+            font-size: 1.6em;
+            color: var(--r-heading-color);
+        }
+        .reveal h3 {
+            font-size: 1.2em;
+            color: #636e72;
+        }
+        .reveal .subtitle {
+            font-size: 1.3em;
+            color: #636e72;
+            margin-top: 0.5em;
+        }
+        .reveal .highlight {
+            color: #0984e3;
+            font-weight: 600;
+        }
+        .reveal .big-number {
+            font-size: 4em;
+            font-weight: 700;
+            color: #0984e3;
+        }
+        .reveal ul {
+            display: block;
+            text-align: left;
+        }
+        .reveal li {
+            margin-bottom: 0.5em;
+            font-size: 0.9em;
+        }
+        .reveal .quote {
+            font-style: italic;
+            font-size: 1.4em;
+            color: #2d3436;
+            border-left: 4px solid #0984e3;
+            padding-left: 1em;
+            text-align: left;
+        }
+        .reveal .author {
+            font-size: 0.8em;
+            color: #636e72;
+            margin-top: 1em;
+        }
+        .reveal .two-columns {
+            display: flex;
+            gap: 2em;
+        }
+        .reveal .two-columns > div {
+            flex: 1;
+            text-align: left;
+        }
+        .reveal .small {
+            font-size: 0.7em;
+            color: #636e72;
+        }
+        .reveal .emoji {
+            font-size: 3em;
+        }
+        .reveal .cta {
+            background: #0984e3;
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 1em;
+        }
+        .reveal .section-title {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0984e3 100%);
+            color: white !important;
+        }
+        .reveal .section-title h2 {
+            color: white;
+        }
+        .slide-number {
+            color: #636e72 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- PORTADA -->
+            <section>
+                <h1>Código abierto contra la despoblación</h1>
+                <p class="subtitle">De HackerDays a Punto de Agua</p>
+                <br><br>
+                <p>
+                    <strong>esLibre 2026</strong><br>
+                    <span class="small">17-18 abril · Valencia</span>
+                </p>
+                <aside class="notes">
+                    Presentarte. Agradecer a esLibre.
+                    "Vengo a contaros una historia sobre agua, vecinas y código abierto."
+                </aside>
+            </section>
+
+            <!-- PARTE 1: APERTURA - EL AGUA DE ROSABEL -->
+            <section data-background-color="#1e3a5f" class="section-title">
+                <h2>1. El agua de Rosabel</h2>
+                <aside class="notes">
+                    Transición a la historia personal que abre la charla.
+                </aside>
+            </section>
+
+            <section>
+                <p class="quote">
+                    "Llevo 30 años abriendo la llave del depósito a las 6 de la mañana.
+                    Si me pasa algo, nadie sabe cómo funciona esto."
+                </p>
+                <p class="author">— Rosabel, vecina de una aldea gallega</p>
+                <aside class="notes">
+                    Esta es una historia real. Rosabel gestiona el agua de su aldea desde hace décadas.
+                    El conocimiento está en su cabeza. No hay documentación. No hay relevo.
+                </aside>
+            </section>
+
+            <section>
+                <h2>El problema invisible</h2>
+                <div class="two-columns">
+                    <div>
+                        <p class="big-number">1.500+</p>
+                        <p>aldeas en Galicia con gestión comunitaria del agua</p>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>Infraestructura crítica</li>
+                            <li>Conocimiento no documentado</li>
+                            <li>Población envejecida</li>
+                            <li>Sin relevo generacional</li>
+                        </ul>
+                    </div>
+                </div>
+                <aside class="notes">
+                    No es solo Galicia. En toda España hay comunidades gestionando recursos así.
+                    Cuando la persona que sabe se va... el sistema colapsa.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Pregunta para vosotros</h2>
+                <p style="font-size: 1.4em;">
+                    ¿Conocéis aldeas o comunidades que gestionen recursos de forma colectiva?
+                </p>
+                <p class="small" style="margin-top: 2em;">
+                    Agua, luz, pastos, montes comunales...
+                </p>
+                <aside class="notes">
+                    Interacción con el público. Levantar manos o comentar brevemente.
+                    Esto existe en toda España, no solo en Galicia.
+                </aside>
+            </section>
+
+            <!-- PARTE 2: RURAL HACKERS Y EL PORQUÉ -->
+            <section data-background-color="#1e3a5f" class="section-title">
+                <h2>2. Rural Hackers</h2>
+                <p style="color: rgba(255,255,255,0.8);">Tecnología y comunidad contra la despoblación</p>
+            </section>
+
+            <section>
+                <h2>¿Quiénes somos?</h2>
+                <p style="font-size: 1.2em;">
+                    <span class="highlight">Rural Hackers</span> es una asociación gallega sin ánimo de lucro
+                </p>
+                <br>
+                <ul>
+                    <li>Usamos <strong>tecnología y comunidad</strong> como herramientas contra la despoblación</li>
+                    <li>Organizamos residencias, hackathons, encuentros intergeneracionales</li>
+                    <li>Base en <strong>Anceu Coliving</strong>, Pontevedra</li>
+                </ul>
+                <br><br>
+                <p class="small">ruralhackers.org · hackerdays.org</p>
+                <aside class="notes">
+                    Anceu es una aldea recuperada que ahora tiene coliving, coworking, huerta...
+                    Es el laboratorio donde probamos todo esto.
+                </aside>
+            </section>
+
+            <section>
+                <h2>¿Por qué software libre?</h2>
+                <ul>
+                    <li><strong>Soberanía:</strong> el código pertenece a la comunidad, no a una empresa</li>
+                    <li><strong>Adaptabilidad:</strong> cada territorio puede modificarlo a sus necesidades</li>
+                    <li><strong>Coste:</strong> sin licencias, sin dependencia de proveedores</li>
+                    <li><strong>Transparencia:</strong> las comunidades pueden auditar qué hace el software</li>
+                </ul>
+                <aside class="notes">
+                    El rural no puede depender de SaaS que desaparecen o suben precios.
+                    Necesitan herramientas que controlen ellos.
+                </aside>
+            </section>
+
+            <section>
+                <h2>La trampa de las "soluciones tecnológicas"</h2>
+                <br>
+                <p style="font-size: 1.3em;">
+                    El cementerio de apps rurales está lleno de proyectos que
+                    <span class="highlight">nadie usa</span>
+                </p>
+                <br>
+                <ul>
+                    <li>Diseñadas desde un despacho urbano</li>
+                    <li>Sin entender el contexto real</li>
+                    <li>Tecnología que complica en vez de simplificar</li>
+                    <li>Abandonadas tras la subvención</li>
+                </ul>
+                <aside class="notes">
+                    Hemos visto muchos proyectos fracasar por esto.
+                    La tecnología no es la solución, es una herramienta.
+                    La solución es entender el problema primero.
+                </aside>
+            </section>
+
+            <!-- PARTE 3: HACKERDAYS - EL MODELO -->
+            <section data-background-color="#1e3a5f" class="section-title">
+                <h2>3. HackerDays</h2>
+                <p style="color: rgba(255,255,255,0.8);">Una semana, un reto real, una solución útil</p>
+            </section>
+
+            <section>
+                <h2>¿Qué es HackerDays?</h2>
+                <br>
+                <p style="font-size: 1.3em;">
+                    Una semana intensiva donde <span class="highlight">profesionales diversos</span>
+                    colaboran para resolver un <span class="highlight">reto rural real</span>
+                </p>
+                <br>
+                <div class="two-columns">
+                    <div>
+                        <h3>Quién participa</h3>
+                        <ul>
+                            <li>Programadores</li>
+                            <li>Diseñadoras</li>
+                            <li>Makers</li>
+                            <li>Vecinas del territorio</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Qué se ofrece</h3>
+                        <ul>
+                            <li>Alojamiento gratuito</li>
+                            <li>Comidas incluidas</li>
+                            <li>Convivencia en Anceu</li>
+                            <li>Un reto con impacto real</li>
+                        </ul>
+                    </div>
+                </div>
+                <aside class="notes">
+                    HackerDays 2025 fue del 1 al 7 de septiembre.
+                    Participación gratuita - solo te pagas el transporte.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Cómo elegimos el reto</h2>
+                <br>
+                <ul>
+                    <li><strong>Escuchamos primero:</strong> conversaciones con vecinas, asociaciones, ayuntamientos</li>
+                    <li><strong>Problema real:</strong> algo que afecta a la comunidad hoy, no teórico</li>
+                    <li><strong>Alcance abordable:</strong> resoluble en una semana con prototipo funcional</li>
+                    <li><strong>Replicable:</strong> que pueda servir a otras comunidades</li>
+                </ul>
+                <br><br>
+                <p class="highlight">
+                    El reto lo define la comunidad, no nosotros.
+                </p>
+                <aside class="notes">
+                    El agua surgió de conversaciones reales con vecinas.
+                    No fue una idea nuestra impuesta.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Las fases de la semana</h2>
+                <br>
+                <table style="font-size: 0.8em; width: 100%;">
+                    <tr>
+                        <td style="padding: 0.5em;"><strong>Día 1-2</strong></td>
+                        <td style="padding: 0.5em;"><span class="highlight">Inmersión</span></td>
+                        <td style="padding: 0.5em;">Conocer el territorio, hablar con vecinas, entender el problema de verdad</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5em;"><strong>Día 3-4</strong></td>
+                        <td style="padding: 0.5em;"><span class="highlight">Diseño</span></td>
+                        <td style="padding: 0.5em;">Definir la solución, arquitectura, repartir tareas</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5em;"><strong>Día 5-6</strong></td>
+                        <td style="padding: 0.5em;"><span class="highlight">Prototipo</span></td>
+                        <td style="padding: 0.5em;">Desarrollo intensivo, hardware, software, integración</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5em;"><strong>Día 7</strong></td>
+                        <td style="padding: 0.5em;"><span class="highlight">Test + Demo</span></td>
+                        <td style="padding: 0.5em;">Probar con vecinas reales, presentación pública</td>
+                    </tr>
+                </table>
+                <aside class="notes">
+                    Las vecinas están presentes toda la semana, no solo al final.
+                    El test del día 7 es con usuarios reales, no simulado.
+                </aside>
+            </section>
+
+            <section>
+                <h2>¿Qué lo hace diferente?</h2>
+                <br>
+                <div class="two-columns">
+                    <div>
+                        <h3>Hackathon clásico</h3>
+                        <ul>
+                            <li>48 horas</li>
+                            <li>Reto abstracto o corporativo</li>
+                            <li>Prototipo que se abandona</li>
+                            <li>Competición individual</li>
+                            <li>Pizza y bebidas energéticas</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>HackerDays</h3>
+                        <ul>
+                            <li>7 días</li>
+                            <li>Reto de una comunidad real</li>
+                            <li>Compromiso de continuidad</li>
+                            <li>Colaboración con vecinas</li>
+                            <li>Comida casera y paseos por el monte</li>
+                        </ul>
+                    </div>
+                </div>
+                <aside class="notes">
+                    El tiempo es clave: en 48h solo puedes hacer una demo.
+                    En 7 días, con inmersión, puedes hacer algo que funcione de verdad.
+                </aside>
+            </section>
+
+            <!-- PARTE 4: PUNTO DE AGUA -->
+            <section data-background-color="#1e3a5f" class="section-title">
+                <h2>4. Punto de Agua</h2>
+                <p style="color: rgba(255,255,255,0.8);">La solución que construimos</p>
+            </section>
+
+            <section>
+                <h2>El reto de 2025</h2>
+                <br>
+                <p style="font-size: 1.2em;">
+                    Crear un sistema <span class="highlight">open source</span> para que las comunidades rurales
+                    puedan gestionar su agua de forma sencilla
+                </p>
+                <br>
+                <ul>
+                    <li>Monitorizar niveles de depósitos</li>
+                    <li>Alertas cuando algo va mal</li>
+                    <li>Registro de consumos y cobros</li>
+                    <li>Documentar el conocimiento de las vecinas</li>
+                    <li>Interfaz que pueda usar cualquier persona</li>
+                </ul>
+                <aside class="notes">
+                    Lo más importante: que Rosabel pueda enseñar el sistema a quien la releve.
+                    Documentar ese conocimiento invisible.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Demo</h2>
+                <br>
+                <p style="font-size: 1.5em;">
+                    🖥️ <span class="highlight">puntodeagua.com</span>
+                </p>
+                <br>
+                <p class="small">
+                    [Aquí mostrar la aplicación en vivo]
+                </p>
+                <aside class="notes">
+                    Demo en vivo de la aplicación.
+                    Mostrar: dashboard, alertas, registro, configuración.
+                    Si hay tiempo, mostrar el hardware también.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Stack técnico</h2>
+                <br>
+                <div class="two-columns">
+                    <div>
+                        <h3>Software</h3>
+                        <ul>
+                            <li>Backend: [tecnología]</li>
+                            <li>Frontend: [tecnología]</li>
+                            <li>Base de datos: [tecnología]</li>
+                            <li>API: REST / GraphQL</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Hardware</h3>
+                        <ul>
+                            <li>Sensores de nivel</li>
+                            <li>Microcontrolador</li>
+                            <li>Conectividad: LoRa / WiFi</li>
+                            <li>Alimentación solar</li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+                <p class="small">
+                    [Adaptar con el stack real de Punto de Agua]
+                </p>
+                <aside class="notes">
+                    Explicar las decisiones técnicas.
+                    Por qué elegimos cada tecnología.
+                    Énfasis en que todo es open source y replicable.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Decisiones de diseño</h2>
+                <br>
+                <ul>
+                    <li><strong>Mobile-first:</strong> muchas vecinas solo tienen móvil</li>
+                    <li><strong>Offline-capable:</strong> la conexión en el rural es irregular</li>
+                    <li><strong>Textos claros:</strong> nada de jerga técnica</li>
+                    <li><strong>Accesibilidad:</strong> texto grande, contraste alto, iconos claros</li>
+                    <li><strong>Multi-idioma:</strong> gallego, castellano, portugués</li>
+                </ul>
+                <aside class="notes">
+                    Diseñamos CON las vecinas, no PARA ellas.
+                    Cada decisión de UX viene de observar cómo usan el móvil.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Lo que aprendimos</h2>
+                <br>
+                <div class="quote">
+                    "El mejor código es el que no hace falta explicar"
+                </div>
+                <br>
+                <ul>
+                    <li>Las usuarias saben lo que necesitan, solo hay que escuchar</li>
+                    <li>Menos funcionalidades, mejor implementadas</li>
+                    <li>El hardware es tan importante como el software</li>
+                    <li>La documentación es parte del producto</li>
+                </ul>
+                <aside class="notes">
+                    Humildad técnica: vinimos a resolver SU problema, no a demostrar lo que sabemos.
+                </aside>
+            </section>
+
+            <section>
+                <h2>El código está abierto</h2>
+                <br>
+                <p style="font-size: 1.3em;">
+                    📦 <span class="highlight">github.com/ruralhackers/puntodeagua</span>
+                </p>
+                <br>
+                <ul>
+                    <li>Licencia: [GPL/MIT/Apache]</li>
+                    <li>Documentación completa</li>
+                    <li>Issues abiertos para contribuir</li>
+                    <li>Hardware: esquemas y BOM disponibles</li>
+                </ul>
+                <br>
+                <p class="small">[Adaptar con la URL real del repositorio]</p>
+                <aside class="notes">
+                    Invitar a contribuir.
+                    Explicar cómo pueden ayudar: código, traducciones, documentación, testeo.
+                </aside>
+            </section>
+
+            <!-- PARTE 5: CÓMO REPLICARLO -->
+            <section data-background-color="#1e3a5f" class="section-title">
+                <h2>5. Cómo replicarlo</h2>
+                <p style="color: rgba(255,255,255,0.8);">Recursos para tu territorio</p>
+            </section>
+
+            <section>
+                <h2>Organiza tu propio HackerDays</h2>
+                <br>
+                <ul>
+                    <li><strong>Encuentra el reto:</strong> habla con tu comunidad, no asumas</li>
+                    <li><strong>Busca un espacio:</strong> donde convivir una semana (coliving, albergue, casa rural)</li>
+                    <li><strong>Convoca diversidad:</strong> no solo programadores</li>
+                    <li><strong>Involucra vecinas:</strong> desde el día 1, no solo al final</li>
+                    <li><strong>Compromiso post-evento:</strong> quién mantiene el proyecto después</li>
+                </ul>
+                <br><br>
+                <p>
+                    📄 <span class="highlight">hackerdays.org/guia</span>
+                </p>
+                <aside class="notes">
+                    Ofrecemos ayuda a quien quiera organizar uno.
+                    No hace falta reinventar la rueda.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Adapta Punto de Agua</h2>
+                <br>
+                <p style="font-size: 1.1em;">
+                    El sistema está diseñado para ser adaptado a otros territorios
+                </p>
+                <br>
+                <ul>
+                    <li>Fork del repositorio</li>
+                    <li>Configura para tu comunidad</li>
+                    <li>Añade tu idioma</li>
+                    <li>Modifica según tus necesidades</li>
+                    <li>Comparte tus mejoras upstream</li>
+                </ul>
+                <aside class="notes">
+                    Si tu comunidad gestiona agua de forma similar, Punto de Agua puede servir.
+                    Y si no es agua, la arquitectura puede adaptarse a otros recursos comunitarios.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Otros retos que necesitan solución</h2>
+                <br>
+                <ul>
+                    <li>🔥 Gestión de montes comunales y prevención de incendios</li>
+                    <li>🚗 Transporte compartido en zonas sin bus</li>
+                    <li>🏥 Coordinación de cuidados a mayores</li>
+                    <li>📦 Logística de última milla para productores locales</li>
+                    <li>🌾 Gestión de pastos y ganado comunitario</li>
+                </ul>
+                <br><br>
+                <p class="highlight">¿Cuál es el reto de tu territorio?</p>
+                <aside class="notes">
+                    HackerDays 2026 será otro reto. ¿Cuál?
+                    Estamos abiertos a propuestas.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Colabora con Rural Hackers</h2>
+                <br>
+                <div class="two-columns">
+                    <div>
+                        <h3>Como persona</h3>
+                        <ul>
+                            <li>Participa en HackerDays 2026</li>
+                            <li>Contribuye código a Punto de Agua</li>
+                            <li>Traduce documentación</li>
+                            <li>Cuenta tu experiencia rural</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Como organización</h3>
+                        <ul>
+                            <li>Propón un reto de tu territorio</li>
+                            <li>Cede espacio para un evento</li>
+                            <li>Patrocina HackerDays</li>
+                            <li>Replica el modelo</li>
+                        </ul>
+                    </div>
+                </div>
+                <aside class="notes">
+                    Estamos en hackerdays.org y ruralhackers.org.
+                    Contacto abierto.
+                </aside>
+            </section>
+
+            <!-- PARTE 6: CIERRE -->
+            <section data-background-color="#1e3a5f" class="section-title">
+                <h2>6. Cierre</h2>
+            </section>
+
+            <section>
+                <h2>El software libre como infraestructura comunitaria</h2>
+                <br>
+                <p style="font-size: 1.2em;">
+                    El código abierto no es solo una licencia.
+                </p>
+                <br>
+                <p style="font-size: 1.2em;">
+                    Es una forma de construir tecnología que
+                    <span class="highlight">pertenece a las comunidades</span> que la usan.
+                </p>
+                <aside class="notes">
+                    Mensaje central de la charla.
+                    Volver a Rosabel: ahora su conocimiento está documentado,
+                    el sistema es de su comunidad, nadie se lo puede quitar.
+                </aside>
+            </section>
+
+            <section>
+                <p class="quote">
+                    "Ahora, cuando yo no esté, el pueblo seguirá teniendo agua."
+                </p>
+                <p class="author">— Rosabel</p>
+                <aside class="notes">
+                    Cerrar con la misma persona con la que abrimos.
+                    El círculo se cierra.
+                </aside>
+            </section>
+
+            <section>
+                <h2>Llamada a la acción</h2>
+                <br>
+                <p style="font-size: 1.3em;">
+                    El rural necesita <span class="highlight">tu código</span>
+                </p>
+                <br>
+                <ul style="font-size: 1.1em;">
+                    <li>🌐 <strong>puntodeagua.com</strong> — el proyecto</li>
+                    <li>📅 <strong>hackerdays.org</strong> — participa en 2026</li>
+                    <li>🏠 <strong>ruralhackers.org</strong> — únete a la comunidad</li>
+                </ul>
+                <aside class="notes">
+                    Repetir las URLs.
+                    Invitar a hablar después de la charla.
+                </aside>
+            </section>
+
+            <!-- CIERRE FINAL -->
+            <section>
+                <h1>¡Gracias!</h1>
+                <br>
+                <p style="font-size: 1.2em;">
+                    [Tu nombre]<br>
+                    <span class="small">Rural Hackers</span>
+                </p>
+                <br>
+                <p>
+                    🐘 @[tu-mastodon]<br>
+                    📧 [tu-email]
+                </p>
+                <br><br>
+                <p class="small">
+                    Slides disponibles en: [URL]
+                </p>
+                <aside class="notes">
+                    Abrir turno de preguntas.
+                    Mencionar que estarás disponible después para charlar.
+                </aside>
+            </section>
+
+            <!-- BACKUP: Por si hay preguntas técnicas -->
+            <section>
+                <h2>Anexo: Arquitectura técnica</h2>
+                <br>
+                <p class="small">[Slide de backup para preguntas técnicas detalladas]</p>
+                <br>
+                <p>Diagrama de arquitectura de Punto de Agua</p>
+                <aside class="notes">
+                    Slide de backup por si alguien pregunta por detalles técnicos.
+                    No mostrar a menos que haya preguntas.
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showNotes: false,
+            plugins: [ RevealNotes ],
+            // Configuración de presentación
+            width: 1280,
+            height: 720,
+            margin: 0.1,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            // Controles
+            controls: true,
+            progress: true,
+            center: true,
+        });
+    </script>
+</body>
+</html>

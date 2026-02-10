@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentations</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .presentations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 40px;
+            text-decoration: none;
+            color: #fff;
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 166, 107, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .card .tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00a66b;
+            margin-bottom: 16px;
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 80px;
+            font-size: 0.85rem;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <h1>Presentations</h1>
+    <div class="presentations">
+        <a href="side-projects/index.html" class="card">
+            <div class="tag">ECHN Workshop @ Sende</div>
+            <h2>Side Projects as Organic Marketing</h2>
+            <p>Do what you love. Four stories from Anceu Coliving about building things worth doing.</p>
+        </a>
+        <a href="eslibre-2026/index.html" class="card">
+            <div class="tag">esLibre 2026 &middot; Melide</div>
+            <h2>Codigo abierto contra la despoblacion</h2>
+            <p>De Hacker Days a Punto de Agua. Software libre, comunidad rural y gestion del agua.</p>
+        </a>
+    </div>
+    <p class="footer">Agustin Jamardo</p>
+</body>
+</html>
