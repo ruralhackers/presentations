@@ -51,6 +51,7 @@
         .logos .sep { color: #333; font-size: 0.75rem; }
         .nav-hint { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
                     font-size: 0.8rem; color: #444; z-index: 100; }
+        .logos, .slide-number, .nav-hint, .progress-bar { transition: opacity 0.3s ease; }
 
         /* IMAGE SLIDE */
         .image-slide { padding: 0; }
@@ -404,6 +405,12 @@
             current = i;
             progress.style.width = ((i + 1) / slides.length * 100) + '%';
             slideNumber.textContent = (i + 1) + ' / ' + slides.length;
+            // Hide UI chrome on image slides (portada/cierre)
+            const isImageSlide = slides[i].classList.contains('image-slide');
+            document.querySelector('.logos').style.opacity = isImageSlide ? '0' : '1';
+            document.getElementById('slideNumber').style.opacity = isImageSlide ? '0' : '1';
+            document.querySelector('.nav-hint').style.opacity = isImageSlide ? '0' : '1';
+            progress.style.opacity = isImageSlide ? '0' : '1';
         }
         document.addEventListener('keydown', e => {
             if (['ArrowRight', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); show(current + 1); }
