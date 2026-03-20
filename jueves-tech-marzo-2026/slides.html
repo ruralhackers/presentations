@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprendimiento Rural — Agustín Jamardo · Jueves Tech 2026</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <style>
+        :root {
+            --accent: #00a66b;
+            --accent-light: rgba(0, 166, 107, 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+        .presentation { height: 100vh; width: 100vw; position: relative; }
+        .slide {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 60px 80px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .slide.active { opacity: 1; visibility: visible; }
+        /* Typography */
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 30px;
+             background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2.5rem; font-weight: 600; margin-bottom: 30px; color: #fff; }
+        h3 { font-size: 1rem; font-weight: 700; color: var(--accent);
+             text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+        p { font-size: 1.3rem; line-height: 1.6; color: #b0b0b0; margin-bottom: 20px; }
+        ul { list-style: none; font-size: 1.2rem; line-height: 2; }
+        ul li { position: relative; padding-left: 28px; color: #b0b0b0; }
+        ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+        .highlight { color: var(--accent); font-weight: 600; }
+        /* Fixed UI */
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px;
+                        background: var(--accent); transition: width 0.3s ease; z-index: 100; }
+        .slide-number { position: fixed; bottom: 25px; right: 40px;
+                        font-size: 0.85rem; color: #333; z-index: 100; }
+        .logos { position: fixed; bottom: 22px; left: 40px;
+                 display: flex; align-items: center; gap: 10px; z-index: 100; }
+        .logos img { height: 22px; opacity: 0.45; filter: brightness(0) invert(1); }
+        .logos .sep { color: #333; font-size: 0.75rem; }
+        .nav-hint { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+                    font-size: 0.8rem; color: #222; z-index: 100; }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="presentation" id="presentation">
+        <!-- slides go here -->
+    </div>
+    <div class="logos">
+        <img src="../eslibre-2026/logos/rural-hackers.png" alt="Rural Hackers"
+             onerror="this.style.display='none';this.parentNode.querySelector('.rh-text').style.display='inline'">
+        <span class="rh-text" style="display:none;font-size:0.7rem;color:#444;font-weight:700;letter-spacing:1px;">RURAL HACKERS</span>
+        <span class="sep">·</span>
+        <img src="../eslibre-2026/logos/anceu-coliving.png" alt="Anceu Coliving"
+             onerror="this.style.display='none';this.parentNode.querySelector('.ac-text').style.display='inline'">
+        <span class="ac-text" style="display:none;font-size:0.7rem;color:#444;font-weight:700;letter-spacing:1px;">ANCEU COLIVING</span>
+    </div>
+    <div class="slide-number" id="slideNumber">1 / 18</div>
+    <div class="nav-hint">← → o Espacio para navegar</div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+        const slideNumber = document.getElementById('slideNumber');
+        let current = 0;
+        function show(i) {
+            if (i < 0) i = 0;
+            if (i >= slides.length) i = slides.length - 1;
+            slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+            current = i;
+            progress.style.width = ((i + 1) / slides.length * 100) + '%';
+            slideNumber.textContent = (i + 1) + ' / ' + slides.length;
+        }
+        document.addEventListener('keydown', e => {
+            if (['ArrowRight', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); show(current + 1); }
+            else if (['ArrowLeft', 'Backspace'].includes(e.key)) { e.preventDefault(); show(current - 1); }
+            else if (e.key === 'Home') show(0);
+            else if (e.key === 'End') show(slides.length - 1);
+        });
+        let tx = 0;
+        document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+        document.addEventListener('touchend', e => {
+            const d = tx - e.changedTouches[0].clientX;
+            if (Math.abs(d) > 50) show(d > 0 ? current + 1 : current - 1);
+        });
+        document.addEventListener('click', e => {
+            if (e.target.tagName === 'A') return;
+            e.clientX > window.innerWidth * 0.7 ? show(current + 1) :
+            e.clientX < window.innerWidth * 0.3 ? show(current - 1) : null;
+        });
+        show(0);
+    </script>
+</body>
+</html>
