@@ -8,7 +8,6 @@
     <style>
         :root {
             --accent: #00a66b;
-            --accent-light: rgba(0, 166, 107, 0.1);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -45,13 +44,13 @@
         .progress-bar { position: fixed; top: 0; left: 0; height: 3px;
                         background: var(--accent); transition: width 0.3s ease; z-index: 100; }
         .slide-number { position: fixed; bottom: 25px; right: 40px;
-                        font-size: 0.85rem; color: #333; z-index: 100; }
+                        font-size: 0.85rem; color: #555; z-index: 100; }
         .logos { position: fixed; bottom: 22px; left: 40px;
                  display: flex; align-items: center; gap: 10px; z-index: 100; }
         .logos img { height: 22px; opacity: 0.45; filter: brightness(0) invert(1); }
         .logos .sep { color: #333; font-size: 0.75rem; }
         .nav-hint { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-                    font-size: 0.8rem; color: #222; z-index: 100; }
+                    font-size: 0.8rem; color: #444; z-index: 100; }
     </style>
 </head>
 <body>
@@ -76,6 +75,7 @@
         const slideNumber = document.getElementById('slideNumber');
         let current = 0;
         function show(i) {
+            if (!slides.length) return;  // guard: no slides yet
             if (i < 0) i = 0;
             if (i >= slides.length) i = slides.length - 1;
             slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
