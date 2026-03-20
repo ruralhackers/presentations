@@ -51,6 +51,80 @@
         .logos .sep { color: #333; font-size: 0.75rem; }
         .nav-hint { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
                     font-size: 0.8rem; color: #444; z-index: 100; }
+
+        /* IMAGE SLIDE */
+        .image-slide { padding: 0; }
+        .image-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* STATEMENT SLIDE */
+        .statement-slide {
+            background-size: cover; background-position: center;
+            position: relative;
+        }
+        .statement-slide::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(0,0,0,0.62); z-index: 1;
+        }
+        .statement-slide .text {
+            position: relative; z-index: 2;
+            text-align: center; max-width: 900px;
+        }
+        .statement-slide .text h2 {
+            font-size: 3.2rem; font-weight: 700; line-height: 1.3;
+            color: #fff; margin: 0;
+        }
+        .statement-slide .text h2 strong { color: var(--accent); }
+
+        /* PERSON SLIDE */
+        .person-slide {
+            flex-direction: row; gap: 0; padding: 0; align-items: stretch;
+        }
+        .person-slide .person-photo {
+            flex: 0 0 48%; position: relative; overflow: hidden;
+        }
+        .person-slide .person-photo img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .person-slide .photo-placeholder {
+            width: 100%; height: 100%; background: #111;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 8rem; font-weight: 700; color: #222;
+        }
+        .person-slide .person-info {
+            flex: 1; padding: 60px 60px 60px 60px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .person-slide .person-name {
+            font-size: 3.5rem; font-weight: 700; color: #fff;
+            margin-bottom: 24px; line-height: 1;
+        }
+        .person-slide .person-facts { margin-bottom: 32px; }
+        .person-slide .person-facts li { font-size: 1.15rem; color: #b0b0b0; line-height: 1.9; }
+        .person-slide .person-facts li::before { display: none; }
+        .person-slide .person-quote {
+            font-size: 1.3rem; font-style: italic; color: #fff;
+            border-left: 4px solid var(--accent); padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        /* CONTENT SLIDE */
+        .content-slide { align-items: flex-start; max-width: 900px; margin: 0 auto; }
+        .content-slide.centered { align-items: center; text-align: center; }
+
+        /* PROJECT SLIDE */
+        .project-slide { flex-direction: row; gap: 60px; padding: 60px 80px; }
+        .project-slide .project-text { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .project-slide .project-image { flex: 1; max-height: 70vh; object-fit: cover; border-radius: 12px;
+                                         box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+        .project-slide .photo-placeholder { flex: 1; background: #111; border-radius: 12px;
+                                             display: flex; align-items: center; justify-content: center;
+                                             color: #222; font-size: 2rem; }
+
+        /* Quote style for non-person slides */
+        .quote {
+            font-size: 1.8rem; font-style: italic; color: #fff;
+            border-left: 4px solid var(--accent); padding-left: 24px; margin: 32px 0;
+        }
     </style>
 </head>
 <body>
