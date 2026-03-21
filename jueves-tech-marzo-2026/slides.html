@@ -130,15 +130,18 @@
 <body>
     <div class="progress-bar" id="progress"></div>
     <div class="presentation" id="presentation">
+
         <!-- SLIDE 1: Portada -->
         <section class="slide image-slide active">
             <img src="init-page.jpg" alt="Jueves Tech — Rural Hackers">
         </section>
 
-        <!-- SLIDE 2: Statement -->
-        <section class="slide statement-slide"
-                 style="background-image: url('../assets/images/mural-agua-2022.webp')">
-            <div class="text">
+        <!-- SLIDE 2: Statement — el pueblo lo hacen las personas -->
+        <section class="slide statement-slide">
+            <img src="../assets/images/mural-agua-2022.webp" alt=""
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:1;"></div>
+            <div class="text" style="position:relative;z-index:2;">
                 <h2>Un pueblo no son casas,<br><strong>son personas</strong></h2>
             </div>
         </section>
@@ -162,23 +165,7 @@
             </div>
         </section>
 
-        <!-- SLIDE 4: Anceu -->
-        <section class="slide project-slide" style="padding-top: 40px; padding-bottom: 60px;">
-            <div class="project-text">
-                <h3>El sitio</h3>
-                <h2>Anceu, Pontevedra</h2>
-                <ul>
-                    <li>Aldea de 97 habitantes</li>
-                    <li>30 minutos de Pontevedra</li>
-                    <li>Zona rural con envejecimiento acelerado</li>
-                    <li>Ahora: coliving, coworking, hackathons, proyectos</li>
-                </ul>
-            </div>
-            <img src="../assets/images/mapa-anceu.jpg" alt="Mapa Anceu" class="project-image"
-                 style="object-fit: contain; max-height: calc(100vh - 100px);">
-        </section>
-
-        <!-- SLIDE 5: Anceu Coliving -->
+        <!-- SLIDE 4: Anceu Coliving -->
         <section class="slide project-slide">
             <div class="project-text">
                 <h3>Anceu Coliving</h3>
@@ -190,8 +177,17 @@
                     <li>El experimento que lo empezó todo</li>
                 </ul>
             </div>
-            <img src="../assets/images/rural-hackers-hero.jpg"
-                 alt="Anceu Coliving" class="project-image">
+            <img src="../assets/images/anceu-hero.jpg" alt="Anceu Coliving" class="project-image">
+        </section>
+
+        <!-- SLIDE 5: Statement — el hilo conductor -->
+        <section class="slide statement-slide">
+            <img src="../assets/images/ruralhackers.jpg" alt=""
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.65);z-index:1;"></div>
+            <div class="text" style="position:relative;z-index:2;">
+                <h2>Esta charla no es sobre Rural Hackers.<br><strong>Es sobre las personas que hacen posible el rural.</strong></h2>
+            </div>
         </section>
 
         <!-- SLIDE 6: Rogelio -->
@@ -213,81 +209,7 @@
             </div>
         </section>
 
-        <!-- SLIDE 7: Rosabel -->
-        <section class="slide person-slide">
-            <div class="person-photo">
-                <img src="../assets/images/rosa-bday-I.jpg" alt="Rosabel">
-            </div>
-            <div class="person-info">
-                <div class="person-name">Rosabel</div>
-                <ul class="person-facts">
-                    <li>La verdadera Rural Influencer</li>
-                    <li>Nació en Anceu, se crió en Brasil</li>
-                    <li>Trabaja en Anceu Coliving desde su apertura</li>
-                    <li>Presidenta de la asociación de aguas</li>
-                </ul>
-                <div class="person-quote">
-                    "Dame un teléfono, y moveré el mundo"
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 8: Loreto -->
-        <section class="slide person-slide">
-            <div class="person-photo">
-                <img src="../assets/images/loreto.jpg" alt="Loreto">
-            </div>
-            <div class="person-info">
-                <div class="person-name">Loreto</div>
-                <ul class="person-facts">
-                    <li>Profesora jubilada</li>
-                    <li>Mediadora cultural de Rural Hackers</li>
-                    <li>Apasionada por la lectura</li>
-                </ul>
-                <div class="person-quote">
-                    "Le habéis dado vida a este pueblo, muchas gracias"
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 9: Rural Hackers -->
-        <section class="slide project-slide">
-            <div class="project-text">
-                <h3>El movimiento</h3>
-                <h2>Rural Hackers</h2>
-                <ul>
-                    <li>Asociación gallega sin ánimo de lucro</li>
-                    <li>Revitalización del rural con tecnología y arte</li>
-                    <li>Atraer talento y retener jóvenes en el territorio</li>
-                    <li>Cultura hacker: prototipado, prueba y error</li>
-                </ul>
-                <p style="margin-top: 32px;">
-                    <span class="highlight">ruralhackers.org</span>
-                </p>
-            </div>
-            <img src="../assets/images/ruralhackers.jpg" alt="Rural Hackers" class="project-image" style="flex: 0 0 60%; max-width: 60%;">
-        </section>
-
-        <!-- SLIDE 10: HackerDays -->
-        <section class="slide project-slide">
-            <div class="project-text">
-                <h3>Rural Hackers</h3>
-                <h2>HackerDays</h2>
-                <ul>
-                    <li>Una semana, un reto rural real</li>
-                    <li>Equipo diverso: código, diseño, makers, vecinos</li>
-                    <li>Alojamiento y comida gratuitos</li>
-                    <li>2025: Punto de Agua — gestión comunitaria del agua</li>
-                </ul>
-                <p style="margin-top: 24px; font-size: 1rem;">
-                    <span class="highlight">hackerdays.org</span>
-                </p>
-            </div>
-            <img src="../assets/images/equipo-hackerdays.jpg"
-                 alt="Equipo HackerDays" class="project-image">
-        </section>
-
-        <!-- SLIDE 11: Pegadas do Recordo -->
+        <!-- SLIDE 7: Pegadas do Recordo -->
         <section class="slide project-slide">
             <div class="project-text">
                 <h3>Rural Hackers</h3>
@@ -299,11 +221,106 @@
                     <li>Videos documentales y patrimonio inmaterial</li>
                 </ul>
             </div>
-            <img src="../assets/images/pegadas-casiano.jpg"
-                 alt="Pegadas do Recordo" class="project-image">
+            <img src="../assets/images/pegadas-casiano.jpg" alt="Pegadas do Recordo" class="project-image">
         </section>
 
-        <!-- SLIDE 12: Víctor -->
+        <!-- SLIDE 8: HackerDays -->
+        <section class="slide project-slide">
+            <div class="project-text">
+                <h3>Rural Hackers</h3>
+                <h2>HackerDays</h2>
+                <ul>
+                    <li>Una semana, un reto rural real</li>
+                    <li>Equipo diverso: código, diseño, makers, vecinos</li>
+                    <li>Alojamiento y comida gratuitos</li>
+                    <li>Una edición cada año</li>
+                </ul>
+                <p style="margin-top: 24px; font-size: 1rem;">
+                    <span class="highlight">hackerdays.org</span>
+                </p>
+            </div>
+            <img src="../assets/images/equipo-hackerdays.jpg" alt="Equipo HackerDays" class="project-image">
+        </section>
+
+        <!-- SLIDE 9: Rosa -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/rosa-bday-I.jpg" alt="Rosabel">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Rosabel</div>
+                <ul class="person-facts">
+                    <li>Nació en Anceu, se crió en Brasil</li>
+                    <li>Trabaja en Anceu Coliving desde su apertura</li>
+                    <li>Presidenta de la asociación de aguas</li>
+                </ul>
+                <div class="person-quote">
+                    "Dame un teléfono, y moveré el mundo"
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: Punto de Agua -->
+        <section class="slide project-slide">
+            <div class="project-text">
+                <h3>HackerDays 2025</h3>
+                <h2>Punto de Agua</h2>
+                <ul>
+                    <li>CRM para comunidades rurales de agua</li>
+                    <li>1.500+ comunidades en Galicia gestionando con papel</li>
+                    <li>Webapp open source, construida en una semana</li>
+                </ul>
+                <p style="margin-top: 24px; font-size: 1rem;">
+                    <span class="highlight">puntodeagua.com</span>
+                </p>
+            </div>
+            <img src="../assets/images/hackerdays-rosa-olga.jpeg" alt="Punto de Agua" class="project-image">
+        </section>
+
+        <!-- SLIDE 11: Camilo -->
+        <!-- TODO: add description and quote for Camilo -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/camilo.png" alt="Camilo">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Camilo</div>
+                <ul class="person-facts">
+                    <li>Presidente de la comunidad de montes</li>
+                    <li><!-- TODO --></li>
+                </ul>
+                <div class="person-quote">
+                    <!-- TODO: add quote -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: Arte en el rural -->
+        <section class="slide content-slide" style="justify-content:center; padding: 50px 80px;">
+            <h3 style="margin-bottom: 24px; align-self: flex-start;">Arte en el rural</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;">
+                <img src="../assets/images/hackerdays-mural.jpg" alt=""
+                     style="width:100%;height:220px;object-fit:cover;border-radius:8px;">
+                <img src="../assets/images/rogelio-3.jpg" alt=""
+                     style="width:100%;height:220px;object-fit:cover;border-radius:8px;">
+                <img src="../assets/images/galicia-ilustrada.jpg" alt=""
+                     style="width:100%;height:220px;object-fit:cover;border-radius:8px;">
+                <img src="../assets/images/culture-moves-tintes.jpg" alt=""
+                     style="width:100%;height:220px;object-fit:cover;border-radius:8px;">
+            </div>
+        </section>
+
+        <!-- SLIDE 13: Statement — la gente que se vino -->
+        <section class="slide statement-slide">
+            <img src="../assets/images/anceu-community.jpg" alt=""
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.6);z-index:1;"></div>
+            <div class="text" style="position:relative;z-index:2;">
+                <h2>Y luego está<br><strong>la gente que decidió quedarse.</strong></h2>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: Víctor -->
         <section class="slide person-slide">
             <div class="person-photo">
                 <img src="../assets/images/victor.jpg" alt="Víctor">
@@ -323,52 +340,73 @@
             </div>
         </section>
 
-        <!-- SLIDE 13: Cómo se emprende en el rural -->
+        <!-- SLIDE 15: Ana -->
+        <!-- TODO: add description and quote for Ana -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/ana-lagoon.jpg" alt="Ana">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Ana</div>
+                <ul class="person-facts">
+                    <li><!-- TODO --></li>
+                </ul>
+                <div class="person-quote">
+                    <!-- TODO: add quote -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 16: Flo y Andreea -->
+        <!-- TODO: add description and quote for Flo y Andreea -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/andreea-y-flo.jpg" alt="Flo y Andreea">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Flo y Andreea</div>
+                <ul class="person-facts">
+                    <li><!-- TODO --></li>
+                </ul>
+                <div class="person-quote">
+                    <!-- TODO: add quote -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 17: Bartek y Ari -->
+        <!-- TODO: add description and quote for Bartek y Ari -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/ari-y-bartek.jpg" alt="Bartek y Ari">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Bartek y Ari</div>
+                <ul class="person-facts">
+                    <li><!-- TODO --></li>
+                </ul>
+                <div class="person-quote">
+                    <!-- TODO: add quote -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 18: A Fuchiqueira -->
         <section class="slide project-slide">
             <div class="project-text">
-                <h3>Emprendimiento rural</h3>
-                <h2>Fuera de la ciudad también se puede</h2>
+                <h3>Iniciativas</h3>
+                <h2>A Fuchiqueira</h2>
                 <ul>
-                    <li>El coworking es la comunidad que te rodea</li>
-                    <li>El networking ocurre en la huerta y en el monte</li>
-                    <li>Las herramientas digitales eliminan la distancia</li>
-                    <li>El contexto rural atrae perfiles que no encuentras en la ciudad</li>
+                    <li>Encuentros mensuales en la casa comunal</li>
+                    <li>Makers, vecinos y colivers juntos</li>
+                    <li>Impresión 3D, biomateriales, cocina tradicional</li>
+                    <li>El nombre significa "el arte de la curiosidad"</li>
                 </ul>
             </div>
-            <img src="../assets/images/hackerdays-mural.jpg" alt="HackerDays mural" class="project-image" style="flex: 0 0 60%; max-width: 60%;">
+            <img src="../assets/images/fuchiqueira-1.jpg" alt="A Fuchiqueira" class="project-image">
         </section>
 
-        <!-- SLIDE 14: Construir redes -->
-        <section class="slide project-slide">
-            <div class="project-text">
-                <h3>Equipo y redes</h3>
-                <h2>Construir en remoto</h2>
-                <ul>
-                    <li>El equipo distribuido necesita rituales fuertes</li>
-                    <li>La comunidad local es parte del equipo</li>
-                    <li>Las redes se construyen haciendo cosas, no en eventos</li>
-                    <li>Proyectos abiertos atraen a las personas correctas</li>
-                </ul>
-            </div>
-            <img src="../assets/images/anceu-community.jpg" alt="Comunidad Anceu" class="project-image">
-        </section>
-
-        <!-- SLIDE 15: Lo que el rural te enseña -->
-        <section class="slide project-slide" style="align-items: stretch;">
-            <div class="project-text" style="flex: 0 0 50%; min-width: 0; display: flex; flex-direction: column; justify-content: center;">
-                <h3>Lecciones</h3>
-                <h2>Lo que el rural te enseña</h2>
-                <ul>
-                    <li><span class="highlight">Recursos escasos</span> → creatividad obligada</li>
-                    <li><span class="highlight">Vecinos reales</span> → feedback honesto</li>
-                    <li><span class="highlight">Ritmos naturales</span> → sostenibilidad real</li>
-                    <li><span class="highlight">Comunidad</span> → el mejor sistema de soporte</li>
-                </ul>
-            </div>
-            <img src="../assets/images/mision-verde-2.jpg" alt="Misión Verde" class="project-image" style="flex: 0 0 45%; max-width: 45%; max-height: none; height: 100%; object-fit: cover;">
-        </section>
-
-        <!-- SLIDE 16: Statement final -->
+        <!-- SLIDE 19: Statement final -->
         <section class="slide statement-slide">
             <img src="../assets/images/rural-hackers-hero.jpg" alt=""
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
@@ -378,7 +416,7 @@
             </div>
         </section>
 
-        <!-- SLIDE 17: Gracias -->
+        <!-- SLIDE 20: Gracias -->
         <section class="slide project-slide">
             <div class="project-text" style="display:flex;flex-direction:column;justify-content:center;">
                 <h2 style="font-size: 4rem; margin-bottom: 40px;">Gracias</h2>
@@ -391,7 +429,7 @@
             <img src="../assets/images/hackerdays-mural.jpg" alt="HackerDays mural" class="project-image">
         </section>
 
-        <!-- SLIDE 18: Cierre -->
+        <!-- SLIDE 21: Cierre -->
         <section class="slide image-slide">
             <img src="init-page.jpg" alt="Jueves Tech — Rural Hackers">
         </section>
