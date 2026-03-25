@@ -365,10 +365,10 @@
           <div class="chart-side">
             <div class="slide-header" style="margin-bottom:20px">
               <div class="point-num">4</div>
-              <h2 style="font-size:1.8rem;font-weight:700;color:var(--text);margin-top:8px">Presentación de contas</h2>
-              <p style="font-size:0.8rem;color:var(--muted);margin-top:6px">Saldo final por ano · 2019–2026</p>
+              <h2 style="font-size:2.2rem;font-weight:700;color:var(--text);margin-top:8px">Presentación de contas</h2>
+              <p style="font-size:1rem;color:var(--muted);margin-top:6px">Saldo final por ano · 2019–2026</p>
             </div>
-            <svg viewBox="0 0 440 260" width="440" height="260" style="overflow:visible">
+            <svg viewBox="0 0 440 260" width="100%" height="320" style="overflow:visible;max-width:560px">
               <!-- Y-axis gridlines -->
               <line x1="0" y1="10" x2="440" y2="10" stroke="#3a3020" stroke-width="1"/>
               <line x1="0" y1="60" x2="440" y2="60" stroke="#3a3020" stroke-width="1"/>
@@ -420,159 +420,164 @@
               <text x="364" y="236" text-anchor="middle" fill="#c8a84b" font-size="10" font-weight="700">26</text>
             </svg>
           </div>
-          <div class="stats-side" style="flex:0 0 340px;gap:12px;">
-            <div class="stat-box" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;border:none;background:none;padding:0;">
+          <div class="stats-side" style="flex:0 0 380px;gap:14px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
               <div class="stat-box">
-                <div class="stat-label">Saldo actual</div>
-                <div class="stat-value">142.438 €</div>
-                <div class="stat-sub">23 mar 2026</div>
+                <div class="stat-label" style="font-size:1.1rem;">Saldo actual</div>
+                <div class="stat-value" style="font-size:2.4rem;">142.438 €</div>
+                <div class="stat-sub" style="font-size:1.1rem;">23 mar 2026</div>
               </div>
               <div class="stat-box green">
-                <div class="stat-label">Ingresos 2026</div>
-                <div class="stat-value green" style="font-size:1.2rem">+95.491 €</div>
-                <div class="stat-sub">Xunta + ENCE</div>
+                <div class="stat-label" style="font-size:1.1rem;">Ingresos 2026</div>
+                <div class="stat-value green" style="font-size:1.8rem;">+95.491 €</div>
+                <div class="stat-sub" style="font-size:1.1rem;">Xunta + ENCE</div>
               </div>
             </div>
-            <div style="font-size:1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-top:4px;">Regra do 40% · estado por anualidade</div>
-            <table style="width:100%;border-collapse:collapse;font-size:1.05rem;">
+            <div style="font-size:1.2rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-top:4px;">Regra do 40% · estado por anualidade</div>
+            <table style="width:100%;border-collapse:collapse;font-size:1.2rem;">
               <thead>
                 <tr>
-                  <th style="text-align:left;color:var(--muted);font-weight:600;padding:3px 6px 6px 0;border-bottom:1px solid #3a3020;">Anualidade</th>
-                  <th style="text-align:right;color:var(--muted);font-weight:600;padding:3px 0 6px 6px;border-bottom:1px solid #3a3020;">Obriga</th>
-                  <th style="text-align:center;color:var(--muted);font-weight:600;padding:3px 0 6px 6px;border-bottom:1px solid #3a3020;">Estado</th>
+                  <th style="text-align:left;color:var(--muted);font-weight:600;padding:5px 8px 8px 0;border-bottom:1px solid #3a3020;">Anualidade</th>
+                  <th style="text-align:right;color:var(--muted);font-weight:600;padding:5px 0 8px 8px;border-bottom:1px solid #3a3020;">Obriga</th>
+                  <th style="text-align:center;color:var(--muted);font-weight:600;padding:5px 0 8px 8px;border-bottom:1px solid #3a3020;">Estado</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="padding:4px 6px 4px 0;color:var(--text);">Lote 2019</td>
-                  <td style="text-align:right;padding:4px 0 4px 6px;color:var(--text);">27.904 €</td>
-                  <td style="text-align:center;padding:4px 0 4px 6px;color:#e07070;">❌ −883 €</td>
+                  <td style="padding:6px 8px 6px 0;color:var(--text);">Lote 2019</td>
+                  <td style="text-align:right;padding:6px 0 6px 8px;color:var(--text);">27.904 €</td>
+                  <td style="text-align:center;padding:6px 0 6px 8px;color:#e07070;">❌ −883 €</td>
                 </tr>
                 <tr>
-                  <td style="padding:4px 6px 4px 0;color:var(--text);">2022</td>
-                  <td style="text-align:right;padding:4px 0 4px 6px;color:var(--text);">180 €</td>
-                  <td style="text-align:center;padding:4px 0 4px 6px;color:var(--green);">✅</td>
+                  <td style="padding:6px 8px 6px 0;color:var(--text);">2022</td>
+                  <td style="text-align:right;padding:6px 0 6px 8px;color:var(--text);">180 €</td>
+                  <td style="text-align:center;padding:6px 0 6px 8px;color:var(--green);">✅</td>
                 </tr>
                 <tr>
-                  <td style="padding:4px 6px 4px 0;color:var(--text);">2023</td>
-                  <td style="text-align:right;padding:4px 0 4px 6px;color:var(--text);">4.551 €</td>
-                  <td style="text-align:center;padding:4px 0 4px 6px;color:var(--green);">✅</td>
+                  <td style="padding:6px 8px 6px 0;color:var(--text);">2023</td>
+                  <td style="text-align:right;padding:6px 0 6px 8px;color:var(--text);">4.551 €</td>
+                  <td style="text-align:center;padding:6px 0 6px 8px;color:var(--green);">✅</td>
                 </tr>
                 <tr>
-                  <td style="padding:4px 6px 4px 0;color:var(--text);">2024</td>
-                  <td style="text-align:right;padding:4px 0 4px 6px;color:var(--text);">978 €</td>
-                  <td style="text-align:center;padding:4px 0 4px 6px;color:var(--green);">✅</td>
+                  <td style="padding:6px 8px 6px 0;color:var(--text);">2024</td>
+                  <td style="text-align:right;padding:6px 0 6px 8px;color:var(--text);">978 €</td>
+                  <td style="text-align:center;padding:6px 0 6px 8px;color:var(--green);">✅</td>
                 </tr>
                 <tr>
-                  <td style="padding:4px 6px 4px 0;color:var(--text);">2025</td>
-                  <td style="text-align:right;padding:4px 0 4px 6px;color:var(--text);">726 €</td>
-                  <td style="text-align:center;padding:4px 0 4px 6px;color:var(--green);">✅</td>
+                  <td style="padding:6px 8px 6px 0;color:var(--text);">2025</td>
+                  <td style="text-align:right;padding:6px 0 6px 8px;color:var(--text);">726 €</td>
+                  <td style="text-align:center;padding:6px 0 6px 8px;color:var(--green);">✅</td>
                 </tr>
                 <tr style="border-top:1px solid #3a3020;">
-                  <td style="padding:6px 6px 4px 0;color:var(--accent);font-weight:700;">2026</td>
-                  <td style="text-align:right;padding:6px 0 4px 6px;color:var(--accent);font-weight:700;">38.196 €</td>
-                  <td style="text-align:center;padding:6px 0 4px 6px;color:var(--accent);">⏳ 34.509 €</td>
+                  <td style="padding:8px 8px 6px 0;color:var(--accent);font-weight:700;">2026</td>
+                  <td style="text-align:right;padding:8px 0 6px 8px;color:var(--accent);font-weight:700;">38.196 €</td>
+                  <td style="text-align:center;padding:8px 0 6px 8px;color:var(--accent);">⏳ 34.509 €</td>
                 </tr>
               </tbody>
             </table>
-            <div style="font-size:0.95rem;color:var(--muted);margin-top:4px;">Prazo anualidade 2026: 31/12/2030</div>
+            <div style="font-size:1.1rem;color:var(--muted);margin-top:6px;">Prazo anualidade 2026: 31/12/2030</div>
           </div>
         </section>
 
         <!-- P5: Informe de xestión 2025 -->
-        <section class="slide content-slide" style="padding:50px 80px;">
-          <div class="slide-header" style="margin-bottom:20px;">
+        <section class="slide content-slide" style="padding:40px 70px;">
+          <div class="slide-header" style="margin-bottom:16px;">
             <div class="point-num">5</div>
             <h2>Informe de xestión 2025</h2>
           </div>
-          <div class="two-col" style="margin-bottom:20px;">
+          <div class="two-col" style="margin-bottom:16px;">
             <div>
               <div class="col-item">
                 <span class="arrow">→</span>
-                <div><strong>Silvicultura Monte do Toro</strong><span>~40 ha · ~30.000 € subvencionados ao 100%</span></div>
+                <div><strong style="font-size:1.35rem;">Silvicultura Monte do Toro</strong><span style="font-size:1.15rem;">~40 ha · ~30.000 € subvencionados ao 100%</span></div>
               </div>
               <div class="col-item">
                 <span class="arrow">→</span>
-                <div><strong>Forestación Chan de Vilariño + Pedriña</strong><span>~19 ha de pino e carballo · ~11.000 €</span></div>
+                <div><strong style="font-size:1.35rem;">Forestación Chan de Vilariño + Pedriña</strong><span style="font-size:1.15rem;">~19 ha de pino e carballo · ~11.000 €</span></div>
               </div>
               <div class="col-item">
                 <span class="arrow">→</span>
-                <div><strong>Parque do Barazal</strong><span>Limpeza, rego e plantación arbustiva · ENCE 1.500 €</span></div>
+                <div><strong style="font-size:1.35rem;">Parque do Barazal</strong><span style="font-size:1.15rem;">Limpeza, rego e plantación arbustiva · ENCE 1.500 €</span></div>
               </div>
               <div class="col-item">
                 <span class="arrow">→</span>
-                <div><strong>Mantemento de camiños</strong><span>10+ rutas: Puntiña, Lagos, Temperán, Eiras...</span></div>
+                <div><strong style="font-size:1.35rem;">Mantemento de camiños</strong><span style="font-size:1.15rem;">10+ rutas: Puntiña, Lagos, Temperán, Eiras...</span></div>
               </div>
             </div>
             <div>
               <div class="col-item">
                 <span class="arrow">→</span>
-                <div><strong>Contra incendios</strong><span>Franja de seguridade + corta Catadoiro ~6 ha</span></div>
+                <div><strong style="font-size:1.35rem;">Contra incendios</strong><span style="font-size:1.15rem;">Franja de seguridade + corta Catadoiro ~6 ha</span></div>
               </div>
               <div class="col-item">
                 <span class="arrow">→</span>
-                <div><strong>Plan de leña</strong><span>14 servizos para 8 familias</span></div>
+                <div><strong style="font-size:1.35rem;">Plan de leña</strong><span style="font-size:1.15rem;">14 servizos para 8 familias</span></div>
               </div>
               <div class="col-item">
                 <span class="arrow">→</span>
-                <div><strong>Xestións administrativas</strong><span>15 requirimentos atendidos</span></div>
+                <div><strong style="font-size:1.35rem;">Xestións administrativas</strong><span style="font-size:1.15rem;">15 requirimentos atendidos</span></div>
               </div>
             </div>
           </div>
-          <div style="display:flex;gap:10px;width:100%;height:260px;">
-            <img src="../assets/images/mision-verde.jpg" alt="Misión Verde 2025" style="flex:1;min-width:0;object-fit:cover;border-radius:8px;">
-            <img src="../assets/images/mision-verde-2.jpg" alt="Misión Verde 2025" style="flex:1;min-width:0;object-fit:cover;border-radius:8px;">
-            <img src="../assets/images/mision-verde-3.jpg" alt="Misión Verde 2025" style="flex:1;min-width:0;object-fit:cover;border-radius:8px;">
+          <!-- Photos: row 1 = 1 photo, row 2 = 2 photos -->
+          <div style="display:flex;flex-direction:column;gap:10px;width:100%;flex:1;min-height:0;">
+            <div style="flex:1;min-height:0;">
+              <img src="../assets/images/mision-verde.jpg" alt="Misión Verde 2025" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+            </div>
+            <div style="flex:1;min-height:0;display:flex;gap:10px;">
+              <img src="../assets/images/mision-verde-2.jpg" alt="Misión Verde 2025" style="flex:1;min-width:0;object-fit:cover;border-radius:8px;">
+              <img src="../assets/images/mision-verde-3.jpg" alt="Misión Verde 2025" style="flex:1;min-width:0;object-fit:cover;border-radius:8px;">
+            </div>
           </div>
         </section>
 
         <!-- P6: Proxectos e orzamento 2026 -->
-        <section class="slide content-slide" style="padding: 50px 60px;">
-          <div class="slide-header">
+        <section class="slide content-slide" style="padding: 40px 60px;">
+          <div class="slide-header" style="margin-bottom:20px;">
             <div class="point-num">6</div>
             <h2>Proxectos e orzamento 2026 · Reinversión 2026–2030</h2>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;width:100%;align-items:start;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;width:100%;align-items:start;">
             <!-- Left: budget table -->
             <div>
-              <div style="font-size:1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Orzamento 2026</div>
-              <table style="width:100%;border-collapse:collapse;font-size:1.05rem;">
+              <div style="font-size:1.25rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">Orzamento 2026</div>
+              <table style="width:100%;border-collapse:collapse;font-size:1.2rem;">
                 <thead>
                   <tr>
-                    <th style="text-align:left;color:var(--muted);font-weight:600;padding:4px 8px 8px 0;border-bottom:1px solid #3a3020;">Actuación</th>
-                    <th style="text-align:right;color:var(--muted);font-weight:600;padding:4px 0 8px 8px;border-bottom:1px solid #3a3020;">Orzamento</th>
-                    <th style="text-align:right;color:var(--muted);font-weight:600;padding:4px 0 8px 8px;border-bottom:1px solid #3a3020;">Subv.</th>
+                    <th style="text-align:left;color:var(--muted);font-weight:600;padding:5px 8px 10px 0;border-bottom:1px solid #3a3020;">Actuación</th>
+                    <th style="text-align:right;color:var(--muted);font-weight:600;padding:5px 0 10px 8px;border-bottom:1px solid #3a3020;">Orzamento</th>
+                    <th style="text-align:right;color:var(--muted);font-weight:600;padding:5px 0 10px 8px;border-bottom:1px solid #3a3020;">Subv.</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td style="padding:5px 8px 5px 0;color:var(--text);">Camiños e desbroces</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--text);">3.000 €</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--muted);">—</td></tr>
-                  <tr><td style="padding:5px 8px 5px 0;color:var(--text);">Silvicultura Toro + frondosas</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--text);">15.000 €</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--green);">11.000 €</td></tr>
-                  <tr><td style="padding:5px 8px 5px 0;color:var(--text);">Silvicultura Chan Vilariño + Pedriña</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--text);">3.500 €</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--green);">2.000 €</td></tr>
-                  <tr><td style="padding:5px 8px 5px 0;color:var(--text);">Silvicultura Outeiro do Rozo</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--text);">2.000 €</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--muted);">—</td></tr>
-                  <tr><td style="padding:5px 8px 5px 0;color:var(--text);">Nova pista Eiras (Oitaven)</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--text);">1.000 €</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--muted);">—</td></tr>
-                  <tr><td style="padding:5px 8px 5px 0;color:var(--text);">Franja seguridade SEAGA</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--text);">3.100 €</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--muted);">—</td></tr>
-                  <tr><td style="padding:5px 8px 5px 0;color:var(--text);">Depósito vello (punto de auga)</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--text);">3.500 €</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--green);">1.000 €</td></tr>
-                  <tr><td style="padding:5px 8px 5px 0;color:var(--text);">Xardín botánico Barazal</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--text);">500 €</td><td style="text-align:right;padding:5px 0 5px 8px;color:var(--green);">500 €</td></tr>
+                  <tr><td style="padding:7px 8px 7px 0;color:var(--text);">Camiños e desbroces</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--text);">3.000 €</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--muted);">—</td></tr>
+                  <tr><td style="padding:7px 8px 7px 0;color:var(--text);">Silvicultura Toro + frondosas</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--text);">15.000 €</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--green);">11.000 €</td></tr>
+                  <tr><td style="padding:7px 8px 7px 0;color:var(--text);">Silvicultura Chan Vilariño + Pedriña</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--text);">3.500 €</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--green);">2.000 €</td></tr>
+                  <tr><td style="padding:7px 8px 7px 0;color:var(--text);">Silvicultura Outeiro do Rozo</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--text);">2.000 €</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--muted);">—</td></tr>
+                  <tr><td style="padding:7px 8px 7px 0;color:var(--text);">Nova pista Eiras (Oitaven)</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--text);">1.000 €</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--muted);">—</td></tr>
+                  <tr><td style="padding:7px 8px 7px 0;color:var(--text);">Franja seguridade SEAGA</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--text);">3.100 €</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--muted);">—</td></tr>
+                  <tr><td style="padding:7px 8px 7px 0;color:var(--text);">Depósito vello (punto de auga)</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--text);">3.500 €</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--green);">1.000 €</td></tr>
+                  <tr><td style="padding:7px 8px 7px 0;color:var(--text);">Xardín botánico Barazal</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--text);">500 €</td><td style="text-align:right;padding:7px 0 7px 8px;color:var(--green);">500 €</td></tr>
                 </tbody>
               </table>
             </div>
             <!-- Right: period stat boxes -->
-            <div style="display:flex;flex-direction:column;gap:14px;">
-              <div style="font-size:1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">Período 2026–2030</div>
+            <div style="display:flex;flex-direction:column;gap:18px;">
+              <div style="font-size:1.25rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">Período 2026–2030</div>
               <div class="stat-box">
-                <div class="stat-label">Total previsto</div>
-                <div class="stat-value">47.000 €</div>
-                <div class="stat-sub">proxectos de mellora e gobernanza</div>
+                <div class="stat-label" style="font-size:1.1rem;">Total previsto</div>
+                <div class="stat-value" style="font-size:2.4rem;">47.000 €</div>
+                <div class="stat-sub" style="font-size:1.1rem;">proxectos de mellora e gobernanza</div>
               </div>
               <div class="stat-box">
-                <div class="stat-label">Reinversión obrigatoria</div>
-                <div class="stat-value" style="font-size:1.3rem">36.000 €</div>
-                <div class="stat-sub">Regra do 40% sobre ingresos 2026</div>
+                <div class="stat-label" style="font-size:1.1rem;">Reinversión obrigatoria</div>
+                <div class="stat-value" style="font-size:2.2rem;">36.000 €</div>
+                <div class="stat-sub" style="font-size:1.1rem;">Regra do 40% sobre ingresos 2026</div>
               </div>
               <div class="stat-box green">
-                <div class="stat-label">Reinversión prevista</div>
-                <div class="stat-value green">50%</div>
-                <div class="stat-sub">dos ingresos recibidos en 2026</div>
+                <div class="stat-label" style="font-size:1.1rem;">Reinversión prevista</div>
+                <div class="stat-value green" style="font-size:2.4rem;">50%</div>
+                <div class="stat-sub" style="font-size:1.1rem;">dos ingresos recibidos en 2026</div>
               </div>
             </div>
           </div>
