@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="gl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,7 @@
         .nav-hint {
             position: fixed; bottom: 25px; left: 50%;
             transform: translateX(-50%);
-            font-size: 0.75rem; color: #444; z-index: 100;
+            font-size: 0.75rem; color: var(--muted); z-index: 100;
         }
 
         /* COVER SLIDE */
@@ -133,8 +133,6 @@
 
         /* TITLE-ONLY SLIDE */
         .title-only {
-            justify-content: center;
-            align-items: center;
             text-align: center;
         }
 
@@ -157,8 +155,6 @@
 
         /* TITLE-SIMPLE SLIDE */
         .title-simple {
-            justify-content: center;
-            align-items: center;
             text-align: center;
         }
 
@@ -283,10 +279,6 @@
             border-left-color: var(--green);
         }
 
-        .data-slide .stat-box.amber {
-            border-left-color: var(--accent);
-        }
-
         .data-slide .stat-label {
             font-size: 0.65rem;
             text-transform: uppercase;
@@ -326,6 +318,7 @@
         const slides = document.querySelectorAll('.slide');
         let current = 0;
         function show(n) {
+            if (!slides.length) return;
             slides[current].classList.remove('active');
             current = (n + slides.length) % slides.length;
             slides[current].classList.add('active');
