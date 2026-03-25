@@ -131,6 +131,8 @@
             margin-right: 8px;
         }
 
+        .index-col { display: flex; flex-direction: column; gap: 8px; }
+
         /* TITLE-ONLY SLIDE */
         .title-only {
             text-align: center;
@@ -311,7 +313,37 @@
     <div class="nav-hint">← →</div>
 
     <div class="presentation" id="presentation">
-        <!-- slides go here -->
+        <section class="slide cover-slide active">
+            <div class="eyebrow">Comunidade de Montes en Man Común de Anceu</div>
+            <h1>Asemblea Xeral<br>Ordinaria <span class="accent">2026</span></h1>
+            <div class="divider"></div>
+            <p class="date-loc">29 de marzo de 2026 · Casa do Pobo de Anceu</p>
+        </section>
+
+        <section class="slide index-slide">
+            <div class="index-title">Orde do día</div>
+            <div class="index-grid">
+                <!-- Column 1: items 1–7 -->
+                <div class="index-col">
+                    <div class="index-item"><span class="num">1.</span> Lectura nominal do censo e recepción de comuneiros</div>
+                    <div class="index-item"><span class="num">2.</span> Altas e baixas de comuneiros</div>
+                    <div class="index-item"><span class="num">3.</span> Lectura e aprobación da acta anterior</div>
+                    <div class="index-item"><span class="num">4.</span> Presentación de contas</div>
+                    <div class="index-item"><span class="num">5.</span> Informe de xestión 2025</div>
+                    <div class="index-item"><span class="num">6.</span> Proxectos e orzamento 2026</div>
+                    <div class="index-item"><span class="num">7.</span> Autorizacións e delegacións</div>
+                </div>
+                <!-- Column 2: items 8–13 -->
+                <div class="index-col">
+                    <div class="index-item"><span class="num">8.</span> Vencemento convenio con cazadores</div>
+                    <div class="index-item"><span class="num">9.</span> Deslindes: Barbudo, Esfarrapada, Forzáns, Fornelos</div>
+                    <div class="index-item"><span class="num">10.</span> Plan de Ordenación Forestal</div>
+                    <div class="index-item"><span class="num">11.</span> Doazón de particulares</div>
+                    <div class="index-item"><span class="num">12.</span> Solicitude Patricia Aguado Pan</div>
+                    <div class="index-item"><span class="num">13.</span> Rogos e preguntas</div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script>
