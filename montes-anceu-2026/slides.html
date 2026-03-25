@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asemblea CMVMC de Anceu 2026</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <style>
+        :root {
+            --accent: #c8a84b;
+            --bg: #2b2416;
+            --text: #f0e8d0;
+            --muted: #a09070;
+            --green: #8fc96a;
+            --card-bg: #3a3020;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation { height: 100vh; width: 100vw; position: relative; }
+
+        .slide {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 60px 80px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .slide.active { opacity: 1; visibility: visible; }
+
+        /* Fixed UI */
+        .progress-bar {
+            position: fixed; top: 0; left: 0;
+            height: 3px; background: var(--accent);
+            transition: width 0.3s ease; z-index: 100;
+        }
+
+        .slide-number {
+            position: fixed; bottom: 25px; right: 40px;
+            font-size: 0.8rem; color: var(--muted); z-index: 100;
+        }
+
+        .nav-hint {
+            position: fixed; bottom: 25px; left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem; color: #444; z-index: 100;
+        }
+
+        /* COVER SLIDE */
+        .cover-slide {
+            text-align: center;
+            gap: 0;
+        }
+
+        .cover-slide .eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .cover-slide h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.15;
+            margin-bottom: 28px;
+        }
+
+        .cover-slide .accent {
+            color: var(--accent);
+        }
+
+        .cover-slide .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 0 auto 28px;
+            border-radius: 2px;
+        }
+
+        .cover-slide .date-loc {
+            font-size: 1rem;
+            color: var(--muted);
+        }
+
+        /* INDEX SLIDE */
+        .index-slide {
+            align-items: flex-start;
+            padding: 60px 80px;
+        }
+
+        .index-slide .index-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 32px;
+        }
+
+        .index-slide .index-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 60px;
+            width: 100%;
+        }
+
+        .index-slide .index-item {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .index-slide .index-item .num {
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* TITLE-ONLY SLIDE */
+        .title-only {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-only .point-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .title-only h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.3;
+            max-width: 800px;
+        }
+
+        /* TITLE-SIMPLE SLIDE */
+        .title-simple {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-simple .point-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .title-simple h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.3;
+            margin-bottom: 28px;
+        }
+
+        .title-simple .simple-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .title-simple .simple-bullets li {
+            font-size: 1.1rem;
+            color: var(--muted);
+            padding-left: 0;
+        }
+
+        /* CONTENT SLIDE */
+        .content-slide {
+            align-items: flex-start;
+            padding: 60px 80px;
+        }
+
+        .content-slide .slide-header {
+            margin-bottom: 32px;
+        }
+
+        .content-slide .slide-header .point-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .content-slide .slide-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 8px;
+        }
+
+        .content-slide .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 48px;
+            width: 100%;
+        }
+
+        .content-slide .col-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .content-slide .col-item .arrow {
+            color: var(--accent);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .content-slide .col-item strong {
+            color: var(--text);
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .content-slide .col-item span {
+            color: var(--muted);
+            font-size: 0.85rem;
+            display: block;
+        }
+
+        /* DATA SLIDE */
+        .data-slide {
+            flex-direction: row;
+            gap: 60px;
+            padding: 60px 80px;
+            align-items: center;
+        }
+
+        .data-slide .chart-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .data-slide .stats-side {
+            flex: 0 0 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .data-slide .stat-box {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 16px 20px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .data-slide .stat-box.green {
+            border-left-color: var(--green);
+        }
+
+        .data-slide .stat-box.amber {
+            border-left-color: var(--accent);
+        }
+
+        .data-slide .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .data-slide .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .data-slide .stat-value.green {
+            color: var(--green);
+        }
+
+        .data-slide .stat-sub {
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="slide-number" id="slide-number"></div>
+    <div class="nav-hint">← →</div>
+
+    <div class="presentation" id="presentation">
+        <!-- slides go here -->
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let current = 0;
+        function show(n) {
+            slides[current].classList.remove('active');
+            current = (n + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            document.getElementById('slide-number').textContent = (current + 1) + ' / ' + slides.length;
+            document.getElementById('progress').style.width = ((current + 1) / slides.length * 100) + '%';
+        }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') show(current + 1);
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') show(current - 1);
+        });
+        show(0);
+    </script>
+</body>
+</html>
