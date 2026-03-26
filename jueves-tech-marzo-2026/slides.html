@@ -47,7 +47,7 @@
                         font-size: 0.85rem; color: #555; z-index: 100; }
         .logos { position: fixed; bottom: 22px; left: 40px;
                  display: flex; align-items: center; gap: 10px; z-index: 100; }
-        .logos img { height: 22px; opacity: 0.45; filter: brightness(0) invert(1); }
+        .logos img { height: 50px; opacity: 0.45; filter: brightness(0) invert(1); }
         .logos .sep { color: #333; font-size: 0.75rem; }
         .nav-hint { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
                     font-size: 0.8rem; color: #444; z-index: 100; }
@@ -141,7 +141,7 @@
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
             <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:1;"></div>
             <div class="text" style="position:relative;z-index:2;">
-                <h2>Un pueblo no son casas,<br><strong>son personas</strong></h2>
+                <h2>Una aldea no son casas,<br><strong>son personas</strong></h2>
             </div>
         </section>
 
@@ -153,10 +153,9 @@
             <div class="person-info">
                 <div class="person-name">Agustín Jamardo</div>
                 <ul class="person-facts">
-                    <li>Programador en Eleven Yellow</li>
-                    <li>Fundador de Rural Hackers</li>
-                    <li>Impulsor de Anceu Coliving</li>
-                    <li>Vive en una aldea de 97 habitantes</li>
+                    <li>Cofundador de Rural Hackers</li>
+                    <li>Fundador de Anceu Coliving</li>
+                    <li>Residente de Anceu desde 2020</li>
                 </ul>
                 <div class="person-quote">
                     "Decidí que no quería elegir entre tecnología y territorio"
@@ -185,7 +184,7 @@
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
             <div style="position:absolute;inset:0;background:rgba(0,0,0,0.65);z-index:1;"></div>
             <div class="text" style="position:relative;z-index:2;">
-                <h2>Esta charla no es sobre Rural Hackers.<br><strong>Es sobre las personas que hacen posible el rural.</strong></h2>
+                <h2>Esta charla no es sobre<br><strong>Rural Hackers</strong>,<br>es sobre las personas que hacen posible el rural.</h2>
             </div>
         </section>
 
@@ -233,6 +232,7 @@
                     <li>Makers, vecinos y colivers juntos</li>
                     <li>Impresión 3D, biomateriales, cocina tradicional</li>
                     <li>El nombre significa "el arte de la curiosidad"</li>
+                    <li>Nuestro primer Repair Café</li>
                 </ul>
             </div>
             <img src="../assets/images/fuchiqueira-1.jpg" alt="A Fuchiqueira" class="project-image">
@@ -437,7 +437,46 @@
             </div>
         </section>
 
-        <!-- SLIDE 20: Statement final -->
+        <!-- SLIDE 20: Otros proyectos -->
+        <section class="slide content-slide" style="max-width:100%;width:100%;">
+            <h3>Rural Hackers</h3>
+            <h2>Otros proyectos</h2>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;width:100%;margin-top:8px;">
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">RuralWO</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Residencia de un mes para mujeres que trabajan con WordPress. Alojamiento y 500€ de beca incluidos.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">TecnoArranxo</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Reparación y donación de equipos informáticos. Más de 70 ordenadores donados a ayuntamientos y centros educativos.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">Entre Culturas</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Encuentros culinarios multiculturales entre colivers internacionales y vecinos de Anceu.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">Misiones Verdes</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Limpieza del bosque de Anceu, retirada de eucaliptos invasivos y recuperación de senderos históricos.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">Ruralia</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Programa de IA aplicada para profesionales rurales. Creatividad, automatización y futuro digital.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">Fixar</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Becas para vivir 15 días en coliving rural gallego. Red de +140 personas que trabajan en el rural.</div>
+                </div>
+            </div>
+            <div style="width:100%;margin-top:16px;background:rgba(0,166,107,0.12);border:1px solid rgba(0,166,107,0.4);border-radius:10px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                    <div style="font-size:1.3rem;font-weight:700;color:var(--accent);margin-bottom:6px;">ruralGPT</div>
+                    <div style="font-size:1rem;color:#e0e0e0;line-height:1.5;">Residencia inmersiva de IA aplicada. 3 días en Anceu Coliving para integrar herramientas de IA en tu trabajo real. Máximo 12 personas.</div>
+                </div>
+                <div style="font-size:0.9rem;color:var(--accent);font-weight:600;white-space:nowrap;margin-left:40px;">ruralgpt.gal</div>
+            </div>
+        </section>
+
+        <!-- SLIDE 21: Statement final -->
         <section class="slide statement-slide">
             <img src="../assets/images/rural-hackers-hero.jpg" alt=""
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
@@ -447,7 +486,7 @@
             </div>
         </section>
 
-        <!-- SLIDE 21: Gracias -->
+        <!-- SLIDE 22: Gracias -->
         <section class="slide project-slide">
             <div class="project-text">
                 <h3>Sigamos la conversación</h3>
@@ -455,13 +494,12 @@
                 <ul>
                     <li><span class="highlight">ruralhackers.org</span></li>
                     <li><span class="highlight">anceu.com</span></li>
-                    <li><span class="highlight">hackerdays.org</span></li>
                 </ul>
             </div>
             <img src="../assets/images/hackerdays-mural.jpg" alt="HackerDays mural" class="project-image" style="max-height:60vh;">
         </section>
 
-        <!-- SLIDE 22: Cierre -->
+        <!-- SLIDE 23: Cierre -->
         <section class="slide image-slide">
             <img src="init-page.jpg" alt="Jueves Tech — Rural Hackers">
         </section>
