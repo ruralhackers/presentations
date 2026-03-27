@@ -692,8 +692,8 @@
             document.getElementById('progress').style.width = ((current + 1) / slides.length * 100) + '%';
         }
         document.addEventListener('keydown', e => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') show(current + 1);
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') show(current - 1);
+            if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); show(current + 1); }
+            if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); show(current - 1); }
         });
         show(0);
     </script>

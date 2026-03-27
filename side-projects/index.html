@@ -712,10 +712,10 @@
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+            if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) {
                 e.preventDefault();
                 nextSlide();
-            } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+            } else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) {
                 e.preventDefault();
                 prevSlide();
             } else if (e.key === 'Home') {
