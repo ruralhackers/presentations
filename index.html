@@ -79,6 +79,38 @@
             line-height: 1.5;
         }
 
+        .card.featured {
+            display: block;
+            width: 100%;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        .card.featured h2 {
+            font-size: 1.8rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #444;
+            margin-bottom: 16px;
+        }
+
+        .older-list {
+            display: flex;
+            flex-direction: column;
+        }
+        .older-item {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 12px 0;
+            border-bottom: 1px solid #1a1a1a;
+            transition: color 0.2s ease;
+        }
+        .older-item:first-child { border-top: 1px solid #1a1a1a; }
+        .older-item:hover { color: #fff; }
+
         .footer {
             margin-top: 80px;
             font-size: 0.85rem;
@@ -88,28 +120,25 @@
 </head>
 <body>
     <h1>Presentations</h1>
-    <div class="presentations">
-        <a href="side-projects/index.html" class="card">
-            <div class="tag">ECHN Workshop @ Sende</div>
-            <h2>Side Projects as Organic Marketing</h2>
-            <p>Do what you love. Four stories from Anceu Coliving about building things worth doing.</p>
-        </a>
-        <a href="eslibre-2026/index.html" class="card">
-            <div class="tag">esLibre 2026 &middot; Melide</div>
-            <h2>Codigo abierto contra la despoblacion</h2>
-            <p>De Hacker Days a Punto de Agua. Software libre, comunidad rural y gestion del agua.</p>
-        </a>
-        <a href="jueves-tech-marzo-2026/slides.html" class="card">
-            <div class="tag">Jueves Tech · Marzo 2026</div>
-            <h2>Emprendimiento en el rural</h2>
-            <p>Rural Hackers, Anceu Coliving y el teletrabajo como motor del territorio. A través de las personas.</p>
-        </a>
-        <a href="montes-anceu-2026/slides.html" class="card">
-            <div class="tag">CMVMC de Anceu · Marzo 2026</div>
-            <h2>Asemblea Xeral Ordinaria 2026</h2>
-            <p>Contas, informe de xestión, proxectos e orzamento. Comunidade de Montes en Man Común de Anceu.</p>
+
+    <div style="max-width:900px;width:100%;">
+        <a href="ia-practica-emprendedores/index.html" class="card featured">
+            <div class="tag">RuralGPT × AJE Ourense · 2026</div>
+            <h2>IA Práctica para Emprendedores</h2>
+            <p>Taller 100% práctico de 3h. Documento de empresa, presentación con Gamma, web con Lovable/Bolt y propuestas con Claude.</p>
         </a>
     </div>
+
+    <div style="max-width:900px;width:100%;margin-top:60px;">
+        <div class="section-label">Anteriores</div>
+        <div class="older-list">
+            <a href="montes-anceu-2026/slides.html" class="older-item">Asemblea Xeral Ordinaria 2026</a>
+            <a href="jueves-tech-marzo-2026/slides.html" class="older-item">Emprendimiento en el rural</a>
+            <a href="eslibre-2026/index.html" class="older-item">Codigo abierto contra la despoblacion</a>
+            <a href="side-projects/index.html" class="older-item">Side Projects as Organic Marketing</a>
+        </div>
+    </div>
+
     <p class="footer">Agustin Jamardo</p>
 </body>
 </html>
