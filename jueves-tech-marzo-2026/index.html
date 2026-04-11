@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprendimiento Rural — Agustín Jamardo · Jueves Tech 2026</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <style>
+        :root {
+            --accent: #00a66b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+        .presentation { height: 100vh; width: 100vw; position: relative; }
+        .slide {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 60px 80px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .slide.active { opacity: 1; visibility: visible; }
+        /* Typography */
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 30px;
+             background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2.5rem; font-weight: 600; margin-bottom: 30px; color: #fff; }
+        h3 { font-size: 1rem; font-weight: 700; color: var(--accent);
+             text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+        p { font-size: 1.3rem; line-height: 1.6; color: #b0b0b0; margin-bottom: 20px; }
+        ul { list-style: none; font-size: 1.2rem; line-height: 2; }
+        ul li { position: relative; padding-left: 28px; color: #b0b0b0; }
+        ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+        .highlight { color: var(--accent); font-weight: 600; }
+        /* Fixed UI */
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px;
+                        background: var(--accent); transition: width 0.3s ease; z-index: 100; }
+        .slide-number { position: fixed; bottom: 25px; right: 40px;
+                        font-size: 0.85rem; color: #555; z-index: 100; }
+        .logos { position: fixed; bottom: 22px; left: 40px;
+                 display: flex; align-items: center; gap: 10px; z-index: 100; }
+        .logos img { height: 50px; opacity: 0.45; filter: brightness(0) invert(1); }
+        .logos .sep { color: #333; font-size: 0.75rem; }
+        .nav-hint { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+                    font-size: 0.8rem; color: #444; z-index: 100; }
+        .logos, .slide-number, .nav-hint, .progress-bar { transition: opacity 0.3s ease; }
+
+        /* IMAGE SLIDE */
+        .image-slide { padding: 80px; background: #fff; }
+        .image-slide img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* STATEMENT SLIDE */
+        .statement-slide {
+            background-size: cover; background-position: center;
+        }
+        .statement-slide::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(0,0,0,0.62); z-index: 1;
+        }
+        .statement-slide .text {
+            position: relative; z-index: 2;
+            text-align: center; max-width: 900px;
+        }
+        .statement-slide .text h2 {
+            font-size: 3.2rem; font-weight: 700; line-height: 1.3;
+            color: #fff; margin: 0;
+        }
+        .statement-slide .text h2 strong { color: var(--accent); }
+
+        /* PERSON SLIDE */
+        .person-slide {
+            flex-direction: row; gap: 0; padding: 0; align-items: stretch;
+        }
+        .person-slide .person-photo {
+            flex: 0 0 48%; position: relative; overflow: hidden;
+        }
+        .person-slide .person-photo img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .person-slide .photo-placeholder {
+            width: 100%; height: 100%; background: #111;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 8rem; font-weight: 700; color: #222;
+        }
+        .person-slide .person-info {
+            flex: 1; padding: 60px 60px 60px 60px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .person-slide .person-name {
+            font-size: 3.5rem; font-weight: 700; color: #fff;
+            margin-bottom: 24px; line-height: 1;
+        }
+        .person-slide .person-facts { margin-bottom: 32px; }
+        .person-slide .person-facts li { font-size: 1.15rem; color: #b0b0b0; line-height: 1.9; padding-left: 28px; }
+        .person-slide .person-quote {
+            font-size: 1.3rem; font-style: italic; color: #fff;
+            border-left: 4px solid var(--accent); padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        /* CONTENT SLIDE */
+        .content-slide { align-items: flex-start; max-width: 900px; margin: 0 auto; }
+        .content-slide.centered { align-items: center; text-align: center; }
+
+        /* PROJECT SLIDE */
+        .project-slide { flex-direction: row; gap: 60px; padding: 60px 80px; }
+        .project-slide .project-text { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .project-slide .project-image { flex: 1; max-height: 70vh; object-fit: cover; border-radius: 12px;
+                                         box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+        .project-slide .photo-placeholder { flex: 1; background: #111; border-radius: 12px;
+                                             display: flex; align-items: center; justify-content: center;
+                                             color: #222; font-size: 2rem; }
+
+        /* Quote style for non-person slides */
+        .quote {
+            font-size: 1.8rem; font-style: italic; color: #fff;
+            border-left: 4px solid var(--accent); padding-left: 24px; margin: 32px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="presentation" id="presentation">
+
+        <!-- SLIDE 1: Portada -->
+        <section class="slide image-slide active">
+            <img src="init-page.jpg" alt="Jueves Tech — Rural Hackers">
+        </section>
+
+        <!-- SLIDE 2: Statement — el pueblo lo hacen las personas -->
+        <section class="slide statement-slide">
+            <img src="../assets/images/mural-agua-2022.webp" alt=""
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:1;"></div>
+            <div class="text" style="position:relative;z-index:2;">
+                <h2>Una aldea no son las <strong>casas</strong>,<br>son las <strong>personas</strong></h2>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: Agustín Jamardo -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/agus.jpg" alt="Agustín Jamardo">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Agustín Jamardo</div>
+                <ul class="person-facts">
+                    <li>Cofundador de Rural Hackers</li>
+                    <li>Fundador de Anceu Coliving</li>
+                    <li>Residente de Anceu desde 2020</li>
+                </ul>
+                <div class="person-quote">
+                    "Decidí que no quería elegir entre tecnología y territorio"
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: Anceu Coliving -->
+        <section class="slide project-slide">
+            <div class="project-text">
+                <h3>Anceu Coliving</h3>
+                <h2>Teletrabajo en el rural</h2>
+                <ul>
+                    <li>Estancias de 15 a 60 días</li>
+                    <li>Profesionales remotos de toda Europa</li>
+                    <li>Coworking, comunidad y vida en aldea</li>
+                    <li>El experimento que lo empezó todo</li>
+                </ul>
+            </div>
+            <img src="../assets/images/anceu-hero.jpg" alt="Anceu Coliving" class="project-image">
+        </section>
+
+        <!-- SLIDE 5: Statement — el hilo conductor -->
+        <section class="slide statement-slide">
+            <img src="../assets/images/ruralhackers.jpg" alt=""
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.65);z-index:1;"></div>
+            <div class="text" style="position:relative;z-index:2;">
+                <h2>Esta charla no es sobre<br><strong>Rural Hackers</strong>,<br>es sobre las personas que hacen posible el rural.</h2>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: Rogelio -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/rogelio.jpeg" alt="Rogelio">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Rogelio</div>
+                <ul class="person-facts">
+                    <li>79 años</li>
+                    <li>Jubilado</li>
+                    <li>Nativo de Anceu</li>
+                    <li>Emigrante a Suíza</li>
+                </ul>
+                <div class="person-quote">
+                    "Yo os ayudo porque vosotros estáis ayudando a que mi aldea no muera"
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: Pegadas do Recordo -->
+        <section class="slide project-slide">
+            <div class="project-text">
+                <h3>Rural Hackers</h3>
+                <h2>Pegadas do Recordo</h2>
+                <ul>
+                    <li>5km de caminos olvidados recuperados</li>
+                    <li>Señales QR con historias del territorio</li>
+                    <li>24 personas de 11 nacionalidades + vecinos</li>
+                    <li>Videos documentales y patrimonio inmaterial</li>
+                </ul>
+                <p style="margin-top: 24px; font-size: 1rem;">
+                    <span class="highlight">linktr.ee/pegadas.do.recordo</span>
+                </p>
+            </div>
+            <img src="../assets/images/pegadas-casiano.jpg" alt="Pegadas do Recordo" class="project-image" style="max-height:56vh;">
+        </section>
+
+        <!-- SLIDE 8: Camilo -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/camilo.png" alt="Camilo">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Camilo</div>
+                <ul class="person-facts">
+                    <li>Originario de Pontevedra</li>
+                    <li>Con casa en Anceu</li>
+                    <li>Presidente de la comunidad de montes</li>
+                </ul>
+                <div class="person-quote">
+                    <!-- TODO: add quote -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: A Fuchiqueira -->
+        <section class="slide project-slide">
+            <div class="project-text">
+                <h3>Iniciativas</h3>
+                <h2>A Fuchiqueira</h2>
+                <ul>
+                    <li>Encuentros mensuales en la casa comunal</li>
+                    <li>Makers, vecinos y colivers juntos</li>
+                    <li>Impresión 3D, biomateriales, cocina tradicional</li>
+                    <li>Nuestro primer Repair Café</li>
+                </ul>
+            </div>
+            <img src="../assets/images/fuchiqueira-1.jpg" alt="A Fuchiqueira" class="project-image" style="max-height:56vh;">
+        </section>
+
+        <!-- SLIDE 10: HackerDays -->
+        <section class="slide project-slide">
+            <div class="project-text">
+                <h3>Rural Hackers</h3>
+                <h2>HackerDays</h2>
+                <ul>
+                    <li>Una semana, un reto rural real</li>
+                    <li>Equipo diverso: código, diseño, makers, vecinos</li>
+                    <li>Alojamiento y comida gratuitos</li>
+                    <li>Una edición cada año</li>
+                </ul>
+                <p style="margin-top: 24px; font-size: 1rem;">
+                    <span class="highlight">hackerdays.org</span>
+                </p>
+            </div>
+            <img src="../assets/images/equipo-hackerdays.jpg" alt="Equipo HackerDays" class="project-image" style="max-height:60vh;">
+        </section>
+
+        <!-- SLIDE 11: Rosa -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/rosa-bday-I.jpg" alt="Rosabel">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Rosabel</div>
+                <ul class="person-facts">
+                    <li>Nació en Anceu, se crió en Brasil</li>
+                    <li>Trabaja en Anceu Coliving desde su apertura</li>
+                    <li>Presidenta de la asociación de aguas</li>
+                </ul>
+                <div class="person-quote">
+                    "Dame un teléfono, y moveré el mundo"
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: Punto de Agua -->
+        <section class="slide project-slide">
+            <div class="project-text">
+                <h3>HackerDays 2025</h3>
+                <h2>Punto de Agua</h2>
+                <ul>
+                    <li>CRM para comunidades rurales de agua</li>
+                    <li>1.500+ comunidades en Galicia gestionando con papel</li>
+                    <li>Webapp open source, construida en una semana</li>
+                </ul>
+                <p style="margin-top: 24px; font-size: 1rem;">
+                    <span class="highlight">puntodeagua.com</span>
+                </p>
+            </div>
+            <img src="../assets/images/hackerdays-rosa-olga.jpeg" alt="Punto de Agua" class="project-image">
+        </section>
+
+        <!-- SLIDE 13: Loreto -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/loreto.jpg" alt="Loreto">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Loreto</div>
+                <ul class="person-facts">
+                    <li>Jubilada de Anceu</li>
+                    <li>Ex-profesora de primaria</li>
+                    <li>Ex-trabajadora en distintos museos de Galicia</li>
+                    <li>Nuestra mediadora cultural</li>
+                </ul>
+                <div class="person-quote">
+                    "Le habéis dado vida a este pueblo, muchas gracias"
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: Arte en el rural -->
+        <section class="slide project-slide">
+            <div style="flex:1;align-self:stretch;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;padding:60px 0 60px 0;">
+                <img src="../assets/images/hackerdays-mural.jpg" alt=""
+                     style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+                <img src="../assets/images/rogelio-3.jpg" alt=""
+                     style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+                <img src="../assets/images/galicia-ilustrada.jpg" alt=""
+                     style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+                <img src="../assets/images/culture-moves-tintes.jpg" alt=""
+                     style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+            </div>
+            <div class="project-text">
+                <h3>Arte en el rural</h3>
+                <h2>Residencias creativas</h2>
+                <p>Artistas de España y Europa — <span class="highlight">Culture Moves Europe</span> · <span class="highlight">Ensaia</span></p>
+                <ul>
+                    <li>Estancias de 1 a 2 meses</li>
+                    <li>Para dejar su huella en Anceu</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: Statement — la gente que se vino -->
+        <section class="slide statement-slide">
+            <img src="../assets/images/anceu-community.jpg" alt=""
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.6);z-index:1;"></div>
+            <div class="text" style="position:relative;z-index:2;">
+                <h2>Y luego está<br><strong>la gente que decidió quedarse.</strong></h2>
+            </div>
+        </section>
+
+        <!-- SLIDE 15: Víctor -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/victor.jpg" alt="Víctor">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Víctor</div>
+                <ul class="person-facts">
+                    <li>32 años</li>
+                    <li>Profesor de inglés online</li>
+                    <li>Madrileño</li>
+                    <li>Entrenador de boxeo</li>
+                    <li>Granjero</li>
+                </ul>
+                <div class="person-quote">
+                    "La vida en aldea, la vida mejor"
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 16: Ana -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/ana-lagoon.jpg" alt="Ana">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Ana</div>
+                <ul class="person-facts">
+                    <li>Del online al offline</li>
+                    <li>La Furgolibro</li>
+                    <li>La Imaginaria</li>
+                    <li>Proyectos en Rural Hackers</li>
+                </ul>
+                <div class="person-quote">
+                    <!-- TODO: add quote -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 17: Nova Lonxevidade Rural -->
+        <section class="slide project-slide">
+            <div class="project-text">
+                <h3>Fundación La Caixa</h3>
+                <h2>Nova Lonxevidade Rural</h2>
+                <p>Personas mayores activas como motor del territorio</p>
+                <ul>
+                    <li><span class="highlight">CanTech</span> — tecnología y personas mayores</li>
+                    <li><span class="highlight">FemTech</span> — mujeres rurales y salud digital</li>
+                    <li><span class="highlight">AventuraTech</span> — aventura, naturaleza y bienestar</li>
+                </ul>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:row;gap:12px;align-items:center;justify-content:center;">
+                <img src="../assets/images/nova-lonxevidade-rural/femtech.jpeg" alt="FemTech"
+                     style="flex:1;width:0;max-height:70vh;object-fit:contain;border-radius:8px;">
+                <img src="../assets/images/nova-lonxevidade-rural/aventuratech.jpeg" alt="AventuraTech"
+                     style="flex:1;width:0;max-height:70vh;object-fit:contain;border-radius:8px;">
+            </div>
+        </section>
+
+        <!-- SLIDE 18: Flo y Andreea -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/andreea-y-flo.jpg" alt="Flo y Andreea">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Flo y Andreea</div>
+                <ul class="person-facts">
+                    <li>Andreea, experta en marketing</li>
+                    <li>Flo, sales en empresas de tech</li>
+                    <li>Se conocieron en Anceu Coliving</li>
+                    <li>Han comprado una casa en la aldea</li>
+                </ul>
+                <div class="person-quote">
+                    <!-- TODO: add quote -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 19: Bartek y Ari -->
+        <section class="slide person-slide">
+            <div class="person-photo">
+                <img src="../assets/images/ari-y-bartek.jpg" alt="Bartek y Ari">
+            </div>
+            <div class="person-info">
+                <div class="person-name">Bartek y Ari</div>
+                <ul class="person-facts">
+                    <li>Equipo de Anceu Coliving</li>
+                    <li>Viven en Anceu desde hace más de un año</li>
+                </ul>
+                <div class="person-quote">
+                    <!-- TODO: add quote -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 20: Otros proyectos -->
+        <section class="slide content-slide" style="max-width:100%;width:100%;">
+            <h3>Rural Hackers</h3>
+            <h2>Otros proyectos</h2>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;width:100%;margin-top:8px;">
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">RuralWO</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Residencia de un mes para mujeres que trabajan con WordPress. Alojamiento y 500€ de beca incluidos.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">TecnoArranxo</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Reparación y donación de equipos informáticos. Más de 70 ordenadores donados a ayuntamientos y centros educativos.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">Entre Culturas</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Encuentros culinarios multiculturales entre colivers internacionales y vecinos de Anceu.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">Misiones Verdes</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Limpieza del bosque de Anceu, retirada de eucaliptos invasivos y recuperación de senderos históricos.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">Ruralia</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Programa de IA aplicada para profesionales rurales. Creatividad, automatización y futuro digital.</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px;">
+                    <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">Fixar</div>
+                    <div style="font-size:1rem;color:#b0b0b0;line-height:1.5;">Becas para vivir 15 días en coliving rural gallego. Red de +140 personas que trabajan en el rural.</div>
+                </div>
+            </div>
+            <div style="width:100%;margin-top:16px;background:rgba(0,166,107,0.12);border:1px solid rgba(0,166,107,0.4);border-radius:10px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                    <div style="font-size:1.3rem;font-weight:700;color:var(--accent);margin-bottom:6px;">ruralGPT</div>
+                    <div style="font-size:1rem;color:#e0e0e0;line-height:1.5;">Residencia inmersiva de IA aplicada. 3 días en Anceu Coliving para integrar herramientas de IA en tu trabajo real. Máximo 12 personas.</div>
+                </div>
+                <div style="font-size:0.9rem;color:var(--accent);font-weight:600;white-space:nowrap;margin-left:40px;">ruralgpt.gal</div>
+            </div>
+        </section>
+
+        <!-- SLIDE 21: Statement final -->
+        <section class="slide statement-slide">
+            <img src="../assets/images/rural-hackers-hero.jpg" alt=""
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:1;"></div>
+            <div class="text" style="position:relative;z-index:2;">
+                <h2>Todo esto empezó con<br><strong>un paseo con Rogelio.</strong></h2>
+            </div>
+        </section>
+
+        <!-- SLIDE 22: Gracias -->
+        <section class="slide project-slide">
+            <div class="project-text">
+                <h3>Sigamos la conversación</h3>
+                <h2>Gracias</h2>
+                <ul>
+                    <li><span class="highlight">ruralhackers.org</span></li>
+                    <li><span class="highlight">anceu.com</span></li>
+                </ul>
+            </div>
+            <img src="../assets/images/hackerdays-mural.jpg" alt="HackerDays mural" class="project-image" style="max-height:60vh;">
+        </section>
+
+        <!-- SLIDE 23: Cierre -->
+        <section class="slide image-slide">
+            <img src="init-page.jpg" alt="Jueves Tech — Rural Hackers">
+        </section>
+    </div>
+    <div class="logos">
+        <img src="../assets/logos/rural-hackers.png" alt="Rural Hackers"
+             onerror="this.style.display='none';this.parentNode.querySelector('.rh-text').style.display='inline'">
+        <span class="rh-text" style="display:none;font-size:0.7rem;color:#444;font-weight:700;letter-spacing:1px;">RURAL HACKERS</span>
+        <span class="sep">·</span>
+        <img src="../assets/logos/anceu-coliving.png" alt="Anceu Coliving"
+             onerror="this.style.display='none';this.parentNode.querySelector('.ac-text').style.display='inline'">
+        <span class="ac-text" style="display:none;font-size:0.7rem;color:#444;font-weight:700;letter-spacing:1px;">ANCEU COLIVING</span>
+    </div>
+    <div class="slide-number" id="slideNumber">1 / 18</div>
+    <div class="nav-hint">← → o Espacio para navegar</div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+        const slideNumber = document.getElementById('slideNumber');
+        let current = 0;
+        function show(i) {
+            if (!slides.length) return;  // guard: no slides yet
+            if (i < 0) i = 0;
+            if (i >= slides.length) i = slides.length - 1;
+            slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+            current = i;
+            progress.style.width = ((i + 1) / slides.length * 100) + '%';
+            slideNumber.textContent = (i + 1) + ' / ' + slides.length;
+            // Hide UI chrome on image slides (portada/cierre)
+            const isImageSlide = slides[i].classList.contains('image-slide');
+            document.querySelector('.logos').style.opacity = isImageSlide ? '0' : '1';
+            document.getElementById('slideNumber').style.opacity = isImageSlide ? '0' : '1';
+            document.querySelector('.nav-hint').style.opacity = isImageSlide ? '0' : '1';
+            progress.style.opacity = isImageSlide ? '0' : '1';
+        }
+        document.addEventListener('keydown', e => {
+            if (['ArrowRight', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); show(current + 1); }
+            else if (['ArrowLeft', 'Backspace'].includes(e.key)) { e.preventDefault(); show(current - 1); }
+            else if (e.key === 'Home') show(0);
+            else if (e.key === 'End') show(slides.length - 1);
+        });
+        let tx = 0;
+        document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+        document.addEventListener('touchend', e => {
+            const d = tx - e.changedTouches[0].clientX;
+            if (Math.abs(d) > 50) show(d > 0 ? current + 1 : current - 1);
+        });
+        document.addEventListener('click', e => {
+            if (e.target.tagName === 'A') return;
+            e.clientX > window.innerWidth * 0.7 ? show(current + 1) :
+            e.clientX < window.innerWidth * 0.3 ? show(current - 1) : null;
+        });
+        show(0);
+    </script>
+</body>
+</html>
