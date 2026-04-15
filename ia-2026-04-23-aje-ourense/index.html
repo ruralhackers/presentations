@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Práctica para Emprendedores — RuralGPT × AJE Ourense · 23 Abril 2026</title>
+    <style>
+        :root {
+            --black:    #0a0a0a;
+            --white:    #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --gray-800: #262626;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Arial, sans-serif;
+            background: var(--black);
+            overflow: hidden;
+            height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .presentation { height: 100vh; width: 100vw; position: relative; }
+
+        .slide {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 64px 96px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .slide.active { opacity: 1; visibility: visible; }
+
+        .light { background: var(--white); }
+        .dark  { background: var(--black); }
+
+        /* ── Fixed chrome ── */
+        .progress {
+            position: fixed; top: 0; left: 0; height: 2px;
+            transition: width 0.35s ease, background 0.3s ease;
+            z-index: 100;
+        }
+        .counter {
+            position: fixed; bottom: 28px; right: 44px;
+            font-size: 11px; letter-spacing: 2px;
+            transition: color 0.3s ease;
+            z-index: 100;
+        }
+        .logo-fixed {
+            position: fixed; bottom: 20px; left: 40px;
+            z-index: 100; transition: opacity 0.3s ease;
+        }
+        .logo-fixed img {
+            height: 28px; display: block;
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+        .nav-hint {
+            position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+            font-size: 11px; letter-spacing: 2px; color: var(--gray-400);
+            z-index: 100; transition: opacity 0.5s ease; pointer-events: none;
+        }
+
+        /* ── COVER ── */
+        .cover {
+            align-items: flex-start; justify-content: space-between;
+            padding: 48px 80px;
+        }
+        .cover-top {
+            width: 100%; border-bottom: 1px solid var(--gray-200);
+            padding-bottom: 24px;
+        }
+        .cover-top img { height: 48px; display: block; }
+        .cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .cover-title {
+            font-size: clamp(52px, 8.5vw, 120px);
+            font-weight: 800; line-height: 0.92;
+            letter-spacing: -3px; color: var(--black);
+        }
+        .cover-sub {
+            margin-top: 20px; font-size: 15px; font-weight: 500;
+            color: var(--gray-600); letter-spacing: 0.5px;
+        }
+        .cover-bottom {
+            width: 100%; border-top: 1px solid var(--gray-200); padding-top: 18px;
+        }
+        .cover-bottom span {
+            font-size: 12px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--gray-400);
+        }
+
+        /* ── SECTION TITLE ── */
+        .slide-section { text-align: center; }
+        .section-big {
+            font-size: clamp(44px, 7.5vw, 108px);
+            font-weight: 800; line-height: 0.92;
+            letter-spacing: -2px; color: var(--white);
+        }
+        .section-sub {
+            margin-top: 28px; font-size: 13px; font-weight: 700;
+            letter-spacing: 4px; text-transform: uppercase; color: var(--gray-800);
+        }
+        .section-num {
+            margin-bottom: 20px; font-size: 11px; font-weight: 700;
+            letter-spacing: 4px; text-transform: uppercase; color: var(--gray-800);
+        }
+
+        /* ── CONTENT ── */
+        .content { align-items: flex-start; }
+        .content-inner { max-width: 700px; width: 100%; }
+        .eyebrow {
+            font-size: 11px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--gray-400); margin-bottom: 24px;
+        }
+        .body-text {
+            font-size: clamp(18px, 2vw, 26px);
+            line-height: 1.6; color: var(--black); font-weight: 500;
+        }
+
+        /* ── TOOLS ── */
+        .tools { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 32px; }
+        .tag {
+            font-size: 12px; font-weight: 600; color: var(--gray-600);
+            border: 1px solid var(--gray-200); padding: 6px 14px;
+            border-radius: 3px; letter-spacing: 0.5px;
+        }
+        .footnote { margin-top: 20px; font-size: 13px; color: var(--gray-400); }
+
+        /* ── AGENDA ── */
+        .agenda { width: 100%; max-width: 720px; }
+        .a-item {
+            display: flex; align-items: baseline; gap: 20px;
+            padding: 14px 0; border-bottom: 1px solid var(--gray-200);
+        }
+        .a-item:first-child { border-top: 1px solid var(--gray-200); }
+        .a-item.a-break { opacity: 0.45; }
+        .a-time {
+            font-size: 11px; font-weight: 700; letter-spacing: 2px;
+            color: var(--gray-400); min-width: 44px; white-space: nowrap;
+        }
+        .a-clock {
+            font-size: 11px; font-weight: 500; letter-spacing: 1px;
+            color: var(--gray-400); min-width: 36px; white-space: nowrap;
+        }
+        .a-name {
+            font-size: clamp(13px, 1.6vw, 18px); font-weight: 600; color: var(--black);
+            flex: 1;
+        }
+        .a-label {
+            font-size: 10px; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--gray-400);
+            min-width: 60px; text-align: right;
+        }
+
+        /* ── ESCALERA ── */
+        .esc-bars {
+            display: flex; align-items: flex-end;
+            gap: 6px; width: 100%; height: 88px;
+        }
+        .esc-bar {
+            flex: 1; border-radius: 2px 2px 0 0;
+        }
+        .esc-bar:nth-child(1) { height: 20%; background: var(--gray-200); }
+        .esc-bar:nth-child(2) { height: 40%; background: var(--gray-400); }
+        .esc-bar:nth-child(3) { height: 60%; background: var(--gray-600); }
+        .esc-bar:nth-child(4) { height: 80%; background: var(--gray-800); }
+        .esc-bar:nth-child(5) { height: 100%; background: var(--black); }
+        .esc-labels {
+            display: flex; justify-content: space-between;
+            width: 100%; margin-top: 12px;
+        }
+        .esc-label {
+            font-size: 12px; color: var(--gray-400);
+            font-style: italic; line-height: 1.45; max-width: 44%;
+        }
+        .esc-label.right { text-align: right; }
+        .esc-statement {
+            border-top: 1px solid var(--gray-200); padding-top: 28px;
+            width: 100%; text-align: center;
+            font-size: clamp(19px, 2.3vw, 28px); font-weight: 800;
+            color: var(--black); line-height: 1.3; letter-spacing: -0.5px;
+        }
+
+        /* ── TAKEAWAYS ── */
+        .takeaways { width: 100%; max-width: 640px; }
+        .t-item {
+            padding: 20px 0; border-bottom: 1px solid var(--gray-200);
+            font-size: clamp(15px, 1.8vw, 20px); font-weight: 500; color: var(--gray-600);
+            display: flex; align-items: center; gap: 20px;
+        }
+        .t-item:first-child { border-top: 1px solid var(--gray-200); }
+        .t-num {
+            font-size: 11px; font-weight: 700; letter-spacing: 2px;
+            color: var(--gray-400); min-width: 20px;
+        }
+
+        /* ── PROMPTS ── */
+        .prompts { width: 100%; max-width: 760px; display: flex; flex-direction: column; gap: 0; }
+        .prompt-card {
+            display: flex; gap: 24px; align-items: flex-start;
+            padding: 20px 0; border-bottom: 1px solid var(--gray-200);
+        }
+        .prompt-card:first-child { border-top: 1px solid var(--gray-200); }
+        .prompt-n {
+            font-size: 11px; font-weight: 700; letter-spacing: 2px;
+            color: var(--gray-400); min-width: 20px; padding-top: 3px;
+        }
+        .prompt-text {
+            font-size: clamp(12px, 1.3vw, 15px); color: var(--gray-600);
+            line-height: 1.6; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        /* ── PATRÓN DE PROMPTING ── */
+        .patron {
+            display: flex; gap: 0; width: 100%; max-width: 820px;
+            border: 1px solid var(--gray-200); border-radius: 4px; overflow: hidden;
+        }
+        .patron-part {
+            flex: 1; padding: 32px 28px; border-right: 1px solid var(--gray-200);
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .patron-part:last-child { border-right: none; }
+        .patron-label {
+            font-size: 10px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--gray-400);
+        }
+        .patron-title {
+            font-size: clamp(16px, 2vw, 22px); font-weight: 800;
+            color: var(--black); line-height: 1.15; letter-spacing: -0.5px;
+        }
+        .patron-example {
+            font-size: clamp(11px, 1.1vw, 13px); color: var(--gray-400);
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            line-height: 1.5; font-style: italic;
+        }
+        .patron-rule {
+            margin-top: 32px; text-align: center;
+            font-size: clamp(17px, 2vw, 24px); font-weight: 800;
+            color: var(--black); letter-spacing: -0.5px;
+            border-top: 1px solid var(--gray-200); padding-top: 28px; width: 100%;
+            max-width: 820px;
+        }
+
+        /* ── PRIMER PROMPT ── */
+        .primer-prompt {
+            background: var(--gray-100); border-radius: 4px;
+            padding: 32px 36px; max-width: 680px; width: 100%;
+        }
+        .primer-label {
+            font-size: 10px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--gray-400); margin-bottom: 16px;
+        }
+        .primer-text {
+            font-size: clamp(15px, 1.8vw, 20px); color: var(--black);
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            line-height: 1.65;
+        }
+        .primer-text em {
+            color: var(--gray-600); font-style: normal;
+            background: var(--gray-200); padding: 1px 5px; border-radius: 2px;
+        }
+
+        /* ── DESCANSO ── */
+        .break-slide { text-align: center; gap: 20px; }
+        .break-big {
+            font-size: clamp(64px, 11vw, 140px);
+            font-weight: 800; color: var(--black);
+            letter-spacing: -4px; line-height: 1;
+        }
+        .break-sub {
+            font-size: 13px; font-weight: 700; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--gray-400);
+        }
+
+        /* ── CONTACT / CTA ── */
+        .contact-slide { text-align: center; gap: 32px; }
+        .c-url {
+            font-size: clamp(16px, 2.2vw, 28px);
+            font-weight: 600; color: var(--gray-600);
+            line-height: 1.8; letter-spacing: -0.3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .slide, .progress { transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+<div class="logo-fixed" id="logoFixed">
+    <img src="../assets/logos/rural-hackers.png" alt="Rural Hackers" id="logoImg">
+</div>
+<div class="nav-hint" id="navHint">← →</div>
+
+<div class="presentation">
+
+    <!-- 01 · COVER -->
+    <section class="slide light cover active">
+        <div class="cover-top">
+            <img src="../assets/logos/rural-hackers.png" alt="Rural Hackers">
+        </div>
+        <div class="cover-main">
+            <div class="cover-title">IA PRÁCTICA<br>PARA<br>EMPRENDEDORES</div>
+            <div class="cover-sub">Taller 100% práctico · 3h · 23 de abril de 2026</div>
+        </div>
+        <div class="cover-bottom">
+            <span>RuralGPT × AJE Ourense</span>
+        </div>
+    </section>
+
+    <!-- 02 · QUIÉNES SOMOS -->
+    <section class="slide light" style="padding:0;">
+        <div style="display:flex;width:100%;height:100%;align-items:center;">
+            <div style="flex:1;padding:64px 80px;">
+                <div class="eyebrow">Quiénes somos</div>
+                <p class="body-text">
+                    RuralGPT es el programa de formación en IA de Rural Hackers,
+                    una ONG gallega que acerca la tecnología al mundo rural
+                    desde Anceu Coliving, Galicia.
+                </p>
+            </div>
+            <div style="flex:0 0 36%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;border-left:1px solid var(--gray-200);height:100%;padding:40px;">
+                <img src="../assets/logos/rural-hackers.png" alt="Rural Hackers"
+                     style="max-width:160px;width:80%;opacity:0.7;">
+                <img src="https://ruralgpt.gal/images/logo-ruralgpt.png" alt="RuralGPT"
+                     style="max-width:160px;width:80%;opacity:0.85;">
+                <img src="https://ajeourense.com/wp-content/uploads/2017/04/AJE-Ou.png" alt="AJE Ourense"
+                     style="max-width:160px;width:80%;opacity:0.75;">
+            </div>
+        </div>
+    </section>
+
+    <!-- 03 · LA ESCALERA DE LA IA -->
+    <section class="slide light" style="align-items:center;">
+        <div style="max-width:680px;width:100%;display:flex;flex-direction:column;gap:0;">
+            <div class="esc-bars">
+                <div class="esc-bar"></div>
+                <div class="esc-bar"></div>
+                <div class="esc-bar"></div>
+                <div class="esc-bar"></div>
+                <div class="esc-bar"></div>
+            </div>
+            <div class="esc-labels">
+                <span class="esc-label">"Buscar en Google<br>el teléfono de un proveedor"</span>
+                <span class="esc-label right">"Programador orquestando<br>agentes de IA sin escribir código"</span>
+            </div>
+            <div style="margin-top:32px;">
+                <div class="esc-statement">
+                    Da igual en qué peldaño estés.<br>Hoy subimos varios.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04 · AGENDA -->
+    <section class="slide light content">
+        <div class="content-inner" style="max-width:720px;">
+            <div class="eyebrow" style="margin-bottom:28px;">Agenda · 3 horas</div>
+            <div class="agenda">
+                <div class="a-item">
+                    <span class="a-time">15 MIN</span>
+                    <span class="a-clock">0:00</span>
+                    <span class="a-name">Bienvenida y setup</span>
+                    <span class="a-label">Bloque 0</span>
+                </div>
+                <div class="a-item">
+                    <span class="a-time">25 MIN</span>
+                    <span class="a-clock">0:15</span>
+                    <span class="a-name">Tu empresa en un documento</span>
+                    <span class="a-label">Bloque 1</span>
+                </div>
+                <div class="a-item">
+                    <span class="a-time">35 MIN</span>
+                    <span class="a-clock">0:40</span>
+                    <span class="a-name">IA como asistente de trabajo diario</span>
+                    <span class="a-label">Bloque 2</span>
+                </div>
+                <div class="a-item a-break">
+                    <span class="a-time">10 MIN</span>
+                    <span class="a-clock">1:15</span>
+                    <span class="a-name">Descanso</span>
+                    <span class="a-label"></span>
+                </div>
+                <div class="a-item">
+                    <span class="a-time">25 MIN</span>
+                    <span class="a-clock">1:25</span>
+                    <span class="a-name">Presentación con Gamma</span>
+                    <span class="a-label">Bloque 3</span>
+                </div>
+                <div class="a-item">
+                    <span class="a-time">25 MIN</span>
+                    <span class="a-clock">1:50</span>
+                    <span class="a-name">Presupuestos y docs profesionales</span>
+                    <span class="a-label">Bloque 4</span>
+                </div>
+                <div class="a-item">
+                    <span class="a-time">15 MIN</span>
+                    <span class="a-clock">2:15</span>
+                    <span class="a-name">Demo web + cierre</span>
+                    <span class="a-label">Bloque 5</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05 · SECCIÓN: BLOQUE 0 -->
+    <section class="slide dark slide-section">
+        <div class="section-num">Bloque 0</div>
+        <div class="section-big">BIENVENIDA<br>Y SETUP</div>
+        <div class="section-sub">15 minutos</div>
+    </section>
+
+    <!-- 06 · PRIMER PROMPT DEL DÍA -->
+    <section class="slide light content" style="align-items:center;">
+        <div style="max-width:700px;width:100%;display:flex;flex-direction:column;gap:28px;">
+            <div class="eyebrow">Check técnico colectivo · todos a la vez</div>
+            <div class="primer-prompt">
+                <div class="primer-label">Primer prompt del día</div>
+                <div class="primer-text">
+                    "Soy <em>[nombre]</em>, tengo un negocio de <em>[sector]</em> en Ourense.
+                    Salúdame y dime una cosa interesante sobre mi sector que no sepa."
+                </div>
+            </div>
+            <p class="footnote" style="font-size:13px;color:var(--gray-600);max-width:580px;line-height:1.6;">
+                Abre ChatGPT, Gemini o Claude (gratis). Rompe el hielo,
+                verifica que todos tienen acceso, y quien nunca usó IA da su primer paso.
+            </p>
+        </div>
+    </section>
+
+    <!-- 07 · SECCIÓN: BLOQUE 1 -->
+    <section class="slide dark slide-section">
+        <div class="section-num">Bloque 1</div>
+        <div class="section-big">TU EMPRESA<br>EN UN<br>DOCUMENTO</div>
+        <div class="section-sub">25 minutos · ChatGPT · Claude · Gemini</div>
+    </section>
+
+    <!-- 08 · PATRÓN DE PROMPTING -->
+    <section class="slide light" style="align-items:center;gap:0;">
+        <div class="eyebrow" style="margin-bottom:24px;align-self:flex-start;margin-left:calc(50% - 410px);">El patrón que usaremos en todo el taller</div>
+        <div class="patron">
+            <div class="patron-part">
+                <div class="patron-label">Parte 1</div>
+                <div class="patron-title">Quién eres</div>
+                <div class="patron-example">"Soy [nombre], tengo una empresa de [sector]..."</div>
+            </div>
+            <div class="patron-part">
+                <div class="patron-label">Parte 2</div>
+                <div class="patron-title">Qué quieres</div>
+                <div class="patron-example">"...ayúdame a escribir un documento que defina mi empresa..."</div>
+            </div>
+            <div class="patron-part">
+                <div class="patron-label">Parte 3</div>
+                <div class="patron-title">Cómo lo quieres</div>
+                <div class="patron-example">"...formato Markdown, tono profesional, máximo 300 palabras."</div>
+            </div>
+        </div>
+        <div class="patron-rule">
+            Un buen prompt tiene estas tres cosas. Siempre.
+        </div>
+    </section>
+
+    <!-- 09 · PROMPTS BLOQUE 1 -->
+    <section class="slide light content">
+        <div class="content-inner" style="max-width:760px;">
+            <div class="eyebrow" style="margin-bottom:24px;">Prompts · Tu empresa en un documento</div>
+            <div class="prompts">
+                <div class="prompt-card">
+                    <span class="prompt-n">01</span>
+                    <span class="prompt-text">"Soy [nombre], tengo una empresa de [sector] que ofrece [servicio] a [cliente ideal]. Ayúdame a escribir un documento que defina mi empresa: qué hacemos, a quién, propuesta de valor y tono de comunicación."</span>
+                </div>
+                <div class="prompt-card">
+                    <span class="prompt-n">02</span>
+                    <span class="prompt-text">"Revisa este documento y mejora la propuesta de valor. Que sea clara, directa y diferenciadora. Sin jerga. Máximo 2 frases."</span>
+                </div>
+                <div class="prompt-card">
+                    <span class="prompt-n">→</span>
+                    <span class="prompt-text" style="color:var(--gray-400);font-style:italic;">Guarda el resultado en Google Doc o Notas. Lo reutilizarás en todos los bloques siguientes.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10 · SECCIÓN: BLOQUE 2 -->
+    <section class="slide dark slide-section">
+        <div class="section-num">Bloque 2</div>
+        <div class="section-big" style="font-size:clamp(36px,5.5vw,78px);">IA COMO<br>ASISTENTE<br>DE TRABAJO<br>DIARIO</div>
+        <div class="section-sub">35 minutos · El bloque más demandado</div>
+    </section>
+
+    <!-- 11 · EJERCICIO A: PROCESAR DOCUMENTOS -->
+    <section class="slide light content">
+        <div class="content-inner" style="max-width:760px;">
+            <div class="eyebrow" style="margin-bottom:12px;">Ejercicio A · Procesar un documento</div>
+            <p class="body-text" style="font-size:clamp(15px,1.6vw,20px);margin-bottom:24px;">
+                Analiza contratos, facturas, informes. La IA como asistente administrativo.
+            </p>
+            <div class="prompts">
+                <div class="prompt-card">
+                    <span class="prompt-n">01</span>
+                    <span class="prompt-text">"Eres mi asistente administrativo. Analiza este contrato y dame: partes implicadas, obligaciones de cada parte, fechas clave, importe total, y cualquier cláusula que debería revisar con cuidado. Formato: tabla resumen."</span>
+                </div>
+                <div class="prompt-card">
+                    <span class="prompt-n">→</span>
+                    <span class="prompt-text" style="color:var(--gray-400);font-style:italic;">Primero con el documento de ejemplo. Luego con un documento real tuyo.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12 · EJERCICIO B: COMUNICACIONES -->
+    <section class="slide light content">
+        <div class="content-inner" style="max-width:760px;">
+            <div class="eyebrow" style="margin-bottom:12px;">Ejercicio B · Redactar comunicaciones profesionales</div>
+            <p class="body-text" style="font-size:clamp(15px,1.6vw,20px);margin-bottom:24px;">
+                Emails de seguimiento, propuestas a clientes, respuestas a reseñas.
+            </p>
+            <div class="prompts">
+                <div class="prompt-card">
+                    <span class="prompt-n">01</span>
+                    <span class="prompt-text">"Eres el responsable comercial de [mi empresa]. Un cliente nos ha pedido presupuesto para [servicio] pero lleva 2 semanas sin responder. Escríbele un email de seguimiento: tono profesional pero cercano, máximo 150 palabras, con un CTA claro."</span>
+                </div>
+                <div class="prompt-card">
+                    <span class="prompt-n">→</span>
+                    <span class="prompt-text" style="color:var(--gray-400);font-style:italic;">Adapta a tu situación real. ¿Ves cómo el tono y el límite de palabras cambia el resultado?</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13 · DESCANSO -->
+    <section class="slide light break-slide">
+        <div class="break-big">Descanso</div>
+        <div class="break-sub">10 minutos · Café, móvil, conversación</div>
+    </section>
+
+    <!-- 14 · SECCIÓN: BLOQUE 3 -->
+    <section class="slide dark slide-section">
+        <div class="section-num">Bloque 3</div>
+        <div class="section-big" style="font-size:clamp(40px,6vw,84px);">PRESENTACIÓN<br>PROFESIONAL</div>
+        <div class="section-sub">25 minutos · gamma.app (gratuito)</div>
+    </section>
+
+    <!-- 15 · PROMPTS GAMMA -->
+    <section class="slide light content">
+        <div class="content-inner" style="max-width:760px;">
+            <div class="eyebrow" style="margin-bottom:12px;">Bloque 3 · Gamma</div>
+            <p class="body-text" style="font-size:clamp(15px,1.6vw,20px);margin-bottom:24px;">
+                Pega tu documento de empresa en Gamma. En minutos tienes una presentación real.
+            </p>
+            <div class="prompts">
+                <div class="prompt-card">
+                    <span class="prompt-n">01</span>
+                    <span class="prompt-text">"Crea una presentación de 6 slides para presentar mi empresa a clientes potenciales. Tono profesional pero cercano."</span>
+                </div>
+                <div class="prompt-card">
+                    <span class="prompt-n">02</span>
+                    <span class="prompt-text">"Genera un elevator pitch visual de 5 slides. El público son inversores. Quiero que la primera slide impacte."</span>
+                </div>
+                <div class="prompt-card">
+                    <span class="prompt-n">→</span>
+                    <span class="prompt-text" style="color:var(--gray-400);font-style:italic;">Itera: cambia diseño, modifica una slide, ajusta el tono. El resultado es descargable.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 16 · SECCIÓN: BLOQUE 4 -->
+    <section class="slide dark slide-section">
+        <div class="section-num">Bloque 4</div>
+        <div class="section-big" style="font-size:clamp(38px,5.8vw,82px);">PRESUPUESTOS<br>Y PROPUESTAS</div>
+        <div class="section-sub">25 minutos · Claude · ChatGPT</div>
+    </section>
+
+    <!-- 17 · PROMPTS PRESUPUESTOS -->
+    <section class="slide light content">
+        <div class="content-inner" style="max-width:760px;">
+            <div class="eyebrow" style="margin-bottom:12px;">Bloque 4 · Presupuestos y docs profesionales</div>
+            <div class="prompts">
+                <div class="prompt-card">
+                    <span class="prompt-n">01</span>
+                    <span class="prompt-text">"Redacta un presupuesto profesional para [mi servicio]. Cliente: [tipo de empresa]. Incluye: descripción del servicio, entregables, plazos, precio desglosado con IVE, condiciones de pago y validez. Formato limpio y profesional."</span>
+                </div>
+                <div class="prompt-card">
+                    <span class="prompt-n">02</span>
+                    <span class="prompt-text">"Convierte este presupuesto en una propuesta comercial de una página: problema → solución → por qué nosotros → precio → próximos pasos."</span>
+                </div>
+                <div class="prompt-card">
+                    <span class="prompt-n">→</span>
+                    <span class="prompt-text" style="color:var(--gray-400);font-style:italic;">Pega antes tu documento del Bloque 1 como contexto. La IA mantiene tu tono y propuesta de valor.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 18 · SECCIÓN: BLOQUE 5 -->
+    <section class="slide dark slide-section">
+        <div class="section-num">Bloque 5</div>
+        <div class="section-big">DEMO WEB<br>+ CIERRE</div>
+        <div class="section-sub">15 minutos · Lovable · Bolt.new</div>
+    </section>
+
+    <!-- 19 · QUÉ TE LLEVAS -->
+    <section class="slide light content">
+        <div class="content-inner" style="max-width:640px;">
+            <div class="eyebrow" style="margin-bottom:28px;">Lo que te llevas hoy</div>
+            <div class="takeaways">
+                <div class="t-item">
+                    <span class="t-num">01</span>
+                    Documento de identidad de tu empresa
+                </div>
+                <div class="t-item">
+                    <span class="t-num">02</span>
+                    Emails y documentos reales listos para enviar
+                </div>
+                <div class="t-item">
+                    <span class="t-num">03</span>
+                    Presentación profesional descargable
+                </div>
+                <div class="t-item">
+                    <span class="t-num">04</span>
+                    Presupuesto y propuesta comercial
+                </div>
+                <div class="t-item">
+                    <span class="t-num">→</span>
+                    Guía de prompts reutilizables
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 20 · CTA RURALGPT -->
+    <section class="slide light" style="align-items:center;justify-content:center;gap:0;text-align:center;">
+        <div style="max-width:600px;width:100%;display:flex;flex-direction:column;gap:28px;align-items:center;">
+            <div class="eyebrow">Próximos pasos con RuralGPT</div>
+            <div style="font-size:clamp(18px,2.4vw,30px);font-weight:800;color:var(--black);line-height:1.2;letter-spacing:-1px;">
+                Newsletter · Próximos cursos · Comunidad
+            </div>
+            <p style="font-size:clamp(13px,1.4vw,17px);color:var(--gray-600);line-height:1.7;max-width:480px;">
+                Automatizaciones con Make, Zapier y n8n —<br>
+                tema para el próximo taller avanzado.
+            </p>
+            <div style="border-top:1px solid var(--gray-200);padding-top:24px;width:100%;">
+                <div style="font-size:14px;font-weight:700;letter-spacing:2px;color:var(--gray-400);text-transform:uppercase;">ruralgpt.gal</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 21 · GRACIAS -->
+    <section class="slide light" style="align-items:center;justify-content:center;gap:52px;">
+        <div style="font-size:clamp(64px,10vw,130px);font-weight:800;letter-spacing:-4px;color:var(--black);line-height:1;">Gracias</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px 48px;max-width:440px;width:100%;align-items:center;">
+            <div style="grid-column:1/-1;display:flex;justify-content:center;">
+                <img src="https://ruralgpt.gal/images/logo-ruralgpt.png" alt="RuralGPT"
+                     style="max-height:52px;max-width:100%;opacity:0.85;">
+            </div>
+            <div style="display:flex;justify-content:center;">
+                <img src="https://ajeourense.com/wp-content/uploads/2017/04/AJE-Ou.png" alt="AJE Ourense"
+                     style="max-height:44px;max-width:100%;opacity:0.7;">
+            </div>
+            <div style="display:flex;justify-content:center;">
+                <img src="../assets/logos/rural-hackers.png" alt="Rural Hackers"
+                     style="max-height:44px;max-width:100%;opacity:0.65;">
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    const slides    = document.querySelectorAll('.slide');
+    const progress  = document.getElementById('progress');
+    const counter   = document.getElementById('counter');
+    const logoFixed = document.getElementById('logoFixed');
+    const logoImg   = document.getElementById('logoImg');
+    const navHint   = document.getElementById('navHint');
+    let current = 0;
+    let moved   = false;
+
+    function show(i) {
+        if (i < 0) i = 0;
+        if (i >= slides.length) i = slides.length - 1;
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+        current = i;
+
+        progress.style.width = ((i + 1) / slides.length * 100) + '%';
+
+        const isDark = slides[i].classList.contains('dark');
+        progress.style.background  = isDark ? '#fff' : '#0a0a0a';
+        counter.style.color        = isDark ? '#262626' : '#a3a3a3';
+        counter.textContent        = (i + 1) + ' / ' + slides.length;
+
+        // Hide fixed logo on cover (0) and last slide — they have their own logo
+        const hideLogo = i === 0 || i === slides.length - 1;
+        logoFixed.style.opacity = hideLogo ? '0' : '1';
+        logoImg.style.filter    = isDark ? 'brightness(0) invert(1)' : 'none';
+        logoImg.style.opacity   = isDark ? '0.28' : '0.45';
+
+        // Hide nav hint after first navigation
+        if (!moved && i !== 0) {
+            moved = true;
+            navHint.style.opacity = '0';
+        }
+    }
+
+    document.addEventListener('keydown', e => {
+        if (['ArrowRight', ' ', 'Enter'].includes(e.key))      { e.preventDefault(); show(current + 1); }
+        else if (['ArrowLeft', 'Backspace'].includes(e.key))   { e.preventDefault(); show(current - 1); }
+        else if (e.key === 'Home') show(0);
+        else if (e.key === 'End')  show(slides.length - 1);
+    });
+
+    let tx = 0;
+    document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', e => {
+        const d = tx - e.changedTouches[0].clientX;
+        if (Math.abs(d) > 50) show(d > 0 ? current + 1 : current - 1);
+    });
+
+    show(0);
+</script>
+</body>
+</html>
