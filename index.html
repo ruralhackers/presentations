@@ -42,6 +42,36 @@
             width: 100%;
         }
 
+        .presentations.horizontal {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 100%;
+        }
+
+        .presentations.horizontal .card {
+            display: flex;
+            align-items: center;
+            padding: 24px 32px;
+            gap: 32px;
+        }
+
+        .presentations.horizontal .card .tag {
+            margin-bottom: 0;
+            min-width: 140px;
+        }
+
+        .presentations.horizontal .card h2 {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        .presentations.horizontal .card p {
+            margin-bottom: 0;
+            min-width: 200px;
+            text-align: right;
+        }
+
         .card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -122,9 +152,9 @@
     <h1>Presentations</h1>
 
     <div style="max-width:900px;width:100%;">
-        <div class="presentations">
+        <div class="presentations horizontal">
             <a href="ia-2026-04-23-aje-ourense/index.html" class="card">
-                <div class="tag">RuralGPT × AJE Ourense</div>
+                <div class="tag">RuralGPT × AJE Ourense · 23 Abril</div>
                 <h2>IA Práctica para Emprendedores</h2>
                 <p>Taller 100% práctico. Documento de empresa, Gamma, Lovable y presupuestos con IA.</p>
             </a>
@@ -138,7 +168,7 @@
             <a href="jueves-tech-marzo-2026/slides.html" class="card">
                 <div class="tag">Marzo 2026</div>
                 <h2>Emprendimiento en el rural</h2>
-                <p>Taller de周四 Tech / Jueves de Tecnología.</p>
+                <p>Taller de Jueves de Tecnología.</p>
             </a>
 
             <a href="eslibre-2026/index.html" class="card">
