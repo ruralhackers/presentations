@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Curso Web - Rural Hackers x AJE Ourense</title>
+  <title>Rural GPT · Tu web con AI — Rural Hackers × AJE Ourense</title>
   <style>
     :root {
       --black: #0a0a0a;
@@ -15,7 +15,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
       background: var(--black);
       color: var(--black);
       overflow: hidden;
@@ -26,7 +26,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      height: 3px;
+      height: 2px;
       background: var(--black);
       width: 0;
       transition: width 0.25s ease;
@@ -61,7 +61,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding: 36px 64px 56px;
+      padding: 40px 72px 64px;
       background: var(--white);
     }
     .slide.active {
@@ -77,37 +77,51 @@
       gap: 18px;
     }
     .top img {
-      height: 38px;
+      height: 36px;
       width: auto;
       object-fit: contain;
     }
+    .cover-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      gap: 28px;
+    }
     .title {
-      margin-top: 34px;
-      font-size: clamp(54px, 8vw, 104px);
-      line-height: 0.93;
-      letter-spacing: -2px;
+      font-size: clamp(72px, 14vw, 180px);
+      line-height: 0.88;
+      letter-spacing: -4px;
       font-weight: 800;
-      max-width: 1060px;
+      max-width: none;
+    }
+    .cover-workshop {
+      font-size: clamp(18px, 2.2vw, 28px);
+      color: var(--gray-600);
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
     .subtitle {
-      margin-top: 18px;
-      font-size: clamp(20px, 2.2vw, 30px);
+      margin-top: 22px;
+      font-size: clamp(22px, 2.4vw, 32px);
       color: var(--gray-600);
-      max-width: 1020px;
-      line-height: 1.4;
+      font-weight: 500;
     }
     .kicker {
       margin-top: auto;
       border-top: 1px solid var(--gray-200);
-      padding-top: 14px;
+      padding-top: 16px;
       font-size: 14px;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       font-weight: 700;
       color: var(--gray-400);
       text-transform: uppercase;
     }
     .eyebrow {
-      margin-top: 28px;
+      margin-top: 36px;
       color: var(--gray-400);
       font-size: 13px;
       text-transform: uppercase;
@@ -115,33 +129,206 @@
       font-weight: 700;
     }
     .content-title {
-      margin-top: 12px;
-      font-size: clamp(44px, 6vw, 82px);
+      margin-top: 14px;
+      font-size: clamp(42px, 6.5vw, 88px);
       line-height: 0.95;
-      letter-spacing: -1px;
+      letter-spacing: -2px;
       font-weight: 800;
       max-width: 980px;
     }
-    .bullets {
-      margin-top: 32px;
-      list-style: none;
-      max-width: 1120px;
+    .lead {
+      margin-top: 28px;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.55;
+      color: var(--gray-600);
+      max-width: 720px;
+      font-weight: 500;
+    }
+    .tags {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 900px;
+    }
+    .tag {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+      padding: 8px 16px;
+      border-radius: 3px;
+      letter-spacing: 0.3px;
+    }
+    .visual {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      text-align: center;
+      padding-bottom: 24px;
+    }
+    .visual img {
+      max-height: min(42vh, 360px);
+      width: auto;
+      max-width: min(70vw, 520px);
+      object-fit: contain;
+    }
+    .visual-title {
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1;
+    }
+    .visual-sub {
+      font-size: clamp(20px, 2.2vw, 28px);
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+    .visual-stack {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      text-align: center;
+      padding-bottom: 20px;
+    }
+    .visual-stack img {
+      max-height: min(34vh, 280px);
+      width: auto;
+      max-width: min(55vw, 320px);
+      object-fit: contain;
+    }
+    .visual-caption {
+      font-size: clamp(18px, 2vw, 24px);
+      color: var(--gray-600);
+      font-weight: 500;
+      max-width: 720px;
+      line-height: 1.35;
+    }
+    .prompts {
+      margin-top: 22px;
       display: grid;
       gap: 14px;
+      max-width: 980px;
+      width: 100%;
+    }
+    .prompt {
+      border: 1px solid var(--gray-200);
+      background: var(--gray-100);
+      padding: 16px 20px;
+      border-radius: 4px;
+      font-size: clamp(15px, 1.55vw, 20px);
+      line-height: 1.45;
+      color: var(--gray-600);
+      font-weight: 500;
+      text-align: left;
+    }
+    .prompt strong {
+      color: var(--black);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.85em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .mage-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 36px;
+      margin-top: 20px;
+      flex: 1;
+      min-height: 0;
+    }
+    .mage-row img {
+      width: min(22vw, 200px);
+      height: auto;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+    .mage-row .prompts {
+      margin-top: 0;
+      flex: 1;
+    }
+    .question {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 28px;
+      padding: 0 24px 40px;
+    }
+    .question h2 {
+      font-size: clamp(48px, 8vw, 104px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      max-width: 1100px;
+    }
+    .question img {
+      max-height: min(38vh, 320px);
+      width: auto;
+      max-width: min(80vw, 720px);
+      object-fit: contain;
+    }
+    .bullets {
+      margin-top: 36px;
+      list-style: none;
+      max-width: 980px;
+      display: grid;
+      gap: 18px;
     }
     .bullets li {
-      font-size: clamp(24px, 2.7vw, 35px);
-      line-height: 1.25;
+      font-size: clamp(22px, 2.5vw, 32px);
+      line-height: 1.3;
       color: var(--gray-600);
-      padding-left: 28px;
-      position: relative;
+      font-weight: 500;
     }
-    .bullets li::before {
-      content: "-";
-      position: absolute;
-      left: 0;
-      top: 0;
+    .section-dark {
+      background: var(--black);
+      color: var(--white);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 64px;
+    }
+    .section-dark .section-label {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
       color: var(--gray-400);
+      margin-bottom: 24px;
+    }
+    .section-dark .section-title {
+      font-size: clamp(48px, 9vw, 120px);
+      font-weight: 800;
+      letter-spacing: -3px;
+      line-height: 0.92;
+      color: var(--white);
+      max-width: 1000px;
+    }
+    .section-dark .section-sub {
+      margin-top: 28px;
+      font-size: clamp(18px, 2vw, 24px);
+      color: var(--gray-400);
+      font-weight: 500;
+      max-width: 640px;
+    }
+    .step-body {
+      margin-top: 18px;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.5;
+      color: var(--gray-600);
+      max-width: 720px;
+      font-weight: 500;
     }
     .coffee {
       background:
@@ -169,197 +356,431 @@
 <body>
   <div class="progress" id="progress"></div>
   <div class="counter" id="counter"></div>
-  <div class="hint" id="hint">ARROWS - SPACE - CLICK</div>
+  <div class="hint" id="hint">ARROWS · SPACE · CLICK</div>
 
+  <!-- 1. Cover -->
   <section class="slide active">
     <div class="top">
       <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
-      <img src="./assets/ruralgpt.png" alt="Rural GPT" />
       <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
     </div>
-    <h1 class="title">CURSO PARA HACER<br>UNA WEB</h1>
-    <p class="subtitle">Vais a aprender tips y herramientas que van a impactar en muchas cosas de vuestra vida.</p>
-    <p class="kicker">Rural Hackers x AJE Ourense</p>
+    <div class="cover-main">
+      <h1 class="title">Rural GPT</h1>
+      <p class="cover-workshop">Tu web con AI</p>
+    </div>
+    <p class="kicker">Rural Hackers × AJE Ourense</p>
   </section>
 
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Rural Hackers</p>
-    <h2 class="content-title">Quiénes somos</h2>
-    <ul class="bullets">
-      <li>Anceu, Ponte Caldelas: tecnología, rural y arte en el mismo lugar.</li>
-      <li>ruraliart: proyectos humanos entre creatividad, territorio y tecnología.</li>
-      <li>A Fuchiqueira: talleres en marcha desde 2023 para aprender haciendo.</li>
-      <li>Residencias que crean CON la aldea, no para la aldea.</li>
-      <li>EYE emprendimiento: Erasmus Young Entrepreneurs para crecer en red.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Dinámica de arranque</p>
-    <h2 class="content-title">Rural GPT:<br>presentaos con un objeto</h2>
-    <ul class="bullets">
-      <li>Coged un objeto que llevéis encima o tengáis cerca.</li>
-      <li>Presentaos en 20 segundos: quién sois y por qué ese objeto os representa.</li>
-      <li>Prompt: "Con este objeto, ayúdame a presentarme al grupo en estilo cercano".</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Ejercicio físico</p>
-    <h2 class="content-title">Vuestra web en A4<br>con post-its</h2>
-    <ul class="bullets">
-      <li>Escribid vuestra web en una hoja A4: portada, propuesta, servicios y contacto.</li>
-      <li>Pegad post-its para ordenar bloques y mensajes clave.</li>
-      <li>Enseñadla al grupo y contad vuestro proyecto en 1 minuto.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Estado inicial</p>
-    <h2 class="content-title">Qué IA usáis<br>y cómo</h2>
-    <ul class="bullets">
-      <li>Qué herramienta usáis ahora (si usáis alguna).</li>
-      <li>Para qué la usáis en el día a día.</li>
-      <li>Qué os gustaría automatizar o mejorar hoy mismo.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Stack mínimo</p>
-    <h2 class="content-title">Compra vuestra base</h2>
-    <ul class="bullets">
-      <li>1) Dominio: IONOS, Bluehost, Hostinger, GoDaddy.</li>
-      <li>2) Hosting: Netlify para desplegar rápido.</li>
-      <li>3) IA: Cursor, ChatGPT, Claude para construir y mejorar.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Inspiración guiada</p>
-    <h2 class="content-title">Elegid 3 referencias</h2>
-    <ul class="bullets">
-      <li>Visitad styles.refero.design y Awwwards.</li>
-      <li>Elegid 3 webs que os gusten por diseño o claridad.</li>
-      <li>Contad al grupo por qué las habéis elegido.</li>
-    </ul>
-  </section>
-
-  <section class="slide coffee">
-    <h2 class="content-title">PAUSA CAFE</h2>
-    <p class="subtitle">10 minutos para desconectar y comentar ideas</p>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Buyer persona</p>
-    <h2 class="content-title">Del monigote<br>a una persona real</h2>
-    <ul class="bullets">
-      <li>Dibujad un monigote de quien os compra.</li>
-      <li>Pasadlo por Gemini para sacarle más detalle.</li>
-      <li>Preguntas: edad, profesión, zapatos, qué comen.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Datos reales</p>
-    <h2 class="content-title">Conectar Gmail<br>para ampliar buyer persona</h2>
-    <ul class="bullets">
-      <li>Prompt 1: "Resume patrones de preguntas y objeciones de mis correos".</li>
-      <li>Prompt 2: "Qué tono funciona mejor según respuestas recibidas".</li>
-      <li>Prompt 3: "Dame 5 insights para afinar mi mensaje de venta".</li>
-      <li>Prompts listos para proyectar y copiar.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Branding y contenido</p>
-    <h2 class="content-title">Material para construir<br>la web</h2>
-    <ul class="bullets">
-      <li>Empezad por las fotos que ya tenéis.</li>
-      <li>Completad con Gemini fotos y banco libre como Unsplash.</li>
-      <li>Explicad markdown y cread un MD de la web y otro personal.</li>
-      <li>Generad 4-5 fotos con Gemini pensando en vuestro buyer.</li>
-      <li>Preparad mails de marca y logo base con Gemini.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Versionado</p>
-    <h2 class="content-title">Qué es GitHub</h2>
-    <ul class="bullets">
-      <li>Es vuestro historial de cambios para no perder trabajo.</li>
-      <li>Permite colaborar y experimentar sin miedo.</li>
-      <li>Podéis tener repos privados o públicos según necesitéis.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Plantilla de salida</p>
-    <h2 class="content-title">Repo base en Astro</h2>
-    <ul class="bullets">
-      <li>https://github.com/netlify-templates/astro-platform-starter</li>
-      <li>Clonar, editar contenido y desplegar en Netlify.</li>
-      <li>Estructura limpia para empezar hoy sin bloqueo.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Manos al teclado</p>
-    <h2 class="content-title">Building</h2>
-    <ul class="bullets">
-      <li>Montad hero, propuesta de valor, servicios y contacto.</li>
-      <li>Revisad contraste, legibilidad y claridad del mensaje.</li>
-      <li>Publicad primera versión aunque no sea perfecta.</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Skills</p>
-    <h2 class="content-title">3 prompts para subir nivel</h2>
-    <ul class="bullets">
-      <li>Idiomas: "Adapta esta web a gallego, castellano e inglés manteniendo tono".</li>
-      <li>SEO: "Propone title, description, H1-H3 y FAQ para posicionar esta página".</li>
-      <li>Mejora: "Actúa como UX writer y mejora claridad, CTA y escaneabilidad".</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
-    <p class="eyebrow">Cierre comparativo</p>
-    <h2 class="content-title">Vuestro dibujo<br>vs vuestra web</h2>
-    <ul class="bullets">
-      <li>Comparad la idea inicial en papel con la web publicada.</li>
-      <li>Qué se mantuvo, qué cambió y por qué.</li>
-      <li>Aprendizaje clave para la siguiente iteración.</li>
-    </ul>
-  </section>
-
+  <!-- 2. Rural Hackers -->
   <section class="slide">
     <div class="top">
       <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
-      <img src="./assets/ruralgpt.png" alt="Rural GPT" />
       <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
     </div>
-    <p class="eyebrow">Cierre final</p>
-    <h2 class="content-title">Qué os lleváis hoy</h2>
+    <p class="eyebrow">Quiénes somos</p>
+    <h2 class="content-title">Rural Hackers</h2>
+    <p class="lead">Tecnología, arte y vida rural para frenar la despoblación. Creamos desde el rural, con la aldea.</p>
+    <div class="tags">
+      <span class="tag">Anceu</span>
+      <span class="tag">Residencias</span>
+      <span class="tag">A Fuchiqueira</span>
+      <span class="tag">RuraliArt</span>
+      <span class="tag">EYE Emprendimiento</span>
+    </div>
+  </section>
+
+  <!-- 3. Presentate con un objeto -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual">
+      <p class="eyebrow" style="margin-top:0">Rural GPT · vamos a conocernos</p>
+      <img src="./assets/objeto-presentacion.png" alt="Un objeto cotidiano" />
+      <h2 class="visual-title">Preséntate con un objeto</h2>
+    </div>
+  </section>
+
+  <!-- 4. Presenta tu web -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual">
+      <img src="./assets/a4-postits.png" alt="Hoja A4 con post-its" />
+      <h2 class="visual-title">Presenta tu web</h2>
+    </div>
+  </section>
+
+  <!-- 5. Que IA utilizas -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="question">
+      <h2>¿Qué IA utilizas?</h2>
+      <img src="./assets/twister-doodle.png" alt="Twister clásico en estilo doodle" />
+    </div>
+  </section>
+
+  <!-- 6. Como la usais -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Ahora</p>
+    <h2 class="content-title">¿Cómo la estás<br>utilizando?</h2>
     <ul class="bullets">
-      <li>Una web publicada con estructura clara.</li>
-      <li>Un proceso para pasar de idea a entrega.</li>
-      <li>Prompts y herramientas para seguir mejorando.</li>
-      <li>Cerilla: una chispa concreta para encender lo siguiente.</li>
+      <li>Qué estáis haciendo con AI en vuestro día a día.</li>
+      <li>Qué cosas pensáis que no controláis totalmente y os gustaría emprender.</li>
     </ul>
+  </section>
+
+  <!-- 7. Compra -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Stack mínimo</p>
+    <h2 class="content-title">Compra tu base</h2>
+    <ul class="bullets">
+      <li>1) Dominio: IONOS, Bluehost, Hostinger, GoDaddy.</li>
+      <li>2) Hosting: Netlify.</li>
+      <li>3) IA: Cursor, ChatGPT, Claude.</li>
+    </ul>
+  </section>
+
+  <!-- 8. Inspiracion -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual">
+      <img src="./assets/inspiracion-doodle.png" alt="Cara de inspiración en doodle" />
+      <h2 class="visual-title">Vamos a inspirarnos</h2>
+      <div class="tags" style="justify-content:center; margin-top:8px">
+        <span class="tag">Refero</span>
+        <span class="tag">Awwwards</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Compartir gustos -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Al grupo</p>
+    <h2 class="content-title">Vamos a compartir<br>por qué nos gustan</h2>
+    <ul class="bullets">
+      <li>Qué elementos visuales os atraen.</li>
+      <li>Qué del texto os engancha (tono, claridad, promesa).</li>
+      <li>Qué haríais igual… y qué no.</li>
+    </ul>
+  </section>
+
+  <!-- 9. Pausa -->
+  <section class="slide coffee">
+    <h2 class="content-title">PAUSA CAFÉ</h2>
+    <p class="subtitle">Y volvemos a ponernos manos a la obra</p>
+  </section>
+
+  <!-- 10. Buyer -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual-stack">
+      <h2 class="visual-title">Buyer persona</h2>
+      <img src="./assets/stickman-buyer.png" alt="Stickman gracioso" />
+      <p class="visual-sub">Vamos a entender cómo es tu buyer persona</p>
+      <p class="visual-caption">Coge un folio y suelta tu creatividad</p>
+      <p class="visual-caption">Te vamos a hacer unas preguntas para jugar con tu imaginación</p>
+    </div>
+  </section>
+
+  <!-- 11. Foto + Gemini -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Del folio a Gemini</p>
+    <h2 class="content-title" style="font-size:clamp(32px,4.5vw,56px)">Sacad el móvil<br>y hacedle una foto</h2>
+    <div class="mage-row">
+      <img src="./assets/foto-buyer-gemini.png" alt="Foto del buyer persona con el móvil" />
+      <div class="prompts">
+        <div class="prompt">
+          <strong>La magia</strong>
+          Subid la foto a Gemini. Lee el dibujo (OCR + detalle visual) y os saca un buyer persona mucho más rico.
+        </div>
+        <div class="prompt">
+          <strong>Prompt avanzado</strong>
+          “Analiza esta foto de mi buyer dibujado. Primero lo visible: edad aproximada, look, actitud, zapatos/ropa, contexto y personalidad. Luego ve más allá: inventa con coherencia nombre, trabajo, miedos profundos, deseos reales, objeciones al comprar, canales donde cuelga y 5 frases exactas que diría. Añade lo que normalmente no vemos: rituales del día, contradicciones (lo que dice vs lo que hace), qué le da status, qué le da vergüenza, cómo decide bajo presión, a quién pide consejo y qué gatillo le hace comprar ya. Entrégalo en BUYER.md listo para que una IA escriba mails y textos de web en su voz.”
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Gmail -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Datos reales</p>
+    <h2 class="content-title" style="font-size:clamp(32px,4.5vw,56px)">El poder de conectar<br>nuestro correo electrónico</h2>
+    <div class="mage-row">
+      <img src="./assets/mago-correo.png" alt="Mago haciendo magia" />
+      <div class="prompts">
+        <div class="prompt">
+          <strong>Prompt 01 · Tono.md</strong>
+          “Lee mis correos enviados y escribe un TONO.md: cómo hablo, nivel de formalidad, palabras que repito, lo que nunca diría, y 5 ejemplos de frases mías.”
+        </div>
+        <div class="prompt">
+          <strong>Prompt 02 · Quién soy.md</strong>
+          “Con mi bandeja, define quién soy y a quién escribo: problemas que resuelvo, objeciones frecuentes y cómo debe escribirme la IA un mail en mi voz.”
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Branding section divider -->
+  <section class="slide section-dark">
+    <p class="section-label">Nuevo bloque</p>
+    <h2 class="section-title">Branding<br>content</h2>
+    <p class="section-sub">Todo lo que tiene que ver con tu imagen de marca</p>
+  </section>
+
+  <!-- ¿Qué fotos tienes? -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual-stack">
+      <img src="./assets/doodle-fotos.png" alt="Fotos y cámara" />
+      <h2 class="visual-title">¿Qué fotos tienes?</h2>
+      <p class="visual-caption">Producto, equipo, espacio, clientes, detalles. Lo que ya está en el móvil cuenta.</p>
+    </div>
+  </section>
+
+  <!-- Gemini para fotos -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Gemini</p>
+    <h2 class="content-title" style="font-size:clamp(32px,4.5vw,56px)">Gemini para<br>hacer fotos</h2>
+    <div class="mage-row">
+      <img src="./assets/doodle-gemini-fotos.png" alt="Gemini generando imágenes" />
+      <div class="prompts">
+        <div class="prompt">
+          <strong>Cómo funciona</strong>
+          Describes lo que quieres ver. Gemini lo genera. Refinas: “más luz”, “menos gente”, “estilo editorial”. Iteras hasta que encaje.
+        </div>
+        <div class="prompt">
+          <strong>Prompt</strong>
+          “Genera una foto realista de mi negocio: [qué haces], luz natural, tono cercano, sin texto en la imagen, lista para web.”
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unsplash -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual-stack">
+      <img src="./assets/doodle-unsplash.png" alt="Repositorio de fotos" />
+      <h2 class="visual-title">Repos de fotos</h2>
+      <p class="visual-sub">unsplash.com</p>
+      <p class="visual-caption">Bancos libres para cubrir huecos: busca por palabra, descarga y atribuye si hace falta.</p>
+    </div>
+  </section>
+
+  <!-- Markdown -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Documentación</p>
+    <h2 class="content-title" style="font-size:clamp(32px,4.5vw,56px)">El MD de tu<br>empresa</h2>
+    <div class="mage-row">
+      <img src="./assets/doodle-markdown.png" alt="Documento markdown" />
+      <div class="prompts">
+        <div class="prompt">
+          <strong>Qué es un .md</strong>
+          Un texto simple con títulos (#) y listas (-). La IA lo lee perfecto. Es la memoria de tu marca.
+        </div>
+        <div class="prompt">
+          <strong>Prompt</strong>
+          “Con lo que sabes de mí, crea WEB.md (propuesta, servicios, tono, CTAs) y PERSONAL.md (quién soy, trayectoria, valores). Cortos y accionables.”
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fotos buyer -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Buyer en imágenes</p>
+    <h2 class="content-title" style="font-size:clamp(32px,4.5vw,56px)">4 o 5 fotos<br>de tu buyer</h2>
+    <div class="mage-row">
+      <img src="./assets/doodle-buyer-fotos.png" alt="Serie de fotos del buyer" />
+      <div class="prompts">
+        <div class="prompt">
+          <strong>Prompt</strong>
+          “Usando mi BUYER.md, genera 5 imágenes coherentes: 1) retrato, 2) en su día a día, 3) con el problema, 4) descubriendo mi solución, 5) después de comprar. Misma persona, estilo fotográfico.”
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mails brand -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Brand content</p>
+    <h2 class="content-title" style="font-size:clamp(32px,4.5vw,56px)">Mails de<br>marca</h2>
+    <div class="mage-row">
+      <img src="./assets/doodle-mails-brand.png" alt="Mails de marca" />
+      <div class="prompts">
+        <div class="prompt">
+          <strong>Idea</strong>
+          Con TONO.md + BUYER.md + WEB.md, la IA escribe como tu marca, no genérico.
+        </div>
+        <div class="prompt">
+          <strong>Prompt</strong>
+          “Con mis MD de tono, buyer y web, escribe 3 mails: bienvenida, oferta clara y seguimiento. Misma voz. Asunto + cuerpo + CTA.”
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Identidad</p>
+    <h2 class="content-title" style="font-size:clamp(32px,4.5vw,56px)">Genera un logo<br>con Gemini</h2>
+    <div class="mage-row">
+      <img src="./assets/doodle-logo.png" alt="Generar logo" />
+      <div class="prompts">
+        <div class="prompt">
+          <strong>Prompt</strong>
+          “Diseña 4 propuestas de logo para [nombre / sector]. Minimal, vector-like, sin texto ilegible, fondo blanco. Luego elige 1 y dame variantes en negro y color.”
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GitHub -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual-stack">
+      <img src="./assets/github-logo.png" alt="GitHub" style="max-height:72px;max-width:72px" />
+      <h2 class="visual-title">¿Qué es GitHub?</h2>
+      <img src="./assets/doodle-github-biblioteca.png" alt="Persona buscando un libro en una biblioteca" />
+      <p class="visual-caption">Como una biblioteca: buscas, coges un proyecto y lo usas o lo mejoras.</p>
+    </div>
+  </section>
+
+  <!-- Repo prefabricado / Astro -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual-stack">
+      <h2 class="visual-title">Las webs son código</h2>
+      <img src="./assets/doodle-casa-prefabricada.png" alt="Casa prefabricada" />
+      <p class="visual-sub">Vamos a usar un repositorio prefabricado</p>
+      <p class="visual-caption">Astro · github.com/netlify-templates/astro-platform-starter</p>
+    </div>
+  </section>
+
+  <!-- Manos a la obra -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual-stack">
+      <h2 class="visual-title">Vamos a construir<br>nuestra web</h2>
+      <img src="./assets/doodle-manos-obra.png" alt="Dos personas trabajando juntas" />
+      <p class="visual-sub">Nos ponemos manos a la obra</p>
+      <p class="visual-caption">Os vamos ayudando de manera personalizada para que no os perdáis</p>
+    </div>
+  </section>
+
+  <!-- Cositas extra -->
+  <section class="slide section-dark">
+    <p class="section-label">Extra</p>
+    <h2 class="section-title">Cositas<br>extra</h2>
+    <p class="section-sub">Potencia para no quedarte a medias</p>
+  </section>
+
+  <!-- Skills -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="visual-stack">
+      <h2 class="visual-title">¿Qué son los skills?</h2>
+      <img src="./assets/doodle-skills-superpowers.png" alt="Persona con superpoderes" />
+      <p class="visual-caption">Instrucciones listas para la IA: como superpoderes que activas cuando los necesitas.</p>
+      <div class="tags" style="justify-content:center; margin-top:4px">
+        <span class="tag">Idiomas</span>
+        <span class="tag">SEO</span>
+        <span class="tag">Claridad UX</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dibujo vs web -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="question">
+      <h2>Tu dibujo → tu web</h2>
+    </div>
+  </section>
+
+  <!-- Cerilla -->
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <div class="question">
+      <h2>Qué te llevas hoy</h2>
+    </div>
   </section>
 
   <script>

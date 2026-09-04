@@ -8,7 +8,7 @@ Each presentation lives in its own folder as a self-contained HTML slide deck --
 
 | Talk | Folder | Description |
 |------|--------|-------------|
-| **Curso para hacer una web** | [`curso-web-aje-ourense/`](curso-web-aje-ourense/) | Taller práctico con AJE Ourense: de la idea a una web publicada (dominio, Netlify, IA, buyer persona, branding, Astro). |
+| **Tu web con AI (Rural GPT)** | [`curso-web-aje-ourense/`](curso-web-aje-ourense/) | Taller práctico con AJE Ourense: buyer persona, branding, prompts y publicar con Astro. |
 | **Do What You Love: Side Projects as Organic Marketing** | [`side-projects/`](side-projects/) | How passion-driven side projects became Anceu Coliving's most effective marketing channel. Covers Hacker Days, Fuchiqueiras, Entre Culturas, and Pegadas do Recordo. |
 
 ## Usage
