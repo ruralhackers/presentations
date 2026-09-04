@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso Web - Rural Hackers x AJE Ourense</title>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray-100: #f5f5f5;
+      --gray-200: #e5e5e5;
+      --gray-400: #a3a3a3;
+      --gray-600: #525252;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--black);
+      color: var(--black);
+      overflow: hidden;
+      height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--black);
+      width: 0;
+      transition: width 0.25s ease;
+      z-index: 1000;
+    }
+    .counter {
+      position: fixed;
+      right: 36px;
+      bottom: 22px;
+      color: var(--gray-400);
+      font-size: 13px;
+      letter-spacing: 2px;
+      z-index: 1000;
+    }
+    .hint {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 22px;
+      color: var(--gray-400);
+      font-size: 13px;
+      letter-spacing: 2px;
+      z-index: 1000;
+      transition: opacity 0.4s ease;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 36px 64px 56px;
+      background: var(--white);
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .top {
+      border-bottom: 1px solid var(--gray-200);
+      padding-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+    .top img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+    .title {
+      margin-top: 34px;
+      font-size: clamp(54px, 8vw, 104px);
+      line-height: 0.93;
+      letter-spacing: -2px;
+      font-weight: 800;
+      max-width: 1060px;
+    }
+    .subtitle {
+      margin-top: 18px;
+      font-size: clamp(20px, 2.2vw, 30px);
+      color: var(--gray-600);
+      max-width: 1020px;
+      line-height: 1.4;
+    }
+    .kicker {
+      margin-top: auto;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 14px;
+      font-size: 14px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: var(--gray-400);
+      text-transform: uppercase;
+    }
+    .eyebrow {
+      margin-top: 28px;
+      color: var(--gray-400);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+    .content-title {
+      margin-top: 12px;
+      font-size: clamp(44px, 6vw, 82px);
+      line-height: 0.95;
+      letter-spacing: -1px;
+      font-weight: 800;
+      max-width: 980px;
+    }
+    .bullets {
+      margin-top: 32px;
+      list-style: none;
+      max-width: 1120px;
+      display: grid;
+      gap: 14px;
+    }
+    .bullets li {
+      font-size: clamp(24px, 2.7vw, 35px);
+      line-height: 1.25;
+      color: var(--gray-600);
+      padding-left: 28px;
+      position: relative;
+    }
+    .bullets li::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gray-400);
+    }
+    .coffee {
+      background:
+        linear-gradient(rgba(10, 10, 10, 0.45), rgba(10, 10, 10, 0.45)),
+        url("./assets/pausa-cafe.jpg") center / cover no-repeat;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .coffee .content-title {
+      color: var(--white);
+      font-size: clamp(80px, 12vw, 160px);
+      margin: 0;
+    }
+    .coffee .subtitle {
+      color: var(--white);
+      font-size: clamp(20px, 2.2vw, 30px);
+      margin-top: 16px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .progress, .hint { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="counter" id="counter"></div>
+  <div class="hint" id="hint">ARROWS - SPACE - CLICK</div>
+
+  <section class="slide active">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/ruralgpt.png" alt="Rural GPT" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <h1 class="title">CURSO PARA HACER<br>UNA WEB</h1>
+    <p class="subtitle">Vais a aprender tips y herramientas que van a impactar en muchas cosas de vuestra vida.</p>
+    <p class="kicker">Rural Hackers x AJE Ourense</p>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Rural Hackers</p>
+    <h2 class="content-title">Quiénes somos</h2>
+    <ul class="bullets">
+      <li>Anceu, Ponte Caldelas: tecnología, rural y arte en el mismo lugar.</li>
+      <li>ruraliart: proyectos humanos entre creatividad, territorio y tecnología.</li>
+      <li>A Fuchiqueira: talleres en marcha desde 2023 para aprender haciendo.</li>
+      <li>Residencias que crean CON la aldea, no para la aldea.</li>
+      <li>EYE emprendimiento: Erasmus Young Entrepreneurs para crecer en red.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Dinámica de arranque</p>
+    <h2 class="content-title">Rural GPT:<br>presentaos con un objeto</h2>
+    <ul class="bullets">
+      <li>Coged un objeto que llevéis encima o tengáis cerca.</li>
+      <li>Presentaos en 20 segundos: quién sois y por qué ese objeto os representa.</li>
+      <li>Prompt: "Con este objeto, ayúdame a presentarme al grupo en estilo cercano".</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Ejercicio físico</p>
+    <h2 class="content-title">Vuestra web en A4<br>con post-its</h2>
+    <ul class="bullets">
+      <li>Escribid vuestra web en una hoja A4: portada, propuesta, servicios y contacto.</li>
+      <li>Pegad post-its para ordenar bloques y mensajes clave.</li>
+      <li>Enseñadla al grupo y contad vuestro proyecto en 1 minuto.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Estado inicial</p>
+    <h2 class="content-title">Qué IA usáis<br>y cómo</h2>
+    <ul class="bullets">
+      <li>Qué herramienta usáis ahora (si usáis alguna).</li>
+      <li>Para qué la usáis en el día a día.</li>
+      <li>Qué os gustaría automatizar o mejorar hoy mismo.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Stack mínimo</p>
+    <h2 class="content-title">Compra vuestra base</h2>
+    <ul class="bullets">
+      <li>1) Dominio: IONOS, Bluehost, Hostinger, GoDaddy.</li>
+      <li>2) Hosting: Netlify para desplegar rápido.</li>
+      <li>3) IA: Cursor, ChatGPT, Claude para construir y mejorar.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Inspiración guiada</p>
+    <h2 class="content-title">Elegid 3 referencias</h2>
+    <ul class="bullets">
+      <li>Visitad styles.refero.design y Awwwards.</li>
+      <li>Elegid 3 webs que os gusten por diseño o claridad.</li>
+      <li>Contad al grupo por qué las habéis elegido.</li>
+    </ul>
+  </section>
+
+  <section class="slide coffee">
+    <h2 class="content-title">PAUSA CAFE</h2>
+    <p class="subtitle">10 minutos para desconectar y comentar ideas</p>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Buyer persona</p>
+    <h2 class="content-title">Del monigote<br>a una persona real</h2>
+    <ul class="bullets">
+      <li>Dibujad un monigote de quien os compra.</li>
+      <li>Pasadlo por Gemini para sacarle más detalle.</li>
+      <li>Preguntas: edad, profesión, zapatos, qué comen.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Datos reales</p>
+    <h2 class="content-title">Conectar Gmail<br>para ampliar buyer persona</h2>
+    <ul class="bullets">
+      <li>Prompt 1: "Resume patrones de preguntas y objeciones de mis correos".</li>
+      <li>Prompt 2: "Qué tono funciona mejor según respuestas recibidas".</li>
+      <li>Prompt 3: "Dame 5 insights para afinar mi mensaje de venta".</li>
+      <li>Prompts listos para proyectar y copiar.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Branding y contenido</p>
+    <h2 class="content-title">Material para construir<br>la web</h2>
+    <ul class="bullets">
+      <li>Empezad por las fotos que ya tenéis.</li>
+      <li>Completad con Gemini fotos y banco libre como Unsplash.</li>
+      <li>Explicad markdown y cread un MD de la web y otro personal.</li>
+      <li>Generad 4-5 fotos con Gemini pensando en vuestro buyer.</li>
+      <li>Preparad mails de marca y logo base con Gemini.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Versionado</p>
+    <h2 class="content-title">Qué es GitHub</h2>
+    <ul class="bullets">
+      <li>Es vuestro historial de cambios para no perder trabajo.</li>
+      <li>Permite colaborar y experimentar sin miedo.</li>
+      <li>Podéis tener repos privados o públicos según necesitéis.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Plantilla de salida</p>
+    <h2 class="content-title">Repo base en Astro</h2>
+    <ul class="bullets">
+      <li>https://github.com/netlify-templates/astro-platform-starter</li>
+      <li>Clonar, editar contenido y desplegar en Netlify.</li>
+      <li>Estructura limpia para empezar hoy sin bloqueo.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Manos al teclado</p>
+    <h2 class="content-title">Building</h2>
+    <ul class="bullets">
+      <li>Montad hero, propuesta de valor, servicios y contacto.</li>
+      <li>Revisad contraste, legibilidad y claridad del mensaje.</li>
+      <li>Publicad primera versión aunque no sea perfecta.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Skills</p>
+    <h2 class="content-title">3 prompts para subir nivel</h2>
+    <ul class="bullets">
+      <li>Idiomas: "Adapta esta web a gallego, castellano e inglés manteniendo tono".</li>
+      <li>SEO: "Propone title, description, H1-H3 y FAQ para posicionar esta página".</li>
+      <li>Mejora: "Actúa como UX writer y mejora claridad, CTA y escaneabilidad".</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top"><img src="./assets/rural-hackers.png" alt="Rural Hackers" /><img src="./assets/aje-ourense.png" alt="AJE Ourense" /></div>
+    <p class="eyebrow">Cierre comparativo</p>
+    <h2 class="content-title">Vuestro dibujo<br>vs vuestra web</h2>
+    <ul class="bullets">
+      <li>Comparad la idea inicial en papel con la web publicada.</li>
+      <li>Qué se mantuvo, qué cambió y por qué.</li>
+      <li>Aprendizaje clave para la siguiente iteración.</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <div class="top">
+      <img src="./assets/rural-hackers.png" alt="Rural Hackers" />
+      <img src="./assets/ruralgpt.png" alt="Rural GPT" />
+      <img src="./assets/aje-ourense.png" alt="AJE Ourense" />
+    </div>
+    <p class="eyebrow">Cierre final</p>
+    <h2 class="content-title">Qué os lleváis hoy</h2>
+    <ul class="bullets">
+      <li>Una web publicada con estructura clara.</li>
+      <li>Un proceso para pasar de idea a entrega.</li>
+      <li>Prompts y herramientas para seguir mejorando.</li>
+      <li>Cerilla: una chispa concreta para encender lo siguiente.</li>
+    </ul>
+  </section>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const progress = document.getElementById("progress");
+    const counter = document.getElementById("counter");
+    const hint = document.getElementById("hint");
+    let current = 0;
+    let moved = false;
+
+    function render(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === current));
+      progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      if (!moved && current > 0) {
+        moved = true;
+        hint.style.opacity = "0";
+      }
+    }
+
+    function next() { render(current + 1); }
+    function prev() { render(current - 1); }
+
+    document.addEventListener("keydown", (event) => {
+      if (["ArrowRight", " ", "Enter"].includes(event.key)) {
+        event.preventDefault();
+        next();
+      } else if (["ArrowLeft", "Backspace"].includes(event.key)) {
+        event.preventDefault();
+        prev();
+      } else if (event.key === "Home") {
+        render(0);
+      } else if (event.key === "End") {
+        render(slides.length - 1);
+      }
+    });
+
+    document.addEventListener("click", () => next());
+
+    let touchX = 0;
+    document.addEventListener("touchstart", (event) => {
+      touchX = event.touches[0].clientX;
+    }, { passive: true });
+
+    document.addEventListener("touchend", (event) => {
+      const delta = touchX - event.changedTouches[0].clientX;
+      if (Math.abs(delta) > 40) {
+        if (delta > 0) next();
+        else prev();
+      }
+    });
+
+    render(0);
+  </script>
+</body>
+</html>
